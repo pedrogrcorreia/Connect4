@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Principal {
     public static void main(String[] args){
-//        Jogo j = new Jogo();
-//        UIText uiText = new UIText(j);
-//        uiText.run();
-        teste1();
+        Jogo j = new Jogo();
+        UIText uiText = new UIText(j);
+        uiText.run();
+//        teste1();
     }
 
     static class Tabuleiro{
@@ -58,12 +58,6 @@ public class Principal {
         tab.joga(3);
         tab.joga(3);
         tab.joga(3);
-         tab.joga(3);
-         tab.joga(3);
-         tab.joga(3);
-         tab.joga(3);
-         tab.joga(3);
-         tab.joga(3);
         System.out.println(tab);
     }
 }
