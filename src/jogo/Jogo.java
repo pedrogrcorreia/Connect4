@@ -24,6 +24,9 @@ public class Jogo {
     public void configuraJogador(String s){setEstado(estado.configurarJogador(s));}
 
     public void efetuaJogada(int col){setEstado(estado.efetuaJogada(col));}
+
+    public void efetuaJogadaPC(){setEstado(estado.efetuaJogadaPC());}
+
     public void terminaJogoAtual(){
         return;
     }

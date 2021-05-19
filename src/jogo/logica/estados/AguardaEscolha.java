@@ -12,10 +12,11 @@ public class AguardaEscolha extends EstadoAdapter{
     public IEstado escolherModo(int opc) {
         if(opc == 1 || opc == 2){
             getModelo().escolheModo(opc);
-            return new AguardaConfJogador1(getModelo());
+            return new AguardaConfig(getModelo());
         }
         if(opc == 3){
             getModelo().escolheModo(opc);
+            getModelo().configuraJogador("");
             return new AguardaJogadorPC(getModelo());
         }
         return new AguardaEscolha(getModelo());

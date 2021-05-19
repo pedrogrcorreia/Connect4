@@ -56,6 +56,15 @@ public class UIText {
         }
     }
 
+    void efetuaJogadaPC(){
+        System.out.println("Introduza 'prox' para prosseguir a jogada.");
+        String s;
+        s = sc.next();
+        if(s.compareToIgnoreCase("prox") == 0){
+            jogo.efetuaJogadaPC();
+        }
+    }
+
 //    void jogada(){
 //        jogo.joga(3);
 //        System.out.println(jogo.getTabuleiro());
@@ -73,18 +82,15 @@ public class UIText {
                 case ESCOLHE_MODO:
                     escolherModo();
                     break;
-                case CONFIGURA_JOGADOR1:
+                case AGUARDA_CONFIG:
                     configuracao();
                     break;
-                case CONFIGURA_JOGADOR2:
-                    configuracao();
-                    break;
-                case AGUARDA_JOGADOR1:
+                case AGUARDA_JOGADOR:
                     efetuaJogada();
                     System.out.println(jogo.toString());
                     break;
-                case AGUARDA_JOGADOR2:
-                    efetuaJogada();
+                case AGUARDA_JOGADORPC:
+                    efetuaJogadaPC();
                     System.out.println(jogo.toString());
                     break;
                 case AGUARDA_MINIJOGO:

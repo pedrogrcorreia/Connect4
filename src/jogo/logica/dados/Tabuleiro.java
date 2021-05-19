@@ -12,7 +12,7 @@ public class Tabuleiro {
         }
     }
 
-    public boolean joga(int col){
+    public boolean joga(int col, String ficha){
         if(col<0 || col > 6)
             return false;
         for(int i=0; i<6; i++){
@@ -20,11 +20,11 @@ public class Tabuleiro {
                 return false;
             }
             if(tab[i][col].compareToIgnoreCase("*") != 0){
-                tab[i-1][col] = "+";
+                tab[i-1][col] = ficha;
                 return true;
             }
         }
-        tab[5][col] = "+";
+        tab[5][col] = ficha;
         return true;
     }
 
