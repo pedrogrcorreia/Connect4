@@ -1,7 +1,7 @@
-package ui.texto;
+package jogo.ui.texto;
 
-import logica.Jogo;
-import logica.Situacao;
+import jogo.Jogo;
+import jogo.Situacao;
 
 import java.util.Scanner;
 
@@ -40,17 +40,30 @@ public class UIText {
     void configuracao(){
         System.out.println("Introduza o nome do jogador: ");
         String s = sc.next();
-        jogo.configuracao(s);
+        jogo.configuraJogador(s);
     }
 
-    void jogada(){
-        jogo.joga(3);
-        System.out.println(jogo.getTabuleiro());
+    void efetuaJogada(){
+        System.out.println("Introduza a coluna onde pretende jogar: ");
+        int col = 0;
+        if(sc.hasNextInt()){
+            col = sc.nextInt();
+            if(col <= 0 || col > 7){
+                efetuaJogada();
+            }
+            jogo.efetuaJogada(col);
+            return;
+        }
     }
 
-    void minijogo(){
-
-    }
+//    void jogada(){
+//        jogo.joga(3);
+//        System.out.println(jogo.getTabuleiro());
+//    }
+//
+//    void minijogo(){
+//
+//    }
 
     public void run(){
         while(!sair) {
@@ -60,14 +73,23 @@ public class UIText {
                 case ESCOLHE_MODO:
                     escolherModo();
                     break;
-                case CONFIGURACAO:
+                case CONFIGURA_JOGADOR1:
                     configuracao();
                     break;
-                case JOGADA:
-                    jogada();
+                case CONFIGURA_JOGADOR2:
+                    configuracao();
                     break;
-                case MINIJOGO:
-                    minijogo();
+                case AGUARDA_JOGADOR1:
+                    efetuaJogada();
+                    System.out.println(jogo.toString());
+                    break;
+                case AGUARDA_JOGADOR2:
+                    efetuaJogada();
+                    System.out.println(jogo.toString());
+                    break;
+                case AGUARDA_MINIJOGO:
+                    break;
+                case AGUARDA_RECOMECO:
                     break;
             }
         }

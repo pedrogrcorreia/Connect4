@@ -1,8 +1,8 @@
-package logica.estados;
+package jogo.logica.estados;
 
-import logica.dados.Dados;
+import jogo.logica.dados.Dados;
 
-public abstract class EstadoAdapter implements IEstado {
+public abstract class EstadoAdapter implements IEstado{
     private final Dados modelo;
 
     public EstadoAdapter(Dados modelo){
@@ -14,17 +14,17 @@ public abstract class EstadoAdapter implements IEstado {
     }
 
     @Override
-    public IEstado escolherModo(int opt) {
+    public IEstado escolherModo(int opc) {
         return this;
     }
 
     @Override
-    public IEstado configuraJogo(String s) {
+    public IEstado configurarJogador(String s) {
         return this;
     }
 
     @Override
-    public IEstado joga(int col) {
+    public IEstado efetuaJogada(int col) {
         return this;
     }
 }

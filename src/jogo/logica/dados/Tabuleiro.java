@@ -1,7 +1,4 @@
-package logica.dados;
-
-import java.util.ArrayList;
-import java.util.List;
+package jogo.logica.dados;
 
 public class Tabuleiro {
     private String[][] tab;
@@ -15,7 +12,21 @@ public class Tabuleiro {
         }
     }
 
-
+    public boolean joga(int col){
+        if(col<0 || col > 6)
+            return false;
+        for(int i=0; i<6; i++){
+            if(tab[0][col].compareToIgnoreCase("*")!=0){
+                return false;
+            }
+            if(tab[i][col].compareToIgnoreCase("*") != 0){
+                tab[i-1][col] = "+";
+                return true;
+            }
+        }
+        tab[5][col] = "+";
+        return true;
+    }
 
     @Override
     public String toString() {
