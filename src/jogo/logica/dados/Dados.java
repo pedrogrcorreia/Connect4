@@ -1,15 +1,10 @@
 package jogo.logica.dados;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Dados {
     private Tabuleiro tabuleiro;
     private int modo;
     private Jogador j1, j2, atual, prox;
-    public Dados(){
-        tabuleiro = new Tabuleiro();
-    }
+    public Dados(){};
 
     public boolean escolheModo(int opc){
         modo = opc;
@@ -50,26 +45,54 @@ public class Dados {
         return true;
     }
 
-    public boolean iniciaJogo(){
+    public void iniciaJogo(){
+        tabuleiro = new Tabuleiro();
         atual = j1;
         prox = j2;
-        return true;
     }
 
     public boolean efetuaJogada(int col){
-        tabuleiro.joga(col-1, atual.getFicha());
-        Jogador aux = atual;
-        atual = prox;
-        prox = aux;
-        return true;
+        atual.addCol(col-1);
+        if(tabuleiro.joga(atual.getCol(), atual.getFicha())) {
+            atual.incrementaJogadas();
+            return true;
+        }
+        return false;
     }
 
     public boolean efetuaJogadaPC(){
-        tabuleiro.joga(atual.getCol()-1, atual.getFicha());
-        Jogador aux = atual;
-        atual = prox;
-        prox = aux;
+        atual.addCol(0);
+        if(tabuleiro.joga(atual.getCol(), atual.getFicha())) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean verificaVitoria(){
+        if(!tabuleiro.verificaVitoria(atual.getCol(), atual.getFicha())){
+            Jogador aux = atual;
+            atual = prox;
+            prox = aux;
+            return false;
+        }
         return true;
+    }
+
+    public void terminaJogo(){
+        j1 = null;
+        j2 = null;
+    }
+
+    public int getJogadas(){
+        System.out.println(atual.getJogadas());
+        return atual.getJogadas();
+    }
+
+    public boolean minijogo(String s){
+        if(s.compareToIgnoreCase("s") == 0){
+            return true;
+        }
+        return false;
     }
 
     public String getTabuleiro(){

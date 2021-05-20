@@ -52,17 +52,41 @@ public class UIText {
                 efetuaJogada();
             }
             jogo.efetuaJogada(col);
-            return;
         }
     }
 
     void efetuaJogadaPC(){
         System.out.println("Introduza 'prox' para prosseguir a jogada.");
         String s;
+        s = sc.nextLine();
+        jogo.efetuaJogadaPC();
+//        if(s.compareToIgnoreCase("prox") == 0){
+//            jogo.efetuaJogadaPC();
+//        }
+    }
+
+    void novoJogo(){
+        System.out.println("Pretende iniciar um novo jogo? (S/N)");
+        String s;
         s = sc.next();
-        if(s.compareToIgnoreCase("prox") == 0){
-            jogo.efetuaJogadaPC();
+        if(s.compareToIgnoreCase("s") == 0){
+            jogo.novoJogo();
         }
+        else{
+            jogo.terminaJogoAtual();
+            sair = true;
+        }
+    }
+
+    void minijogo(){
+        System.out.println("Pretende usufruir do minijogo? (S/N)");
+        String s;
+        s = sc.next();
+        jogo.minijogo(s);
+    }
+
+    void minijogoResposta(){
+
     }
 
 //    void jogada(){
@@ -94,8 +118,13 @@ public class UIText {
                     System.out.println(jogo.toString());
                     break;
                 case AGUARDA_MINIJOGO:
+                    minijogo();
+                    break;
+                case AGUARDA_MINIJOGO_RESPOSTA:
+                    minijogoResposta();
                     break;
                 case AGUARDA_RECOMECO:
+                    novoJogo();
                     break;
             }
         }

@@ -10,10 +10,20 @@ public class AguardaJogadorPC extends EstadoAdapter{
     public IEstado efetuaJogadaPC() {
         if(getModelo().efetuaJogadaPC()){
             if(getModelo().getModo() == 2) {
-                return new AguardaJogador(getModelo());
+                if(!getModelo().verificaVitoria()) {
+                    return new AguardaJogador(getModelo());
+                }
+                else{
+                    return new AguardaRecomeco(getModelo());
+                }
             }
             if(getModelo().getModo() == 3){
-                return new AguardaJogadorPC(getModelo());
+                if(!getModelo().verificaVitoria()) {
+                    return new AguardaJogadorPC(getModelo());
+                }
+                else{
+                    return new AguardaRecomeco(getModelo());
+                }
             }
         }
         return this;

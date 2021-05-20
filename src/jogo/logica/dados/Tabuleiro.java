@@ -28,6 +28,128 @@ public class Tabuleiro {
         return true;
     }
 
+    public boolean verificaVitoria(int col, String ficha){
+        int linha = 0;
+        int conta;
+
+        // obtem a linha
+        for(int i=0; i<6; i++){
+            if(tab[i][col].compareToIgnoreCase("*") != 0){
+                linha = i;
+                break;
+            }
+        }
+
+        // pesquisa na vertical
+        conta = 0;
+        for(int i=linha; i<6; i++){
+            if(tab[i][col].compareToIgnoreCase(ficha) == 0){
+                conta++;
+            }
+            else{
+                break;
+            }
+        }
+
+        if(conta == 4){
+            return true;
+        }
+
+        // pesquisa horizontal frente
+        conta = 0;
+        for(int i=col; i<7; i++){
+            if(tab[linha][i].compareToIgnoreCase(ficha) == 0){
+                conta++;
+            }
+            else{
+                break;
+            }
+        }
+        // pesquisa horizontal tras
+        for(int i=col-1; i>=0; i--){
+            if(tab[linha][i].compareToIgnoreCase(ficha) == 0){
+                conta++;
+            }
+            else{
+                break;
+            }
+        }
+
+        if(conta == 4){
+            return true;
+        }
+
+        // quadrantes pares frente
+        conta=0;
+        int coluna=col;
+        for(int i=linha; i<6; i++){
+            if(tab[i][coluna].compareToIgnoreCase(ficha) == 0){
+                conta++;
+                if(coluna < 6){
+                    coluna++;
+                }
+            }
+            else{
+                break;
+            }
+        }
+        // quadrantes pares tras
+        coluna = col-1;
+        if(coluna <= 0){
+            coluna = 0;
+        }
+        for(int i=linha-1; i>=0; i--){
+            if(tab[i][coluna].compareToIgnoreCase(ficha) == 0){
+                conta++;
+                if(coluna > 0){
+                    coluna--;
+                }
+            }
+            else{
+                break;
+            }
+        }
+        if(conta == 4){
+            return true;
+        }
+
+        // quadrantes impares tras
+        conta = 0;
+        coluna = col;
+        for(int i=linha; i<6; i++){
+            if(tab[i][coluna].compareToIgnoreCase(ficha) == 0){
+                conta++;
+                if(coluna > 0){
+                    coluna--;
+                }
+            }
+            else{
+                break;
+            }
+        }
+        // quadrantes impares frente
+        coluna = col+1;
+        if(coluna >= 7){
+            coluna = 6;
+        }
+        for(int i=linha-1; i>=0; i--){
+            if(tab[i][coluna].compareToIgnoreCase(ficha) == 0){
+                conta++;
+                if(coluna < 6){
+                    coluna++;
+                }
+            }
+            else{
+                break;
+            }
+        }
+        if(conta == 4){
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

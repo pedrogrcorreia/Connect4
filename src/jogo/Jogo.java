@@ -27,6 +27,10 @@ public class Jogo {
 
     public void efetuaJogadaPC(){setEstado(estado.efetuaJogadaPC());}
 
+    public void novoJogo(){setEstado(estado.novoJogo());}
+
+    public void minijogo(String s){setEstado(estado.minijogo(s));}
+
     public void terminaJogoAtual(){
         return;
     }

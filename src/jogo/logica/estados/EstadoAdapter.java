@@ -29,6 +29,21 @@ public abstract class EstadoAdapter implements IEstado{
     }
 
     @Override
+    public IEstado novoJogo() {
+        return this;
+    }
+
+    @Override
+    public IEstado minijogo(String s){
+        return this;
+    }
+
+    @Override
+    public IEstado minijogoResposta(){
+        return this;
+    }
+
+    @Override
     public IEstado efetuaJogadaPC() {
         return this;
     }
