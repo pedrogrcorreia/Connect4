@@ -4,4 +4,7 @@ public interface Jogador {
     String getNome();
     String getFicha();
     int getCol();
+    void addCol(int col);
+    void incrementaJogadas();
+    int getJogadas();
 }

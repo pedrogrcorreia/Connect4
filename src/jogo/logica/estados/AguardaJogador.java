@@ -8,12 +8,25 @@ public class AguardaJogador extends EstadoAdapter{
 
     @Override
     public IEstado efetuaJogada(int col) {
+        if(getModelo().getJogadas() != 0 && getModelo().getJogadas() == 4){
+            return new AguardaMinijogo(getModelo());
+        }
         if(getModelo().efetuaJogada(col)){
             if(getModelo().getModo() == 1) {
-                return new AguardaJogador(getModelo());
+                if(!getModelo().verificaVitoria()) {
+                    return new AguardaJogador(getModelo());
+                }
+                else{
+                    return new AguardaRecomeco(getModelo());
+                }
             }
             if(getModelo().getModo() == 2){
-                return new AguardaJogadorPC(getModelo());
+                if(!getModelo().verificaVitoria()){
+                    return new AguardaJogadorPC(getModelo());
+                }
+                else{
+                    return new AguardaRecomeco(getModelo());
+                }
             }
         }
         return this;
