@@ -28,6 +28,7 @@ public class JogoOriginator implements IMementoOriginator {
         jogo = (Jogo) obj;
         jogo.mantemJogador(a.getJogadorAtual());
         jogo.removeCreditos(a.getCreditos());
+        jogo.resetJogadas();
     }
 
     public void escolherModo(int opcao) {

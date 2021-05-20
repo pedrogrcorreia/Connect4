@@ -39,7 +39,14 @@ public class JogadorH implements Jogador, Serializable {
     }
 
     @Override
-    public void incrementaJogadas() { ++jogadas; }
+    public void incrementaJogadas() {
+        if(jogadas == 4){
+            jogadas = 0;
+        }
+        else{
+            jogadas++;
+        }
+    }
 
     @Override
     public int getJogadas() {
@@ -66,7 +73,7 @@ public class JogadorH implements Jogador, Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Jogador " + nome + " jogou na coluna " + (colJogada+1) + ".\n");
-        sb.append("Tem " + creditos + " e já jogou " + jogadas + ".\n");
+        sb.append("Tem " + creditos + " créditos e faltam " + (4-jogadas) + " jogadas para o minijogo.\n");
         return sb.toString();
     }
 }

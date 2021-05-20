@@ -14,8 +14,9 @@ public class JogoGestao {
     }
 
     public void undo(){
-        careTaker.undo();
-        System.out.println(careTaker);
+        if(originator.getCreditos() > 1) {
+            careTaker.undo();
+        }
     }
 
     // delegacao para jogo originator

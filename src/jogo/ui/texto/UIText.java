@@ -97,7 +97,7 @@ public class UIText {
 
     void printLog(){
         List<String> log = jogoGestao.getLog();
-        System.out.println("\n");
+        //System.out.println("\n");
         for(String s : log){
             System.out.println(s);
         }
@@ -109,7 +109,7 @@ public class UIText {
         while(!sair) {
             Situacao sit = jogoGestao.getSituacaoAtual();
             System.out.println(sit);
-            //printLog();
+            printLog();
             switch(sit) {
                 case ESCOLHE_MODO:
                     escolherModo();

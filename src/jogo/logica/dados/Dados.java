@@ -16,6 +16,7 @@ public class Dados implements Serializable {
 
     public boolean escolheModo(int opc){
         modo = opc;
+        addLog("Foi escolhido o modo " + modo + ".\n");
         return true;
     }
 
@@ -69,9 +70,8 @@ public class Dados implements Serializable {
         atual.addCol(col-1);
         if(tabuleiro.joga(atual.getCol(), atual.getFicha())) {
             atual.incrementaJogadas();
-            proxJogador();
             addLog(atual.toString());
-            System.out.println(atual.toString());
+            proxJogador();
             return true;
         }
         return false;
@@ -81,7 +81,7 @@ public class Dados implements Serializable {
         int colArt = atual.getCol();
         if(tabuleiro.joga(colArt, atual.getFicha())) {
             addLog(atual.toString());
-            System.out.println(atual.toString());
+            proxJogador();
             return true;
         }
         return false;
