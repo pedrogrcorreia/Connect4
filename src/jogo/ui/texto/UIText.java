@@ -1,17 +1,19 @@
 package jogo.ui.texto;
 
-import jogo.Jogo;
-import jogo.Situacao;
+import jogo.logica.Jogo;
+import jogo.logica.JogoGestao;
+import jogo.logica.Situacao;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UIText {
-    Jogo jogo;
+    JogoGestao jogoGestao;
     private boolean sair = false;
     private Scanner sc = new Scanner(System.in);
 
-    public UIText(Jogo j){
-        this.jogo = j;
+    public UIText(JogoGestao j){
+        this.jogoGestao = j;
     }
 
     void escolherModo(){
@@ -27,12 +29,12 @@ public class UIText {
             if(opcao <= 0 || opcao > 3){
                 escolherModo();
             }
-            jogo.escolherModo(opcao);
+            jogoGestao.escolherModo(opcao);
             return;
         }
         s = sc.next();
         if(s.compareToIgnoreCase("fim") == 0){
-            jogo.terminaJogoAtual();
+            jogoGestao.terminaJogoAtual();
             sair = true;
         }
     }
@@ -40,18 +42,22 @@ public class UIText {
     void configuracao(){
         System.out.println("Introduza o nome do jogador: ");
         String s = sc.next();
-        jogo.configuraJogador(s);
+        jogoGestao.configuraJogador(s);
     }
 
     void efetuaJogada(){
+        System.out.println("Introduza 'u' para desfazer a jogada anterior.");
         System.out.println("Introduza a coluna onde pretende jogar: ");
+        String s;
         int col = 0;
         if(sc.hasNextInt()){
             col = sc.nextInt();
-            if(col <= 0 || col > 7){
-                efetuaJogada();
-            }
-            jogo.efetuaJogada(col);
+            jogoGestao.efetuaJogada(col);
+            return;
+        }
+        s = sc.next();
+        if(s.compareToIgnoreCase("u") == 0){
+            jogoGestao.undo();
         }
     }
 
@@ -59,10 +65,7 @@ public class UIText {
         System.out.println("Introduza 'prox' para prosseguir a jogada.");
         String s;
         s = sc.nextLine();
-        jogo.efetuaJogadaPC();
-//        if(s.compareToIgnoreCase("prox") == 0){
-//            jogo.efetuaJogadaPC();
-//        }
+        jogoGestao.efetuaJogadaPC();
     }
 
     void novoJogo(){
@@ -70,10 +73,10 @@ public class UIText {
         String s;
         s = sc.next();
         if(s.compareToIgnoreCase("s") == 0){
-            jogo.novoJogo();
+            jogoGestao.novoJogo();
         }
         else{
-            jogo.terminaJogoAtual();
+            jogoGestao.terminaJogoAtual();
             sair = true;
         }
     }
@@ -82,26 +85,31 @@ public class UIText {
         System.out.println("Pretende usufruir do minijogo? (S/N)");
         String s;
         s = sc.next();
-        jogo.minijogo(s);
+        jogoGestao.minijogo(s);
     }
 
     void minijogoResposta(){
-
+        System.out.println("Introduza a resposta: ");
+        String s;
+        s = sc.next();
+        jogoGestao.minijogoResposta();
     }
 
-//    void jogada(){
-//        jogo.joga(3);
-//        System.out.println(jogo.getTabuleiro());
-//    }
-//
-//    void minijogo(){
-//
-//    }
+    void printLog(){
+        List<String> log = jogoGestao.getLog();
+        System.out.println("\n");
+        for(String s : log){
+            System.out.println(s);
+        }
+    }
+
+
 
     public void run(){
         while(!sair) {
-            Situacao sit = jogo.getSituacaoAtual();
+            Situacao sit = jogoGestao.getSituacaoAtual();
             System.out.println(sit);
+            //printLog();
             switch(sit) {
                 case ESCOLHE_MODO:
                     escolherModo();
@@ -109,13 +117,14 @@ public class UIText {
                 case AGUARDA_CONFIG:
                     configuracao();
                     break;
-                case AGUARDA_JOGADOR:
+                case AGUARDA_JOGADOR1:
+                case AGUARDA_JOGADOR2:
                     efetuaJogada();
-                    System.out.println(jogo.toString());
+                    System.out.println(jogoGestao.toString());
                     break;
                 case AGUARDA_JOGADORPC:
                     efetuaJogadaPC();
-                    System.out.println(jogo.toString());
+                    System.out.println(jogoGestao.toString());
                     break;
                 case AGUARDA_MINIJOGO:
                     minijogo();

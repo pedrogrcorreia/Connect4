@@ -1,11 +1,13 @@
 package jogo;
 
+import jogo.logica.Jogo;
+import jogo.logica.JogoGestao;
 import jogo.ui.texto.UIText;
 
 public class Principal {
     public static void main(String[] args) {
-        Jogo j = new Jogo();
-        UIText uiText = new UIText(j);
+        JogoGestao jGestao = new JogoGestao();
+        UIText uiText = new UIText(jGestao);
         uiText.run();
 //        teste1();
     }

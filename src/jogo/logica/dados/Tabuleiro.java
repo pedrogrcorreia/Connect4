@@ -1,6 +1,8 @@
 package jogo.logica.dados;
 
-public class Tabuleiro {
+import java.io.Serializable;
+
+public class Tabuleiro implements Serializable {
     private String[][] tab;
 
     public Tabuleiro(){

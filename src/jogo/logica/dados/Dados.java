@@ -1,10 +1,18 @@
 package jogo.logica.dados;
 
-public class Dados {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Dados implements Serializable {
     private Tabuleiro tabuleiro;
     private int modo;
     private Jogador j1, j2, atual, prox;
-    public Dados(){};
+    private List<String> logCompleto;
+
+    public Dados(){
+        logCompleto = new ArrayList<String>();
+    };
 
     public boolean escolheModo(int opc){
         modo = opc;
@@ -19,6 +27,7 @@ public class Dados {
         if(modo == 1){
             if(j1 == null) {
                 j1 = new JogadorH(s, "O");
+                addLog("Configuração do jogador "+s+" com a ficha " + " O " + ".\n");
                 return false;
             }
             else{
@@ -26,19 +35,24 @@ public class Dados {
                     return false;
                 }
                 j2 = new JogadorH(s, "X");
+                addLog("Configuração do jogador "+s+" com a ficha " + " X " + ".\n");
                 iniciaJogo();
                 return true;
             }
         }
         if(modo == 2){
             j1 = new JogadorH(s, "O");
+            addLog("Configuração do jogador "+s+" com a ficha " + " O " + ".\n");
             j2 = new JogadorC("X");
+            addLog("Configuração do jogador "+j2.getNome()+" com a ficha " + " X " + ".\n");
             iniciaJogo();
             return true;
         }
         if(modo == 3){
             j1 = new JogadorC("O");
+            addLog("Configuração do jogador "+j1.getNome()+" com a ficha " + " O " + ".\n");
             j2 = new JogadorC("X");
+            addLog("Configuração do jogador "+j2.getNome()+" com a ficha " + " X " + ".\n");
             iniciaJogo();
             return true;
         }
@@ -55,14 +69,19 @@ public class Dados {
         atual.addCol(col-1);
         if(tabuleiro.joga(atual.getCol(), atual.getFicha())) {
             atual.incrementaJogadas();
+            proxJogador();
+            addLog(atual.toString());
+            System.out.println(atual.toString());
             return true;
         }
         return false;
     }
 
     public boolean efetuaJogadaPC(){
-        atual.addCol(0);
-        if(tabuleiro.joga(atual.getCol(), atual.getFicha())) {
+        int colArt = atual.getCol();
+        if(tabuleiro.joga(colArt, atual.getFicha())) {
+            addLog(atual.toString());
+            System.out.println(atual.toString());
             return true;
         }
         return false;
@@ -70,12 +89,15 @@ public class Dados {
 
     public boolean verificaVitoria(){
         if(!tabuleiro.verificaVitoria(atual.getCol(), atual.getFicha())){
-            Jogador aux = atual;
-            atual = prox;
-            prox = aux;
             return false;
         }
         return true;
+    }
+
+    public void proxJogador(){
+        Jogador aux = atual;
+        atual = prox;
+        prox = aux;
     }
 
     public void terminaJogo(){
@@ -84,8 +106,16 @@ public class Dados {
     }
 
     public int getJogadas(){
-        System.out.println(atual.getJogadas());
         return atual.getJogadas();
+    }
+
+    public int getJogadorAtual(){
+        if(atual == j1){
+            return 1;
+        }
+        else{
+            return 2;
+        }
     }
 
     public boolean minijogo(String s){
@@ -95,7 +125,50 @@ public class Dados {
         return false;
     }
 
+    public boolean getMinijogo(){
+        MinijogoMatematica m = new MinijogoMatematica();
+        m.getJogo();
+        return true;
+    }
+
+    public int getCreditos(){
+        return atual.getCreditos();
+    }
+
+    public void mantemJogador(int jogador) {
+        if(jogador == 1){
+            atual = j1;
+            prox = j2;
+        }
+        else{
+            atual = j2;
+            prox = j1;
+        }
+    }
+
+    public void removeCreditos(int creditos){
+        atual.removeCreditos(creditos);
+        System.out.println("Foi removido um credito ao jogador " + atual.getNome() + ".\n");
+        System.out.println("Tem " + atual.getCreditos() + " creditos.\n");
+        addLog("Foi removido um crédito ao jogador " + atual.getNome() + ".\n");
+    }
+
+    public void resetJogadas(){
+        atual.resetJogadas();
+        addLog("As jogadas até ao mini-jogo foram resetadas para o jogador " + atual.getNome() + ".\n");
+    }
+
+    private void addLog(String a){
+        logCompleto.add(a);
+    }
+
+    public List<String> getLog(){
+        return logCompleto;
+    }
+
     public String getTabuleiro(){
         return tabuleiro.toString();
     }
+
+
 }
