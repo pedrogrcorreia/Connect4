@@ -7,4 +7,7 @@ public interface Jogador {
     void addCol(int col);
     void incrementaJogadas();
     int getJogadas();
+    void resetJogadas();
+    int getCreditos();
+    void removeCreditos(int creditos);
 }

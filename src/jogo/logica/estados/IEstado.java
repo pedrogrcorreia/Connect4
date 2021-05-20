@@ -1,7 +1,7 @@
 package jogo.logica.estados;
 
 
-import jogo.Situacao;
+import jogo.logica.Situacao;
 
 public interface IEstado {
     IEstado escolherModo(int opt);

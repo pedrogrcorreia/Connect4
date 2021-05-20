@@ -1,8 +1,9 @@
 package jogo.logica.dados;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class JogadorC implements Jogador{
+public class JogadorC implements Jogador, Serializable {
     private String nome;
     private String ficha;
     private int colJogada;
@@ -43,5 +44,25 @@ public class JogadorC implements Jogador{
     @Override
     public int getJogadas(){
         return 0;
+    }
+
+    @Override
+    public int getCreditos(){ return 0;}
+
+    @Override
+    public void removeCreditos(int creditos) {
+        return;
+    }
+
+    @Override
+    public void resetJogadas() {
+        return;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Jogador " + nome + " jogou na coluna " + (colJogada+1));
+        return sb.toString();
     }
 }
