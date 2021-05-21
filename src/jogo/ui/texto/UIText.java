@@ -40,7 +40,7 @@ public class UIText {
         s = sc.next();
         if(s.compareToIgnoreCase("fim") == 0){
             jogoGestao.terminaJogoAtual();
-            sair = true;
+            sairJogo = true;
         }
     }
 
@@ -56,7 +56,7 @@ public class UIText {
         System.out.println("Introduza 'g' para gravar o jogo e sair.");
         System.out.println("Introduza a coluna onde pretende jogar: ");
         String s;
-        int col = 0;
+        int col;
         if(sc.hasNextInt()){
             col = sc.nextInt();
             jogoGestao.efetuaJogada(col);
@@ -65,6 +65,7 @@ public class UIText {
         s = sc.next();
         if(s.compareToIgnoreCase("u") == 0){
             jogoGestao.undo();
+            return;
         }
         if(s.compareToIgnoreCase("s") == 0){
             jogoGestao.efetuaJogada('s');
@@ -224,6 +225,8 @@ public class UIText {
 
     public void run() throws IOException, ClassNotFoundException {
         while (!sair) {
+            sairJogo = false;
+            jogoGestao = new JogoGestao();
             System.out.println("Deseja: ");
             System.out.println("Começar um novo jogo (N).");
             System.out.println("Carregar um jogo gravado (C).");
@@ -231,21 +234,46 @@ public class UIText {
             System.out.println("Terminar. (F)");
             String s;
             s = sc.next();
-            if (s.compareToIgnoreCase("c") == 0) {
-                jogoGestao = carregaJogo();
-                printLog();
-                jogo();
+            switch(s){
+                case "c":
+                case "C":
+                    jogoGestao = carregaJogo();
+                    printLog();
+                    jogo();
+                    break;
+                case "r":
+                case "R":
+                    jogoGestao = recuperaReplay();
+                    printLog();
+                    break;
+                case "n":
+                case "N":
+                    jogo();
+                    break;
+                case "f":
+                case "F":
+                    sair = true;
+                    break;
             }
-            if (s.compareToIgnoreCase("r") == 0) {
-                jogoGestao = recuperaReplay();
-                printLog();
-            }
-            if(s.compareToIgnoreCase("f") == 0){
-                sair = true;
-            }
-            if(s.compareToIgnoreCase("n") == 0){
-                jogo();
-            }
+//            if (s.compareToIgnoreCase("c") == 0) {
+//                jogoGestao = carregaJogo();
+//                printLog();
+//                jogo();
+//                break;
+//            }
+//            if (s.compareToIgnoreCase("r") == 0) {
+//                jogoGestao = recuperaReplay();
+//                printLog();
+//                break;
+//            }
+//            if(s.compareToIgnoreCase("f") == 0){
+//                sair = true;
+//                break;
+//            }
+//            if(s.compareToIgnoreCase("n") == 0){
+//                jogo();
+//                break;
+//            }
         }
     }
 }

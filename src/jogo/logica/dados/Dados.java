@@ -227,7 +227,12 @@ public class Dados implements Serializable {
         return logCompleto;
     }
 
-    public String getLogJogada(){ return logCompleto.get(logCompleto.size()-1); }
+    public String getLogJogada() {
+        if (logCompleto.size() > 0) {
+            return logCompleto.get(logCompleto.size() - 1);
+        }
+        return "";
+    }
 
     public String getTabuleiro(){
         return tabuleiro.toString();

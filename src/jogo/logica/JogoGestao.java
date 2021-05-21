@@ -35,7 +35,9 @@ public class JogoGestao implements Serializable {
     }
 
     public void efetuaJogada(int col) {
-        careTaker.gravaMemento();
+        if(col != (int)'s') {
+            careTaker.gravaMemento();
+        }
         System.out.println(careTaker);
         originator.efetuaJogada(col);
     }
