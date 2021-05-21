@@ -16,4 +16,5 @@ public interface Jogador {
     void mudaMinijogo();
     void incrementaEspecial();
     int getEspecial();
+    void resetRespostas();
 }

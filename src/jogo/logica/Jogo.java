@@ -71,4 +71,7 @@ public class Jogo implements Serializable {
         return modelo.getTabuleiro();
     }
 
+    public String getLogJogada() {
+        return modelo.getLogJogada();
+    }
 }

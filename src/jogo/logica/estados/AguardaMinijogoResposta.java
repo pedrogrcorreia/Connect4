@@ -17,9 +17,14 @@ public class AguardaMinijogoResposta extends EstadoAdapter implements Serializab
             else{
                 getModelo().mudaMinijogo();
                 getModelo().atribuiEspecial();
-                return new AguardaMinijogoResposta(getModelo());
+                getModelo().incrementaJogadas();
+                getModelo().resetRespostas();
+                getModelo().proxJogador();
+                return new AguardaJogador(getModelo());
             }
         }
+        getModelo().resetRespostas();
+        getModelo().incrementaJogadas();
         getModelo().proxJogador(); // se perder o minijogo passa para o seguinte
         return new AguardaJogador(getModelo());
     }

@@ -109,6 +109,11 @@ public class JogadorH implements Jogador, Serializable {
     }
 
     @Override
+    public void resetRespostas() {
+        respostas = 0;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Jogador " + nome + " jogou na coluna " + (colJogada+1) + ".\n");

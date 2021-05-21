@@ -3,17 +3,18 @@ package jogo.ui.texto;
 import jogo.logica.Jogo;
 import jogo.logica.JogoGestao;
 import jogo.logica.Situacao;
+import jogo.logica.Util;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import static jogo.logica.Util.gravaJogo;
-import static jogo.logica.Util.recuperaJogo;
+import static jogo.logica.Util.*;
 
 public class UIText {
     JogoGestao jogoGestao;
     private boolean sair = false;
+    private boolean sairJogo = false;
     private Scanner sc = new Scanner(System.in);
 
     public UIText(JogoGestao j){
@@ -52,6 +53,7 @@ public class UIText {
     void efetuaJogada(){
         System.out.println("Introduza 'u' para desfazer a jogada anterior.");
         System.out.println("Introduza 's' para utilizar a peça especial.");
+        System.out.println("Introduza 'g' para gravar o jogo e sair.");
         System.out.println("Introduza a coluna onde pretende jogar: ");
         String s;
         int col = 0;
@@ -69,7 +71,13 @@ public class UIText {
         }
         if(s.compareToIgnoreCase("fim") == 0){
             jogoGestao.terminaJogoAtual();
-            sair = true;
+            sairJogo = true;
+        }
+        if(s.compareToIgnoreCase("g") == 0){
+            System.out.println("Introduza o nome do jogo: ");
+            s = sc.next();
+            gravaJogo(jogoGestao, s);
+            sairJogo = true;
         }
     }
 
@@ -83,9 +91,21 @@ public class UIText {
     }
 
     void efetuaJogadaPC(){
-        System.out.println("Introduza 'prox' para prosseguir a jogada.");
+        System.out.println("Introduza 'enter' para prosseguir a jogada.");
+        System.out.println("Introduza 'g' para gravar o jogo.");
         String s;
         s = sc.nextLine();
+
+        if(s.compareToIgnoreCase("fim") == 0){
+            jogoGestao.terminaJogoAtual();
+            sairJogo = true;
+        }
+        if(s.compareToIgnoreCase("g") == 0){
+            System.out.println("Introduza o nome do jogo: ");
+            s = sc.next();
+            gravaJogo(jogoGestao, s);
+            sairJogo = true;
+        }
         jogoGestao.efetuaJogadaPC();
     }
 
@@ -98,7 +118,7 @@ public class UIText {
         }
         else{
             jogoGestao.terminaJogoAtual();
-            sair = true;
+            sairJogo = true;
         }
     }
 
@@ -116,11 +136,36 @@ public class UIText {
         jogoGestao.minijogoResposta(s);
     }
 
-    void carregaJogo(){
+    JogoGestao carregaJogo() throws IOException, ClassNotFoundException {
         System.out.println("Introduza o nome do ficheiro do jogo: ");
         String s;
         s = sc.next();
+        jogoGestao = Util.recuperaJogo(s);
+        if(jogoGestao != null){
+            return jogoGestao;
+        }
+        else{
+            System.out.println("Introduza um nome de ficheiro válido.");
+            carregaJogo();
+        }
+        return null;
+    }
 
+    JogoGestao recuperaReplay() throws IOException, ClassNotFoundException {
+        System.out.println("Introduza o numero do jogo que pretende rever: ");
+        int jogo;
+        if(sc.hasNextInt()){
+            jogo = sc.nextInt();
+            if(jogo < 1 || jogo > 5){
+                System.out.println("Número inválido.");
+                recuperaReplay();
+            }
+            else{
+                jogoGestao = Util.recuperaReplay(jogo);
+                return jogoGestao;
+            }
+        }
+        return null;
     }
 
     void printLog(){
@@ -131,25 +176,15 @@ public class UIText {
         }
     }
 
+    void printLogJogada(){
+        String log = jogoGestao.getLogJogada();
+        System.out.println(log);
+    }
 
-
-    public void run(){
-        System.out.println("Comecar um jogo novo (n) ou carregar (c) um jogo guardado?");
-        String s;
-        s = sc.next();
-        if(s.compareToIgnoreCase("c") == 0){
-            System.out.println("Introduza o nome do jogo: ");
-            s = sc.next();
-            try {
-                jogoGestao = recuperaJogo(s);
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        while (!sair) {
+    void jogo(){
+        while (!sairJogo) {
             Situacao sit = jogoGestao.getSituacaoAtual();
             System.out.println(sit);
-            //printLog();
             switch (sit) {
                 case ESCOLHE_MODO:
                     escolherModo();
@@ -179,11 +214,38 @@ public class UIText {
                     minijogoResposta();
                     break;
                 case AGUARDA_RECOMECO:
-                    gravaJogo(jogoGestao, "jogo1");
+                    gravaReplay(jogoGestao);
                     novoJogo();
                     break;
             }
+            printLogJogada();
         }
-        gravaJogo(jogoGestao, "jogo1");
-    };
+    }
+
+    public void run() throws IOException, ClassNotFoundException {
+        while (!sair) {
+            System.out.println("Deseja: ");
+            System.out.println("Começar um novo jogo (N).");
+            System.out.println("Carregar um jogo gravado (C).");
+            System.out.println("Ver o replay de um jogo (R).");
+            System.out.println("Terminar. (F)");
+            String s;
+            s = sc.next();
+            if (s.compareToIgnoreCase("c") == 0) {
+                jogoGestao = carregaJogo();
+                printLog();
+                jogo();
+            }
+            if (s.compareToIgnoreCase("r") == 0) {
+                jogoGestao = recuperaReplay();
+                printLog();
+            }
+            if(s.compareToIgnoreCase("f") == 0){
+                sair = true;
+            }
+            if(s.compareToIgnoreCase("n") == 0){
+                jogo();
+            }
+        }
+    }
 }

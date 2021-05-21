@@ -78,4 +78,8 @@ public class JogoGestao implements Serializable {
     public void efetuaJogadaEspecial(int col) {
         originator.efetuaJogadaEspecial(col);
     }
+
+    public String getLogJogada() {
+        return originator.getLogJogada();
+    }
 }

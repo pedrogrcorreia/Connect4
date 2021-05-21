@@ -9,6 +9,7 @@ public class Dados implements Serializable {
     private int modo;
     private Jogador j1, j2, atual, prox;
     private List<String> logCompleto;
+    private List<String> logJogada;
     private transient MinijogoMatematica m;
     private transient MinijogoDicionario d;
 
@@ -141,12 +142,6 @@ public class Dados implements Serializable {
     }
 
     public String getMinijogo(){
-//        m = new MinijogoMatematica();
-//        m.criaJogo();
-//        System.out.println(m.getResposta());
-//        return m.getJogo();
-//        d = new MinijogoDicionario();
-//        d.criaJogo();
         if(atual.getMinijogo() == 0){
             m.criaJogo();
             System.out.println(m.getResposta());
@@ -168,7 +163,6 @@ public class Dados implements Serializable {
             return false;
         }
         if(atual.getMinijogo() == 1){
-            System.out.println("DEBUG\n");
             if(resposta.compareToIgnoreCase(d.getResposta()) == 0){
                 atual.incrementaRespostas();
                 return true;
@@ -197,6 +191,10 @@ public class Dados implements Serializable {
     public int getCreditos(){
         return atual.getCreditos();
     }
+
+    public void incrementaJogadas(){ atual.incrementaJogadas(); }
+
+    public void resetRespostas(){ atual.resetRespostas(); }
 
     public void mantemJogador(int jogador) {
         if(jogador == 1){
@@ -228,6 +226,8 @@ public class Dados implements Serializable {
     public List<String> getLog(){
         return logCompleto;
     }
+
+    public String getLogJogada(){ return logCompleto.get(logCompleto.size()-1); }
 
     public String getTabuleiro(){
         return tabuleiro.toString();

@@ -33,7 +33,9 @@ public class JogadorC implements Jogador, Serializable {
 
     @Override
     public int getCol(){
-        return colJogada;
+        int max = 6;
+        int min = 0;
+        return colJogada = (int)Math.floor(Math.random()*(max-min+1)+min);
     }
 
     @Override
@@ -87,6 +89,11 @@ public class JogadorC implements Jogador, Serializable {
     @Override
     public int getEspecial() {
         return 0;
+    }
+
+    @Override
+    public void resetRespostas(){
+        return;
     }
 
     @Override

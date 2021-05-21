@@ -84,6 +84,10 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
         jogo.efetuaJogadaEspecial(col);
     }
 
+    public String getLogJogada() {
+        return jogo.getLogJogada();
+    }
+
     private static class Memento implements IMemento, Serializable { //Memento genérico que dá para tudo quando se recorre a serialização ...
         private byte[] snapshot = null;  // null para marcar a posição do programador
 

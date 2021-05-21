@@ -10,55 +10,70 @@ public class AguardaJogador extends EstadoAdapter implements Serializable {
 
     @Override
     public IEstado efetuaJogada(int col) {
-//        if(getModelo().efetuaJogada(col)){
-//            if(getModelo().getModo() == 1) {
-//                if(!getModelo().verificaVitoria()) {
-//                    if(getModelo().getJogadas() != 0 && getModelo().getJogadas() != 4) {
-//                        getModelo().proxJogador();
-//                        return new AguardaJogador(getModelo());
-//                    }
-//                    if(getModelo().getJogadas() != 0 && (getModelo().getJogadas() % 4) == 0){
-//                        return new AguardaMinijogo(getModelo());
-//                    }
-//                }
-//                else{
-//                    return new AguardaRecomeco(getModelo());
-//                }
-//            }
-//            if(getModelo().getModo() == 2){
-//                if(!getModelo().verificaVitoria()){
-//                    getModelo().proxJogador();
-//                    return new AguardaJogadorPC(getModelo());
-//                }
-//                else{
-//                    return new AguardaRecomeco(getModelo());
-//                }
-//            }
-//        }
-//        return this;
-        if(getModelo().getModo() == 1) {
+        if(getModelo().getModo() == 1){
             if(col == (int) 's'){
-                if(getModelo().getEspecial() > 0) {
+                if(getModelo().getEspecial() > 0){
                     return new AguardaJogadorEspecial(getModelo());
                 }
                 else{
                     return this;
                 }
             }
-            if (!getModelo().efetuaJogada(col)) {
-                return this;
-            }
-            else {
-                if (!getModelo().verificaVitoria()) {
+            if(getModelo().efetuaJogada(col)){
+                if(!getModelo().verificaVitoria()){
+                    if(getModelo().getJogadas() > 0 && getModelo().getJogadas() % 4 == 0){
+                        return new AguardaMinijogo(getModelo());
+                    }
                     getModelo().proxJogador();
                     return new AguardaJogador(getModelo());
                 }
-                else {
-                    return new AguardaRecomeco(getModelo());
+            }
+        }
+        if(getModelo().getModo() == 2){
+            if(col == (int) 's'){
+                if(getModelo().getEspecial() > 0){
+                    return new AguardaJogadorEspecial(getModelo());
+                }
+                else{
+                    return this;
+                }
+            }
+            if(getModelo().getJogadas() > 0 && getModelo().getJogadas() % 4 == 0){
+                return new AguardaMinijogo(getModelo());
+            }
+            if(getModelo().efetuaJogada(col)){
+                if(!getModelo().verificaVitoria()){
+                    getModelo().proxJogador();
+                    return new AguardaJogadorPC(getModelo());
                 }
             }
         }
         return this;
+
+        //// TESTEEEE
+//        if(getModelo().getModo() == 1) {
+//            if(col == (int) 's'){
+//                if(getModelo().getEspecial() > 0) {
+//                    return new AguardaJogadorEspecial(getModelo());
+//                }
+//                else{
+//                    return this;
+//                }
+//            }
+//            if (!getModelo().efetuaJogada(col)) {
+//                return this;
+//            }
+//            else {
+//                if (!getModelo().verificaVitoria()) {
+//                    getModelo().proxJogador();
+//                    return new AguardaJogador(getModelo());
+//                }
+//                else {
+//                    return new AguardaRecomeco(getModelo());
+//                }
+//            }
+//        }
+//        return this;
     }
 
     @Override

@@ -2,17 +2,28 @@ package jogo;
 
 import jogo.logica.Jogo;
 import jogo.logica.JogoGestao;
-import jogo.ui.texto.UIText;
 import jogo.logica.Util;
+import jogo.ui.texto.UIText;
+import jogo.logica.Util.*;
+
+import java.io.IOException;
 
 import static jogo.logica.Util.gravaJogo;
 
 public class Principal {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         JogoGestao jGestao = new JogoGestao();
         UIText uiText = new UIText(jGestao);
+        //uiText.run();
+//        Util u = new Util();
+//        Util.gravaReplay(jGestao);
+//        Util.gravaReplay(jGestao);
+//        Util.gravaReplay(jGestao);
+//        Util.gravaReplay(jGestao);
+//        Util.gravaReplay(jGestao);
+//        Util.recuperaReplay(2);
+//        Util.gravaReplay(jGestao);
         uiText.run();
-//        uiText.run();
 //        teste1();
     }
 }
