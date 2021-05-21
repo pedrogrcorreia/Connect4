@@ -27,7 +27,6 @@ public class Util {
         if(jogos.length >= 5){
             File gameToDelete = new File(targetDir, jogos[0]);
             gameToDelete.delete();
-            System.out.println("Apaguei o jogo " + jogos[0]);
         }
         if(jogos.length == 0){
             proximoJogo = 1;
@@ -37,7 +36,6 @@ public class Util {
             proximoJogo++;
         }
 
-        System.out.println(proximoJogo);
         File targetFile=new File(targetDir, String.valueOf(proximoJogo));
 
         try{
@@ -103,8 +101,6 @@ public class Util {
         for(int i=0; i< files.length; i++){
             jogos[i] = files[i].getName();
         }
-
-        System.out.println(jogos[jogo-1]);
 
         File targetFile=new File(targetDir, jogos[jogo-1]);
 
