@@ -2,6 +2,8 @@ package jogo.logica;
 
 import jogo.logica.dados.Dados;
 import jogo.logica.estados.AguardaEscolha;
+import jogo.logica.estados.AguardaJogador;
+import jogo.logica.estados.AguardaMinijogoResposta;
 import jogo.logica.estados.IEstado;
 
 import java.io.Serializable;
@@ -14,6 +16,8 @@ public class Jogo implements Serializable {
     public Jogo(){
         modelo = new Dados();
         estado = new AguardaEscolha(modelo);
+        //modelo.iniciaJogo();
+        //estado = new AguardaJogador(modelo);
     }
 
     public void setEstado(IEstado estado){ this.estado = estado;   }
@@ -32,7 +36,7 @@ public class Jogo implements Serializable {
 
     public void minijogo(String s){ setEstado(estado.minijogo(s)); }
 
-    public void minijogoResposta(){ setEstado(estado.minijogoResposta()); }
+    public void minijogoResposta(String resposta){ setEstado(estado.minijogoResposta(resposta)); }
 
     public void terminaJogoAtual(){
         return;
@@ -48,6 +52,16 @@ public class Jogo implements Serializable {
 
     public void resetJogadas(){ modelo.resetJogadas(); }
 
+    public void mantemJogador(int jogador) {
+        modelo.mantemJogador(jogador);
+    }
+
+    public int getJogadorAtual() {
+        return modelo.getJogadorAtual();
+    }
+
+    public String getMinijogo() { return modelo.getMinijogo(); }
+
     public List getLog(){ return modelo.getLog(); }
 
     @Override
@@ -55,11 +69,6 @@ public class Jogo implements Serializable {
         return modelo.getTabuleiro();
     }
 
-    public void mantemJogador(int jogador) {
-        modelo.mantemJogador(jogador);
-    }
-
-    public int getJogadorAtual() {
-        return modelo.getJogadorAtual();
+    public void efetuaJogadaEspecial(int col) { setEstado(estado.efetuaJogadaEspecial(col));
     }
 }

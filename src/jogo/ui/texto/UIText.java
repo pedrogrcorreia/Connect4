@@ -47,6 +47,7 @@ public class UIText {
 
     void efetuaJogada(){
         System.out.println("Introduza 'u' para desfazer a jogada anterior.");
+        System.out.println("Introduza '9' para utilizar a peça especial.");
         System.out.println("Introduza a coluna onde pretende jogar: ");
         String s;
         int col = 0;
@@ -58,6 +59,15 @@ public class UIText {
         s = sc.next();
         if(s.compareToIgnoreCase("u") == 0){
             jogoGestao.undo();
+        }
+    }
+
+    void efetuaJogadaEspecial(){
+        System.out.println("Introduza a coluna para a qual pretende eliminar as peças.");
+        int col = 0;
+        if(sc.hasNextInt()){
+            col = sc.nextInt();
+            jogoGestao.efetuaJogadaEspecial(col);
         }
     }
 
@@ -92,7 +102,7 @@ public class UIText {
         System.out.println("Introduza a resposta: ");
         String s;
         s = sc.next();
-        jogoGestao.minijogoResposta();
+        jogoGestao.minijogoResposta(s);
     }
 
     void printLog(){
@@ -109,7 +119,7 @@ public class UIText {
         while(!sair) {
             Situacao sit = jogoGestao.getSituacaoAtual();
             System.out.println(sit);
-            printLog();
+            //printLog();
             switch(sit) {
                 case ESCOLHE_MODO:
                     escolherModo();
@@ -122,6 +132,11 @@ public class UIText {
                     efetuaJogada();
                     System.out.println(jogoGestao.toString());
                     break;
+                case AGUARDA_JOGADOR1_ESPECIAL:
+                case AGUARDA_JOGADOR2_ESPECIAL:
+                    efetuaJogadaEspecial();
+                    System.out.println(jogoGestao.toString());
+                    break;
                 case AGUARDA_JOGADORPC:
                     efetuaJogadaPC();
                     System.out.println(jogoGestao.toString());
@@ -130,6 +145,7 @@ public class UIText {
                     minijogo();
                     break;
                 case AGUARDA_MINIJOGO_RESPOSTA:
+                    System.out.println(jogoGestao.getMinijogo());
                     minijogoResposta();
                     break;
                 case AGUARDA_RECOMECO:

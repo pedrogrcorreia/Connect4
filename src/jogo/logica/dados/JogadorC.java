@@ -60,6 +60,36 @@ public class JogadorC implements Jogador, Serializable {
     }
 
     @Override
+    public void incrementaRespostas() {
+        return;
+    }
+
+    @Override
+    public int getRespostas() {
+        return 0;
+    }
+
+    @Override
+    public int getMinijogo() {
+        return 0;
+    }
+
+    @Override
+    public void mudaMinijogo() {
+        return;
+    }
+
+    @Override
+    public void incrementaEspecial() {
+        return;
+    }
+
+    @Override
+    public int getEspecial() {
+        return 0;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Jogador " + nome + " jogou na coluna " + (colJogada+1));

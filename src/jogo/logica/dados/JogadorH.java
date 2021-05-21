@@ -8,6 +8,8 @@ public class JogadorH implements Jogador, Serializable {
     private int colJogada;
     private int jogadas;
     private int creditos;
+    private int respostas;
+    private int minijogo;
     private int special;
 
     public JogadorH(String username, String ficha){
@@ -15,7 +17,9 @@ public class JogadorH implements Jogador, Serializable {
         this.ficha = ficha;
         jogadas = 0;
         creditos = 5;
-        special = 0;
+        respostas = 0;
+        minijogo = 0;
+        special = 1;
     }
 
     @Override
@@ -67,6 +71,41 @@ public class JogadorH implements Jogador, Serializable {
     public void removeCreditos(int creditos) {
         this.creditos = creditos;
         this.creditos--;
+    }
+
+    @Override
+    public void incrementaRespostas() {
+        respostas++;
+    }
+
+    @Override
+    public int getRespostas() {
+        return respostas;
+    }
+
+    @Override
+    public int getMinijogo() {
+        return minijogo;
+    }
+
+    @Override
+    public void mudaMinijogo() {
+        if(minijogo == 0){
+            minijogo = 1;
+        }
+        else{
+            minijogo = 0;
+        }
+    }
+
+    @Override
+    public void incrementaEspecial() {
+        special++;
+    }
+
+    @Override
+    public int getEspecial() {
+        return special;
     }
 
     @Override

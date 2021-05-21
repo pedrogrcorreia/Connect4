@@ -10,4 +10,10 @@ public interface Jogador {
     void resetJogadas();
     int getCreditos();
     void removeCreditos(int creditos);
+    void incrementaRespostas();
+    int getRespostas();
+    int getMinijogo();
+    void mudaMinijogo();
+    void incrementaEspecial();
+    int getEspecial();
 }

@@ -8,9 +8,11 @@ public interface IEstado {
     IEstado configurarJogador(String s);
     IEstado efetuaJogada(int col);
     IEstado efetuaJogadaPC();
+    IEstado efetuaJogadaEspecial(int col);
     IEstado novoJogo();
     IEstado minijogo(String s);
-    IEstado minijogoResposta();
+    IEstado minijogoResposta(String resposta);
+
 
     Situacao getSituacaoAtual();
 }

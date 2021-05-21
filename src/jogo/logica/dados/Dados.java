@@ -9,9 +9,13 @@ public class Dados implements Serializable {
     private int modo;
     private Jogador j1, j2, atual, prox;
     private List<String> logCompleto;
+    private transient MinijogoMatematica m;
+    private transient MinijogoDicionario d;
 
     public Dados(){
         logCompleto = new ArrayList<String>();
+        m = new MinijogoMatematica();
+        d = new MinijogoDicionario();
     };
 
     public boolean escolheModo(int opc){
@@ -60,11 +64,19 @@ public class Dados implements Serializable {
         return true;
     }
 
+    // FUNCAO CORRETA
     public void iniciaJogo(){
         tabuleiro = new Tabuleiro();
         atual = j1;
         prox = j2;
     }
+
+    // FUNCAO DEBUG
+//    public void iniciaJogo(){
+//        tabuleiro = new Tabuleiro();
+//        atual = new JogadorH("s", "x");
+//        prox = new JogadorH("t", "o");
+//    }
 
     public boolean efetuaJogada(int col){
         atual.addCol(col-1);
@@ -75,6 +87,10 @@ public class Dados implements Serializable {
             return true;
         }
         return false;
+    }
+
+    public boolean efetuaJogadaEspecial(int col){
+        return tabuleiro.jogaEspecial(col - 1);
     }
 
     public boolean efetuaJogadaPC(){
@@ -125,10 +141,58 @@ public class Dados implements Serializable {
         return false;
     }
 
-    public boolean getMinijogo(){
-        MinijogoMatematica m = new MinijogoMatematica();
-        m.getJogo();
-        return true;
+    public String getMinijogo(){
+//        m = new MinijogoMatematica();
+//        m.criaJogo();
+//        System.out.println(m.getResposta());
+//        return m.getJogo();
+//        d = new MinijogoDicionario();
+//        d.criaJogo();
+        if(atual.getMinijogo() == 0){
+            m.criaJogo();
+            System.out.println(m.getResposta());
+            return m.getJogo();
+        }
+        else{
+            d.criaJogo();
+            System.out.println(d.getResposta());
+            return d.getJogo();
+        }
+    }
+
+    public boolean minijogoResposta(String resposta) {
+        if (atual.getMinijogo() == 0){
+            if (resposta.compareToIgnoreCase(m.getResposta()) == 0) {
+                atual.incrementaRespostas();
+                return true;
+            }
+            return false;
+        }
+        if(atual.getMinijogo() == 1){
+            System.out.println("DEBUG\n");
+            if(resposta.compareToIgnoreCase(d.getResposta()) == 0){
+                atual.incrementaRespostas();
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public void mudaMinijogo(){
+        atual.mudaMinijogo();
+    }
+
+    public void atribuiEspecial(){
+        atual.incrementaEspecial();
+    }
+
+    public int getEspecial(){
+        return atual.getEspecial();
+    }
+
+    public int getRespostas(){
+        return atual.getRespostas();
     }
 
     public int getCreditos(){

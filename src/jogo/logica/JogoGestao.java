@@ -53,8 +53,10 @@ public class JogoGestao {
         originator.minijogo(s);
     }
 
-    public void minijogoResposta(){
-        originator.minijogoResposta();
+    public String getMinijogo() { return originator.getMiniJogo(); }
+
+    public void minijogoResposta(String resposta){
+        originator.minijogoResposta(resposta);
     }
 
 
@@ -69,5 +71,10 @@ public class JogoGestao {
 
     public List getLog() {
         return originator.getLog();
+    }
+
+
+    public void efetuaJogadaEspecial(int col) {
+        originator.efetuaJogadaEspecial(col);
     }
 }

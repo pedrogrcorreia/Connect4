@@ -31,6 +31,14 @@ public abstract class EstadoAdapter implements IEstado, Serializable {
     }
 
     @Override
+    public IEstado efetuaJogadaPC() {
+        return this;
+    }
+
+    @Override
+    public IEstado efetuaJogadaEspecial(int col) { return this; }
+
+    @Override
     public IEstado novoJogo() {
         return this;
     }
@@ -41,12 +49,9 @@ public abstract class EstadoAdapter implements IEstado, Serializable {
     }
 
     @Override
-    public IEstado minijogoResposta(){
+    public IEstado minijogoResposta(String resposta){
         return this;
     }
 
-    @Override
-    public IEstado efetuaJogadaPC() {
-        return this;
-    }
+
 }

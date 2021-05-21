@@ -15,8 +15,9 @@ public class Tabuleiro implements Serializable {
     }
 
     public boolean joga(int col, String ficha){
-        if(col<0 || col > 6)
+        if(col<0 || col > 6) {
             return false;
+        }
         for(int i=0; i<6; i++){
             if(tab[0][col].compareToIgnoreCase("*")!=0){
                 return false;
@@ -150,6 +151,16 @@ public class Tabuleiro implements Serializable {
         }
 
         return false;
+    }
+
+    public boolean jogaEspecial(int col){
+        if(col<0 || col > 6) {
+            return false;
+        }
+        for(int i=0; i<6; i++){
+            tab[i][col] = "*";
+        }
+        return true;
     }
 
     @Override

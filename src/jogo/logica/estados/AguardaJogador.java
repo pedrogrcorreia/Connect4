@@ -35,13 +35,17 @@ public class AguardaJogador extends EstadoAdapter{
 //        }
 //        return this;
         if(getModelo().getModo() == 1) {
+            if(col == 9){
+                return new AguardaJogadorEspecial(getModelo());
+            }
             if (!getModelo().efetuaJogada(col)) {
                 return this;
-            } else {
+            }
+            else {
                 if (!getModelo().verificaVitoria()) {
-                    //getModelo().proxJogador();
                     return new AguardaJogador(getModelo());
-                } else {
+                }
+                else {
                     return new AguardaRecomeco(getModelo());
                 }
             }
