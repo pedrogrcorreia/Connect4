@@ -1,10 +1,11 @@
 package jogo.logica.memento;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Caretaker { //CareTaker (usado pelas IU) -> no TP, seria a Máquina de estados/modelo
+public class Caretaker implements Serializable { //CareTaker (usado pelas IU) -> no TP, seria a Máquina de estados/modelo
 
     private IMementoOriginator originator;
 

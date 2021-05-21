@@ -2,9 +2,10 @@ package jogo.logica;
 
 import jogo.logica.memento.Caretaker;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class JogoGestao {
+public class JogoGestao implements Serializable {
     private JogoOriginator originator;
     private Caretaker careTaker;
 

@@ -19,7 +19,7 @@ public class JogadorH implements Jogador, Serializable {
         creditos = 5;
         respostas = 0;
         minijogo = 0;
-        special = 1;
+        special = 0;
     }
 
     @Override

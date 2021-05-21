@@ -3,7 +3,9 @@ package jogo.logica.estados;
 import jogo.logica.Situacao;
 import jogo.logica.dados.Dados;
 
-public class AguardaJogador extends EstadoAdapter{
+import java.io.Serializable;
+
+public class AguardaJogador extends EstadoAdapter implements Serializable {
     public AguardaJogador(Dados modelo){super(modelo);}
 
     @Override
@@ -35,14 +37,20 @@ public class AguardaJogador extends EstadoAdapter{
 //        }
 //        return this;
         if(getModelo().getModo() == 1) {
-            if(col == 9){
-                return new AguardaJogadorEspecial(getModelo());
+            if(col == (int) 's'){
+                if(getModelo().getEspecial() > 0) {
+                    return new AguardaJogadorEspecial(getModelo());
+                }
+                else{
+                    return this;
+                }
             }
             if (!getModelo().efetuaJogada(col)) {
                 return this;
             }
             else {
                 if (!getModelo().verificaVitoria()) {
+                    getModelo().proxJogador();
                     return new AguardaJogador(getModelo());
                 }
                 else {

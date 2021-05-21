@@ -3,7 +3,9 @@ package jogo.logica.estados;
 import jogo.logica.Situacao;
 import jogo.logica.dados.Dados;
 
-public class AguardaJogadorPC extends EstadoAdapter{
+import java.io.Serializable;
+
+public class AguardaJogadorPC extends EstadoAdapter implements Serializable {
     public AguardaJogadorPC(Dados modelo){super(modelo);}
 
     @Override

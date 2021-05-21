@@ -2,11 +2,12 @@ package jogo.logica.dados;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MinijogoDicionario{
+public class MinijogoDicionario implements Serializable {
 
     List<String> dicionario;
     String palavra, palavraEscondida;

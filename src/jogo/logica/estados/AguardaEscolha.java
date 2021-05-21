@@ -3,7 +3,9 @@ package jogo.logica.estados;
 import jogo.logica.Situacao;
 import jogo.logica.dados.Dados;
 
-public class AguardaEscolha extends EstadoAdapter{
+import java.io.Serializable;
+
+public class AguardaEscolha extends EstadoAdapter implements Serializable {
     public AguardaEscolha(Dados modelo){
         super(modelo);
     }

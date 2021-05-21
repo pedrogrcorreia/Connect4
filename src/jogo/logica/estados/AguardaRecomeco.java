@@ -3,7 +3,9 @@ package jogo.logica.estados;
 import jogo.logica.Situacao;
 import jogo.logica.dados.Dados;
 
-public class AguardaRecomeco extends EstadoAdapter{
+import java.io.Serializable;
+
+public class AguardaRecomeco extends EstadoAdapter implements Serializable {
     public AguardaRecomeco(Dados modelo){super(modelo);}
 
     @Override

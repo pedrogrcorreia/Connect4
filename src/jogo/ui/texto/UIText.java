@@ -4,8 +4,12 @@ import jogo.logica.Jogo;
 import jogo.logica.JogoGestao;
 import jogo.logica.Situacao;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import static jogo.logica.Util.gravaJogo;
+import static jogo.logica.Util.recuperaJogo;
 
 public class UIText {
     JogoGestao jogoGestao;
@@ -47,7 +51,7 @@ public class UIText {
 
     void efetuaJogada(){
         System.out.println("Introduza 'u' para desfazer a jogada anterior.");
-        System.out.println("Introduza '9' para utilizar a peça especial.");
+        System.out.println("Introduza 's' para utilizar a peça especial.");
         System.out.println("Introduza a coluna onde pretende jogar: ");
         String s;
         int col = 0;
@@ -59,6 +63,13 @@ public class UIText {
         s = sc.next();
         if(s.compareToIgnoreCase("u") == 0){
             jogoGestao.undo();
+        }
+        if(s.compareToIgnoreCase("s") == 0){
+            jogoGestao.efetuaJogada('s');
+        }
+        if(s.compareToIgnoreCase("fim") == 0){
+            jogoGestao.terminaJogoAtual();
+            sair = true;
         }
     }
 
@@ -105,6 +116,13 @@ public class UIText {
         jogoGestao.minijogoResposta(s);
     }
 
+    void carregaJogo(){
+        System.out.println("Introduza o nome do ficheiro do jogo: ");
+        String s;
+        s = sc.next();
+
+    }
+
     void printLog(){
         List<String> log = jogoGestao.getLog();
         //System.out.println("\n");
@@ -116,11 +134,23 @@ public class UIText {
 
 
     public void run(){
-        while(!sair) {
+        System.out.println("Comecar um jogo novo (n) ou carregar (c) um jogo guardado?");
+        String s;
+        s = sc.next();
+        if(s.compareToIgnoreCase("c") == 0){
+            System.out.println("Introduza o nome do jogo: ");
+            s = sc.next();
+            try {
+                jogoGestao = recuperaJogo(s);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        while (!sair) {
             Situacao sit = jogoGestao.getSituacaoAtual();
             System.out.println(sit);
             //printLog();
-            switch(sit) {
+            switch (sit) {
                 case ESCOLHE_MODO:
                     escolherModo();
                     break;
@@ -149,9 +179,11 @@ public class UIText {
                     minijogoResposta();
                     break;
                 case AGUARDA_RECOMECO:
+                    gravaJogo(jogoGestao, "jogo1");
                     novoJogo();
                     break;
             }
         }
+        gravaJogo(jogoGestao, "jogo1");
     };
 }

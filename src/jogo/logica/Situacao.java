@@ -2,7 +2,9 @@ package jogo.logica;
 
 import jogo.logica.dados.Dados;
 
-public enum Situacao {
+import java.io.Serializable;
+
+public enum Situacao implements Serializable {
     ESCOLHE_MODO("Escolher o modo de jogo."),
     AGUARDA_CONFIG("Escolher o nome do jogador."),
     AGUARDA_JOGADOR1("Aguardar jogada do jogador 1."),

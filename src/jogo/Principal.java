@@ -3,12 +3,16 @@ package jogo;
 import jogo.logica.Jogo;
 import jogo.logica.JogoGestao;
 import jogo.ui.texto.UIText;
+import jogo.logica.Util;
+
+import static jogo.logica.Util.gravaJogo;
 
 public class Principal {
     public static void main(String[] args) {
         JogoGestao jGestao = new JogoGestao();
         UIText uiText = new UIText(jGestao);
         uiText.run();
+//        uiText.run();
 //        teste1();
     }
 }

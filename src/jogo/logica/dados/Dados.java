@@ -83,7 +83,6 @@ public class Dados implements Serializable {
         if(tabuleiro.joga(atual.getCol(), atual.getFicha())) {
             atual.incrementaJogadas();
             addLog(atual.toString());
-            proxJogador();
             return true;
         }
         return false;

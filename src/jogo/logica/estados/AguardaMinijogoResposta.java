@@ -3,7 +3,9 @@ package jogo.logica.estados;
 import jogo.logica.Situacao;
 import jogo.logica.dados.Dados;
 
-public class AguardaMinijogoResposta extends EstadoAdapter{
+import java.io.Serializable;
+
+public class AguardaMinijogoResposta extends EstadoAdapter implements Serializable {
     public AguardaMinijogoResposta(Dados modelo){super(modelo);}
 
     @Override
@@ -18,7 +20,7 @@ public class AguardaMinijogoResposta extends EstadoAdapter{
                 return new AguardaMinijogoResposta(getModelo());
             }
         }
-        getModelo().proxJogador();
+        getModelo().proxJogador(); // se perder o minijogo passa para o seguinte
         return new AguardaJogador(getModelo());
     }
 

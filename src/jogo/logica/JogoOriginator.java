@@ -6,7 +6,7 @@ import jogo.logica.memento.IMementoOriginator;
 import java.io.*;
 import java.util.List;
 
-public class JogoOriginator implements IMementoOriginator {
+public class JogoOriginator implements IMementoOriginator, Serializable {
     Jogo jogo;
 
     public JogoOriginator(){
@@ -84,7 +84,7 @@ public class JogoOriginator implements IMementoOriginator {
         jogo.efetuaJogadaEspecial(col);
     }
 
-    private static class Memento implements IMemento { //Memento genérico que dá para tudo quando se recorre a serialização ...
+    private static class Memento implements IMemento, Serializable { //Memento genérico que dá para tudo quando se recorre a serialização ...
         private byte[] snapshot = null;  // null para marcar a posição do programador
 
         // as seguintes NÃO SÃO @Overrides
