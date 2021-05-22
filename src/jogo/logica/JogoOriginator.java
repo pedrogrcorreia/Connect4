@@ -65,6 +65,8 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
         return jogo.getSituacaoAtual();
     }
 
+    public String getTabuleiro() { return jogo.getTabuleiro();}
+
     @Override
     public String toString() {
         return jogo.toString();

@@ -24,15 +24,15 @@ public class Util {
 
 //        System.out.println(jogos[0]);
 
-        if(jogos.length >= 5){
+        if(files.length >= 5){
             File gameToDelete = new File(targetDir, jogos[0]);
             gameToDelete.delete();
         }
-        if(jogos.length == 0){
+        if(files.length == 0){
             proximoJogo = 1;
         }
         else{
-            proximoJogo = Integer.parseInt(jogos[jogos.length-1]);
+            proximoJogo = Integer.parseInt(jogos[files.length-1]);
             proximoJogo++;
         }
 
@@ -97,10 +97,17 @@ public class Util {
         File targetDir=new File("replays");
 
         File[] files = targetDir.listFiles();
+        if(files != null && files.length < jogo){
+            return null;
+        }
         Arrays.sort(files, Comparator.comparingLong(File::lastModified));
+
         for(int i=0; i< files.length; i++){
             jogos[i] = files[i].getName();
         }
+
+
+
 
         File targetFile=new File(targetDir, jogos[jogo-1]);
 

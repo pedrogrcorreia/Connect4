@@ -68,6 +68,7 @@ public class Dados implements Serializable {
     // FUNCAO CORRETA
     public void iniciaJogo(){
         tabuleiro = new Tabuleiro();
+        addLog(tabuleiro.toString());
         atual = j1;
         prox = j2;
     }
@@ -84,6 +85,7 @@ public class Dados implements Serializable {
         if(tabuleiro.joga(atual.getCol(), atual.getFicha())) {
             atual.incrementaJogadas();
             addLog(atual.toString());
+            addLog(tabuleiro.toString());
             return true;
         }
         return false;
@@ -107,6 +109,7 @@ public class Dados implements Serializable {
         if(!tabuleiro.verificaVitoria(atual.getCol(), atual.getFicha())){
             return false;
         }
+        addLog("Jogador " + atual.getNome() + " venceu o jogo!\n");
         return true;
     }
 
@@ -177,6 +180,7 @@ public class Dados implements Serializable {
     }
 
     public void atribuiEspecial(){
+        addLog("Jogador " + atual.getNome() + " ganhou o minijogo e uma peça especial.\n");
         atual.incrementaEspecial();
     }
 

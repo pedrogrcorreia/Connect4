@@ -184,42 +184,45 @@ public class UIText {
 
     void jogo(){
         while (!sairJogo) {
-            Situacao sit = jogoGestao.getSituacaoAtual();
-            System.out.println(sit);
-            switch (sit) {
-                case ESCOLHE_MODO:
-                    escolherModo();
-                    break;
-                case AGUARDA_CONFIG:
-                    configuracao();
-                    break;
-                case AGUARDA_JOGADOR1:
-                case AGUARDA_JOGADOR2:
-                    efetuaJogada();
-                    System.out.println(jogoGestao.toString());
-                    break;
-                case AGUARDA_JOGADOR1_ESPECIAL:
-                case AGUARDA_JOGADOR2_ESPECIAL:
-                    efetuaJogadaEspecial();
-                    System.out.println(jogoGestao.toString());
-                    break;
-                case AGUARDA_JOGADORPC:
-                    efetuaJogadaPC();
-                    System.out.println(jogoGestao.toString());
-                    break;
-                case AGUARDA_MINIJOGO:
-                    minijogo();
-                    break;
-                case AGUARDA_MINIJOGO_RESPOSTA:
-                    System.out.println(jogoGestao.getMinijogo());
-                    minijogoResposta();
-                    break;
-                case AGUARDA_RECOMECO:
-                    gravaReplay(jogoGestao);
-                    novoJogo();
-                    break;
+            if (jogoGestao != null) {
+                Situacao sit = jogoGestao.getSituacaoAtual();
+                printLogJogada();
+                System.out.println(sit);
+                switch (sit) {
+                    case ESCOLHE_MODO:
+                        escolherModo();
+                        break;
+                    case AGUARDA_CONFIG:
+                        configuracao();
+                        break;
+                    case AGUARDA_JOGADOR1:
+                    case AGUARDA_JOGADOR2:
+                        efetuaJogada();
+                        //System.out.println(jogoGestao.getTabuleiro());
+                        break;
+                    case AGUARDA_JOGADOR1_ESPECIAL:
+                    case AGUARDA_JOGADOR2_ESPECIAL:
+                        efetuaJogadaEspecial();
+                        //System.out.println(jogoGestao.getTabuleiro());
+                        break;
+                    case AGUARDA_JOGADORPC:
+                        efetuaJogadaPC();
+                        //System.out.println(jogoGestao.getTabuleiro());
+                        break;
+                    case AGUARDA_MINIJOGO:
+                        minijogo();
+                        break;
+                    case AGUARDA_MINIJOGO_RESPOSTA:
+                        System.out.println(jogoGestao.getMinijogo());
+                        minijogoResposta();
+                        break;
+                    case AGUARDA_RECOMECO:
+                        gravaReplay(jogoGestao);
+                        novoJogo();
+                        break;
+                }
+//                printLogJogada();
             }
-            printLogJogada();
         }
     }
 
@@ -244,7 +247,12 @@ public class UIText {
                 case "r":
                 case "R":
                     jogoGestao = recuperaReplay();
-                    printLog();
+                    if(jogoGestao != null) {
+                        printLog();
+                    }
+                    else{
+                        System.out.println("O replay não existe.");
+                    }
                     break;
                 case "n":
                 case "N":

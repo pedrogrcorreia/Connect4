@@ -15,17 +15,17 @@ public class Principal {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         JogoGestao jGestao = new JogoGestao();
         UIText uiText = new UIText(jGestao);
-        //uiText.run();
-        Util u = new Util();
-        Util.gravaReplay(jGestao);
-        Util.gravaReplay(jGestao);
-        Util.gravaReplay(jGestao);
-        Util.gravaReplay(jGestao);
-        Util.gravaReplay(jGestao);
-        Util.recuperaReplay(2);
-        jGestao = recuperaReplay(2);
-        jGestao.escolherModo(3);
-        System.out.println(jGestao.getLog());
+        uiText.run();
+//        Util u = new Util();
+//        Util.gravaReplay(jGestao);
+//        Util.gravaReplay(jGestao);
+//        Util.gravaReplay(jGestao);
+//        Util.gravaReplay(jGestao);
+//        Util.gravaReplay(jGestao);
+//        Util.recuperaReplay(2);
+//        jGestao = recuperaReplay(2);
+//        jGestao.escolherModo(3);
+//        System.out.println(jGestao.getLog());
         //Util.gravaReplay(jGestao);
 //        uiText.run();
 //        teste1();

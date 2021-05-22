@@ -66,6 +66,8 @@ public class Jogo implements Serializable {
 
     public List getLog(){ return modelo.getLog(); }
 
+    public String getTabuleiro() { return modelo.getTabuleiro(); }
+
     @Override
     public String toString() {
         return modelo.getTabuleiro();

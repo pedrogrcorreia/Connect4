@@ -2,10 +2,14 @@ package jogo.logica;
 
 import jogo.logica.memento.Caretaker;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 public class JogoGestao implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 4L;
     private JogoOriginator originator;
     private Caretaker careTaker;
 
@@ -66,6 +70,8 @@ public class JogoGestao implements Serializable {
     public Situacao getSituacaoAtual() {
         return originator.getSituacaoAtual();
     }
+
+    public String getTabuleiro(){ return originator.getTabuleiro(); }
 
     @Override
     public String toString() {
