@@ -42,7 +42,6 @@ public class UIText {
         }
         s = sc.next();
         if(s.compareToIgnoreCase("fim") == 0){
-            jogoGestao.terminaJogoAtual();
             sairJogo = true;
         }
     }
@@ -51,7 +50,6 @@ public class UIText {
         System.out.println("Introduza o nome do jogador: ");
         String s = sc.next();
         if(s.compareToIgnoreCase("fim") == 0){
-            jogoGestao.terminaJogoAtual();
             sairJogo = true;
         }
         else {
@@ -90,7 +88,6 @@ public class UIText {
             jogoGestao.efetuaJogada('s');
         }
         if(s.compareToIgnoreCase("fim") == 0){
-            jogoGestao.terminaJogoAtual();
             sairJogo = true;
         }
         if(s.compareToIgnoreCase("g") == 0){
@@ -120,7 +117,6 @@ public class UIText {
 //            efetuaJogadaPC();
 //        }
         if(s.compareToIgnoreCase("fim") == 0){
-            jogoGestao.terminaJogoAtual();
             sairJogo = true;
         }
         if(s.compareToIgnoreCase("g") == 0){
@@ -144,7 +140,6 @@ public class UIText {
             return;
         }
         if(s.compareToIgnoreCase("n") == 0){
-            jogoGestao.terminaJogoAtual();
             sairJogo = true;
             return;
         }

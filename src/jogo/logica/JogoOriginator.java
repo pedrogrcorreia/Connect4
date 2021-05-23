@@ -38,10 +38,6 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
         jogo.escolherModo(opcao);
     }
 
-    public void terminaJogoAtual() {
-        jogo.terminaJogoAtual();
-    }
-
     public void configuraJogador(String s) {
         jogo.configuraJogador(s);
     }

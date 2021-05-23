@@ -38,10 +38,6 @@ public class Jogo implements Serializable {
 
     public void minijogoResposta(String resposta){ setEstado(estado.minijogoResposta(resposta)); }
 
-    public void terminaJogoAtual(){
-        return;
-    }
-
     public Situacao getSituacaoAtual(){
         return estado.getSituacaoAtual();
     }

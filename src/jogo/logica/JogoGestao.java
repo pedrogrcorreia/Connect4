@@ -30,10 +30,6 @@ public class JogoGestao implements Serializable {
         originator.escolherModo(opcao);
     }
 
-    public void terminaJogoAtual() {
-        originator.terminaJogoAtual();
-    }
-
     public void configuraJogador(String s) {
         originator.configuraJogador(s);
     }
