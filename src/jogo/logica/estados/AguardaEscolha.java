@@ -12,16 +12,25 @@ public class AguardaEscolha extends EstadoAdapter implements Serializable {
 
     @Override
     public IEstado escolherModo(int opc) {
-        if(opc == 1 || opc == 2){
-            getModelo().escolheModo(opc);
+        getModelo().escolheModo(opc);
+        if(getModelo().getModo() == 1 || getModelo().getModo() == 2){
             return new AguardaConfig(getModelo());
         }
-        if(opc == 3){
-            getModelo().escolheModo(opc);
+        if(getModelo().getModo() == 3){
             getModelo().configuraJogador("");
             return new AguardaJogadorPC(getModelo());
         }
-        return new AguardaEscolha(getModelo());
+        return this;
+//        if(opc == 1 || opc == 2){
+//            getModelo().escolheModo(opc);
+//            return new AguardaConfig(getModelo());
+//        }
+//        if(opc == 3){
+//            getModelo().escolheModo(opc);
+//            getModelo().configuraJogador("");
+//            return new AguardaJogadorPC(getModelo());
+//        }
+//        return new AguardaEscolha(getModelo());
     }
 
     @Override
