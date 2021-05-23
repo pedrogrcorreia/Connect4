@@ -7,15 +7,22 @@ import jogo.ui.texto.UIText;
 import jogo.logica.Util.*;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import static jogo.logica.Util.gravaJogo;
 import static jogo.logica.Util.recuperaReplay;
 
 public class Principal {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         JogoGestao jGestao = new JogoGestao();
         UIText uiText = new UIText(jGestao);
         uiText.run();
+//        long start = System.currentTimeMillis();
+//        Scanner sc = new Scanner(System.in);
+//// ...
+//        long finish = System.currentTimeMillis();
+//        long timeElapsed = finish - start;
+//        System.out.println(timeElapsed);
 //        Util u = new Util();
 //        Util.gravaReplay(jGestao);
 //        Util.gravaReplay(jGestao);

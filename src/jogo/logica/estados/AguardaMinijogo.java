@@ -13,6 +13,7 @@ public class AguardaMinijogo extends EstadoAdapter implements Serializable {
         if(getModelo().minijogo(s)){
             return new AguardaMinijogoResposta(getModelo());
         }
+        getModelo().mudaMinijogo();
         getModelo().proxJogador();
         return new AguardaJogador(getModelo());
     }

@@ -17,4 +17,7 @@ public interface Jogador {
     void incrementaEspecial();
     int getEspecial();
     void resetRespostas();
+    void startClock();
+    void stopClock();
+    int getTempo();
 }

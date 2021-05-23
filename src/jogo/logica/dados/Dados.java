@@ -6,17 +6,14 @@ import java.util.List;
 
 public class Dados implements Serializable {
     private Tabuleiro tabuleiro;
-    private int modo;
+    private int modo, minijogoN;
     private Jogador j1, j2, atual, prox;
     private List<String> logCompleto;
     private List<String> logJogada;
-    private transient MinijogoMatematica m;
-    private transient MinijogoDicionario d;
+    private transient Minijogo minijogo;
 
     public Dados(){
         logCompleto = new ArrayList<String>();
-        m = new MinijogoMatematica();
-        d = new MinijogoDicionario();
     };
 
     public boolean escolheModo(int opc){
@@ -66,19 +63,19 @@ public class Dados implements Serializable {
     }
 
     // FUNCAO CORRETA
-    public void iniciaJogo(){
-        tabuleiro = new Tabuleiro();
-        addLog(tabuleiro.toString());
-        atual = j1;
-        prox = j2;
-    }
-
-    // FUNCAO DEBUG
 //    public void iniciaJogo(){
 //        tabuleiro = new Tabuleiro();
-//        atual = new JogadorH("s", "x");
-//        prox = new JogadorH("t", "o");
+//        addLog(tabuleiro.toString());
+//        atual = j1;
+//        prox = j2;
 //    }
+
+     //FUNCAO DEBUG
+    public void iniciaJogo(){
+        tabuleiro = new Tabuleiro();
+        atual = new JogadorH("s", "x");
+        prox = new JogadorH("t", "o");
+    }
 
     public boolean efetuaJogada(int col){
         atual.addCol(col-1);
@@ -139,6 +136,7 @@ public class Dados implements Serializable {
 
     public boolean minijogo(String s){
         if(s.compareToIgnoreCase("s") == 0){
+            atual.startClock();
             return true;
         }
         return false;
@@ -146,31 +144,47 @@ public class Dados implements Serializable {
 
     public String getMinijogo(){
         if(atual.getMinijogo() == 0){
-            m.criaJogo();
-            System.out.println(m.getResposta());
-            return m.getJogo();
+            minijogo = new MinijogoMatematica();
         }
         else{
-            d.criaJogo();
-            System.out.println(d.getResposta());
-            return d.getJogo();
+            minijogo = new MinijogoDicionario();
         }
+        minijogo.criaJogo();
+        System.out.println(minijogo.getResposta());
+        return minijogo.getJogo();
+//        if(atual.getMinijogo() == 0){
+//            m.criaJogo();
+//            System.out.println(m.getResposta());
+//            return m.getJogo();
+//        }
+//        else{
+//            d.criaJogo();
+//            System.out.println(d.getResposta());
+//            return d.getJogo();
+//        }
     }
 
     public boolean minijogoResposta(String resposta) {
-        if (atual.getMinijogo() == 0){
-            if (resposta.compareToIgnoreCase(m.getResposta()) == 0) {
-                atual.incrementaRespostas();
-                return true;
-            }
-            return false;
+        if(minijogo.respostaCorreta(resposta)){
+            atual.incrementaRespostas();
+            return true;
         }
-        if(atual.getMinijogo() == 1){
-            if(resposta.compareToIgnoreCase(d.getResposta()) == 0){
-                atual.incrementaRespostas();
-                return true;
-            }
-            return false;
+        return false;
+    }
+
+    public boolean continuaMinijogo(){
+        if(minijogo.continuaMinijogo(atual.getRespostas())){
+            System.out.println(atual.getRespostas());
+            return true;
+        }
+        stopClock();
+        return false;
+    }
+
+    public boolean minijogoVitoria(){
+        System.out.println(atual.getTempo());
+        if(minijogo.vitoriaMinijogo(atual.getTempo(), atual.getRespostas())){
+            return true;
         }
         return false;
     }
@@ -223,6 +237,14 @@ public class Dados implements Serializable {
         addLog("As jogadas até ao mini-jogo foram resetadas para o jogador " + atual.getNome() + ".\n");
     }
 
+    public void startClock(){
+        atual.startClock();
+    }
+
+    public void stopClock(){
+        atual.stopClock();
+    }
+
     private void addLog(String a){
         logCompleto.add(a);
     }
@@ -242,5 +264,6 @@ public class Dados implements Serializable {
         return tabuleiro.toString();
     }
 
+    public boolean tabuleiroCheio() { return tabuleiro.cheio(); }
 
 }

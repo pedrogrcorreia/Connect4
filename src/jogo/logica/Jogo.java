@@ -1,10 +1,7 @@
 package jogo.logica;
 
 import jogo.logica.dados.Dados;
-import jogo.logica.estados.AguardaEscolha;
-import jogo.logica.estados.AguardaJogador;
-import jogo.logica.estados.AguardaMinijogoResposta;
-import jogo.logica.estados.IEstado;
+import jogo.logica.estados.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,9 +12,9 @@ public class Jogo implements Serializable {
 
     public Jogo(){
         modelo = new Dados();
-        estado = new AguardaEscolha(modelo);
-        //modelo.iniciaJogo();
-        //estado = new AguardaJogador(modelo);
+        //estado = new AguardaEscolha(modelo);
+        modelo.iniciaJogo();
+        estado = new AguardaMinijogo(modelo);
     }
 
     public void setEstado(IEstado estado){ this.estado = estado;   }

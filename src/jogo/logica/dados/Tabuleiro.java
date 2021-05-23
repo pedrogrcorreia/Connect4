@@ -163,6 +163,17 @@ public class Tabuleiro implements Serializable {
         return true;
     }
 
+    public boolean cheio(){
+        for(int i=0; i<6; i++){
+            for(int j=0; j<7; j++){
+                if(tab[i][j].compareToIgnoreCase("*") == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

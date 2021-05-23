@@ -97,6 +97,21 @@ public class JogadorC implements Jogador, Serializable {
     }
 
     @Override
+    public void startClock() {
+        return;
+    }
+
+    @Override
+    public void stopClock() {
+        return;
+    }
+
+    @Override
+    public int getTempo() {
+        return 0;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Jogador " + nome + " jogou na coluna " + (colJogada+1));

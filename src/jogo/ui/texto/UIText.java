@@ -15,7 +15,7 @@ public class UIText {
     JogoGestao jogoGestao;
     private boolean sair = false;
     private boolean sairJogo = false;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in).useDelimiter("\\n");
 
     public UIText(JogoGestao j){
         this.jogoGestao = j;

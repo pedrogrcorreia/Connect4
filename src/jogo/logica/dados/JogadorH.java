@@ -12,6 +12,10 @@ public class JogadorH implements Jogador, Serializable {
     private int minijogo;
     private int special;
 
+    long start;
+    long stop;
+    long time;
+
     public JogadorH(String username, String ficha){
         nome = username;
         this.ficha = ficha;
@@ -111,6 +115,21 @@ public class JogadorH implements Jogador, Serializable {
     @Override
     public void resetRespostas() {
         respostas = 0;
+    }
+
+    @Override
+    public void startClock() {
+        start = System.currentTimeMillis();
+    }
+
+    @Override
+    public void stopClock() {
+        stop = System.currentTimeMillis();
+    }
+
+    @Override
+    public int getTempo() {
+        return (int) (stop - start) / 1000;
     }
 
     @Override

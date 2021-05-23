@@ -10,23 +10,58 @@ public class AguardaMinijogoResposta extends EstadoAdapter implements Serializab
 
     @Override
     public IEstado minijogoResposta(String resposta) {
-        if(getModelo().minijogoResposta(resposta)){
-            if(getModelo().getRespostas() < 5) {
-                return new AguardaMinijogoResposta(getModelo());
-            }
-            else{
-                getModelo().mudaMinijogo();
-                getModelo().atribuiEspecial();
-                getModelo().incrementaJogadas();
-                getModelo().resetRespostas();
-                getModelo().proxJogador();
-                return new AguardaJogador(getModelo());
-            }
+        if(getModelo().getModo() == 1) { // se o modo for o HvH
+            if (getModelo().minijogoResposta(resposta)) { // se acertou
+                if (getModelo().continuaMinijogo()) { // se o jogo é para continuar (matemática)
+                    return new AguardaMinijogoResposta(getModelo());
+                }
+                if (getModelo().minijogoVitoria()) { // se ganhou
+                    getModelo().mudaMinijogo(); // mudar o minijogo para o jogador atual
+                    getModelo().atribuiEspecial(); // atribuir a peça especial
+                    getModelo().incrementaJogadas(); // incrementa o numero de jogadas
+                    getModelo().resetRespostas(); // faz o reset das respostas
+                    getModelo().proxJogador(); // passa para o proximo jogador
+                    return new AguardaJogador(getModelo()); // novo estado
+                } else { // se perdeu (tempo excedido)
+                    getModelo().mudaMinijogo(); // so nao atribui a peça especial
+                    getModelo().incrementaJogadas();
+                    getModelo().resetRespostas();
+                    getModelo().proxJogador();
+                    return new AguardaJogador(getModelo());
+                }
+            } // se errou
+            getModelo().mudaMinijogo();
+            getModelo().incrementaJogadas();
+            getModelo().resetRespostas();
+            getModelo().proxJogador();
+            return new AguardaJogador(getModelo());
         }
-        getModelo().resetRespostas();
-        getModelo().incrementaJogadas();
-        getModelo().proxJogador(); // se perder o minijogo passa para o seguinte
-        return new AguardaJogador(getModelo());
+        else { // se o modo for HvC
+            if (getModelo().minijogoResposta(resposta)) { // se acertou
+                if (getModelo().continuaMinijogo()) { // se o jogo é para continuar (matemática)
+                    return new AguardaMinijogoResposta(getModelo());
+                }
+                if (getModelo().minijogoVitoria()) { // se ganhou
+                    getModelo().mudaMinijogo(); // mudar o minijogo para o jogador atual
+                    getModelo().atribuiEspecial(); // atribuir a peça especial
+                    getModelo().incrementaJogadas(); // incrementa o numero de jogadas
+                    getModelo().resetRespostas(); // faz o reset das respostas
+                    getModelo().proxJogador(); // passa para o proximo jogador
+                    return new AguardaJogadorPC(getModelo()); // novo estado
+                } else { // se perdeu (tempo excedido)
+                    getModelo().mudaMinijogo(); // so nao atribui a peça especial
+                    getModelo().incrementaJogadas();
+                    getModelo().resetRespostas();
+                    getModelo().proxJogador();
+                    return new AguardaJogadorPC(getModelo());
+                }
+            } // se errou
+            getModelo().mudaMinijogo();
+            getModelo().incrementaJogadas();
+            getModelo().resetRespostas();
+            getModelo().proxJogador();
+            return new AguardaJogadorPC(getModelo());
+        }
     }
 
     @Override
