@@ -35,7 +35,7 @@ public class AguardaMinijogoResposta extends EstadoAdapter implements Serializab
             getModelo().proxJogador(); // passa ao proximo jogador porque perdeu
             return new AguardaJogador(getModelo());
         }
-        else { // se o modo for HvC
+        if(getModelo().getModo() == 2) { // se o modo for HvC
             if (getModelo().minijogoResposta(resposta)) { // se acertou
                 if (getModelo().continuaMinijogo()) { // se o jogo é para continuar (matemática)
                     return new AguardaMinijogoResposta(getModelo());
@@ -60,6 +60,7 @@ public class AguardaMinijogoResposta extends EstadoAdapter implements Serializab
             getModelo().proxJogador(); // passa ao proximo jogador
             return new AguardaJogadorPC(getModelo());
         }
+        return this;
     }
 
     @Override

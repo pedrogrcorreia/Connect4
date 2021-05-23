@@ -1,4 +1,4 @@
-package jogo.logica.dados;
+package jogo.logica.dados.jogador;
 
 import java.io.Serializable;
 
@@ -9,7 +9,13 @@ public class JogadorC implements Jogador, Serializable {
     static private int id;
 
     public JogadorC(String ficha){
-        nome = "Artifical " + id++;
+        if(id == 0) {
+            nome = "Alexa";
+        }
+        else{
+            nome = "Siri";
+        }
+        id++;
         this.ficha = ficha;
     }
 
@@ -25,9 +31,7 @@ public class JogadorC implements Jogador, Serializable {
 
     @Override
     public void addCol(int col) {
-        int max = 7;
-        int min = 1;
-        colJogada = (int)Math.floor(Math.random()*(max-min+1)+min);
+        colJogada = col;
     }
 
     @Override
@@ -35,6 +39,13 @@ public class JogadorC implements Jogador, Serializable {
         int max = 6;
         int min = 0;
         return colJogada = (int)Math.floor(Math.random()*(max-min+1)+min);
+    }
+
+    @Override
+    public int randomCol() {
+        int max = 6;
+        int min = 0;
+        return (int)Math.floor(Math.random()*(max-min+1)+min);
     }
 
     @Override
@@ -113,7 +124,7 @@ public class JogadorC implements Jogador, Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Jogador " + nome + " jogou na coluna " + (colJogada+1));
+        sb.append("Jogador " + nome + " jogou na coluna " + (colJogada+1) + ".");
         return sb.toString();
     }
 }

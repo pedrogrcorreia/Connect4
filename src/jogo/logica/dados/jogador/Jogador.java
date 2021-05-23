@@ -1,10 +1,11 @@
-package jogo.logica.dados;
+package jogo.logica.dados.jogador;
 
 public interface Jogador {
     String getNome();
     String getFicha();
     int getCol();
     void addCol(int col);
+    int randomCol();
     void incrementaJogadas();
     int getJogadas();
     void resetJogadas();

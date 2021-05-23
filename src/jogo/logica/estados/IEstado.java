@@ -13,6 +13,5 @@ public interface IEstado {
     IEstado minijogo(String s);
     IEstado minijogoResposta(String resposta);
 
-
     Situacao getSituacaoAtual();
 }

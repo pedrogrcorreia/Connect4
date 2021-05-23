@@ -1,4 +1,4 @@
-package jogo.logica.dados;
+package jogo.logica.dados.jogador;
 
 import java.io.Serializable;
 
@@ -23,7 +23,7 @@ public class JogadorH implements Jogador, Serializable {
         creditos = 5;
         respostas = 0;
         minijogo = 0;
-        special = 0;
+        special = 1;
     }
 
     @Override
@@ -34,6 +34,11 @@ public class JogadorH implements Jogador, Serializable {
     @Override
     public void addCol(int col){
         colJogada = col;
+    }
+
+    @Override
+    public int randomCol() {
+        return 0;
     }
 
     @Override
@@ -135,7 +140,9 @@ public class JogadorH implements Jogador, Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Jogador " + nome + " jogou na coluna " + (colJogada+1) + ".\n");
+        if(colJogada >= 0 && colJogada <= 6) {
+            sb.append("Jogador " + nome + " jogou na coluna " + (colJogada + 1) + ".\n");
+        }
         sb.append("Tem " + creditos + " créditos e faltam " + (4-jogadas) + " jogadas para o minijogo.\n");
         return sb.toString();
     }

@@ -27,6 +27,9 @@ public class AguardaJogador extends EstadoAdapter implements Serializable {
                 getModelo().proxJogador(); // muda de jogador
                 return new AguardaJogador(getModelo());
             }
+            else{
+                return new AguardaJogador(getModelo());
+            }
         }
         if(getModelo().getModo() == 2){
             if(getModelo().getJogadas() > 0 && getModelo(). getJogadas() % 4 == 0) {

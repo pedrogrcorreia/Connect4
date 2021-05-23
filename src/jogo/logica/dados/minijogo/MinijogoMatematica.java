@@ -1,4 +1,4 @@
-package jogo.logica.dados;
+package jogo.logica.dados.minijogo;
 
 import java.io.Serializable;
 

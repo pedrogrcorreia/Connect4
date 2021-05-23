@@ -42,7 +42,6 @@ public class JogoGestao implements Serializable {
         if(col != (int)'s') {
             careTaker.gravaMemento();
         }
-        System.out.println(careTaker);
         originator.efetuaJogada(col);
     }
 
@@ -77,16 +76,14 @@ public class JogoGestao implements Serializable {
         return originator.toString();
     }
 
-    public List getLog() {
-        return originator.getLog();
-    }
-
-
     public void efetuaJogadaEspecial(int col) {
         originator.efetuaJogadaEspecial(col);
     }
 
-    public String getLogJogada() {
+    public List<String> getLogJogada() {
         return originator.getLogJogada();
     }
+
+    public List<String> getLogCompleto(){ return originator.getLogCompleto(); }
+
 }

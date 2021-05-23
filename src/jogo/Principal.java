@@ -3,10 +3,13 @@ package jogo;
 import jogo.logica.Jogo;
 import jogo.logica.JogoGestao;
 import jogo.logica.Util;
+import jogo.logica.dados.Tabuleiro;
 import jogo.ui.texto.UIText;
 import jogo.logica.Util.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static jogo.logica.Util.gravaJogo;
@@ -17,6 +20,21 @@ public class Principal {
         JogoGestao jGestao = new JogoGestao();
         UIText uiText = new UIText(jGestao);
         uiText.run();
+        //uiText.novoJogo();
+//        Tabuleiro t = new Tabuleiro();
+//        System.out.println(t.toString());
+//        t.joga(1, "X");
+//        t.joga(2, "X");
+//        t.joga(2, "X");
+//        t.joga(3, "X");
+//        t.joga(3, "X");
+//        t.joga(3, "X");
+//        t.joga(4, "O");
+//        t.joga(4, "O");
+//        t.joga(4, "O");
+//        t.joga(4, "X");
+//        System.out.println(t.verificaVitoria(1, "X"));
+//        System.out.println(t.toString());
 //        long start = System.currentTimeMillis();
 //        Scanner sc = new Scanner(System.in);
 //// ...

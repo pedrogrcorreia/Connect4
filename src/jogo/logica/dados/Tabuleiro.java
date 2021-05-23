@@ -9,7 +9,7 @@ public class Tabuleiro implements Serializable {
         tab = new String[6][7];
         for(int i=0; i<6; i++){
             for(int j=0; j<7; j++){
-                tab[i][j] = "*";
+                tab[i][j] = " ";
             }
         }
     }
@@ -19,10 +19,10 @@ public class Tabuleiro implements Serializable {
             return false;
         }
         for(int i=0; i<6; i++){
-            if(tab[0][col].compareToIgnoreCase("*")!=0){
+            if(tab[0][col].compareToIgnoreCase(" ")!=0){
                 return false;
             }
-            if(tab[i][col].compareToIgnoreCase("*") != 0){
+            if(tab[i][col].compareToIgnoreCase(" ") != 0){
                 tab[i-1][col] = ficha;
                 return true;
             }
@@ -37,7 +37,7 @@ public class Tabuleiro implements Serializable {
 
         // obtem a linha
         for(int i=0; i<6; i++){
-            if(tab[i][col].compareToIgnoreCase("*") != 0){
+            if(tab[i][col].compareToIgnoreCase(" ") != 0){
                 linha = i;
                 break;
             }
@@ -158,7 +158,7 @@ public class Tabuleiro implements Serializable {
             return false;
         }
         for(int i=0; i<6; i++){
-            tab[i][col] = "*";
+            tab[i][col] = " ";
         }
         return true;
     }
@@ -166,7 +166,7 @@ public class Tabuleiro implements Serializable {
     public boolean cheio(){
         for(int i=0; i<6; i++){
             for(int j=0; j<7; j++){
-                if(tab[i][j].compareToIgnoreCase("*") == 0){
+                if(tab[i][j].compareToIgnoreCase(" ") == 0){
                     return false;
                 }
             }
@@ -177,12 +177,17 @@ public class Tabuleiro implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("_______________\n");
         for(int i=0; i<6; i++){
             for(int j=0; j<7; j++){
-                sb.append(tab[i][j]+" ");
+                if(j==0){
+                    sb.append("|");
+                }
+                sb.append(tab[i][j]+"|");
             }
             sb.append("\n");
         }
+        sb.append("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
         return sb.toString();
     }
 }

@@ -13,8 +13,9 @@ public class Jogo implements Serializable {
     public Jogo(){
         modelo = new Dados();
         estado = new AguardaEscolha(modelo);
-        //modelo.iniciaJogo();
-        //estado = new AguardaMinijogo(modelo);
+//        modelo.iniciaJogo();
+//        modelo.escolheModo(1);
+//        estado = new AguardaMinijogo(modelo);
     }
 
     public void setEstado(IEstado estado){ this.estado = estado;   }
@@ -61,7 +62,9 @@ public class Jogo implements Serializable {
 
     public String getMinijogo() { return modelo.getMinijogo(); }
 
-    public List getLog(){ return modelo.getLog(); }
+    public List<String> getLogJogada(){ return modelo.getLogJogada(); }
+
+    public List<String> getLogCompleto(){ return modelo.getLogCompleto(); }
 
     public String getTabuleiro() { return modelo.getTabuleiro(); }
 
@@ -70,7 +73,4 @@ public class Jogo implements Serializable {
         return modelo.getTabuleiro();
     }
 
-    public String getLogJogada() {
-        return modelo.getLogJogada();
-    }
 }

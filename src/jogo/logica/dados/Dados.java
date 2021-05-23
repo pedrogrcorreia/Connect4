@@ -1,12 +1,19 @@
 package jogo.logica.dados;
 
+import jogo.logica.dados.jogador.Jogador;
+import jogo.logica.dados.jogador.JogadorC;
+import jogo.logica.dados.jogador.JogadorH;
+import jogo.logica.dados.minijogo.Minijogo;
+import jogo.logica.dados.minijogo.MinijogoDicionario;
+import jogo.logica.dados.minijogo.MinijogoMatematica;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Dados implements Serializable {
     private Tabuleiro tabuleiro;
-    private int modo, minijogoN;
+    private int modo;
     private Jogador j1, j2, atual, prox;
     private List<String> logCompleto;
     private List<String> logJogada;
@@ -14,6 +21,7 @@ public class Dados implements Serializable {
 
     public Dados(){
         logCompleto = new ArrayList<String>();
+        logJogada = new ArrayList<String>();
     };
 
     public boolean escolheModo(int opc){
@@ -30,7 +38,7 @@ public class Dados implements Serializable {
         if(modo == 1){
             if(j1 == null) {
                 j1 = new JogadorH(s, "O");
-                addLog("Configuração do jogador "+s+" com a ficha " + " O " + ".\n");
+                addLog("Configuração do jogador "+s+" com a ficha " + "O" + ".\n");
                 return false;
             }
             else{
@@ -38,44 +46,56 @@ public class Dados implements Serializable {
                     return false;
                 }
                 j2 = new JogadorH(s, "X");
-                addLog("Configuração do jogador "+s+" com a ficha " + " X " + ".\n");
+                addLog("Configuração do jogador "+s+" com a ficha " + "X" + ".\n");
                 iniciaJogo();
                 return true;
             }
         }
         if(modo == 2){
             j1 = new JogadorH(s, "O");
-            addLog("Configuração do jogador "+s+" com a ficha " + " O " + ".\n");
+            addLog("Configuração do jogador "+s+" com a ficha " + "O" + ".\n");
             j2 = new JogadorC("X");
-            addLog("Configuração do jogador "+j2.getNome()+" com a ficha " + " X " + ".\n");
+            addLog("Configuração do jogador "+j2.getNome()+" com a ficha " + "X" + ".\n");
             iniciaJogo();
             return true;
         }
         if(modo == 3){
             j1 = new JogadorC("O");
-            addLog("Configuração do jogador "+j1.getNome()+" com a ficha " + " O " + ".\n");
+            addLog("Configuração do jogador "+j1.getNome()+" com a ficha " + "O" + ".\n");
             j2 = new JogadorC("X");
-            addLog("Configuração do jogador "+j2.getNome()+" com a ficha " + " X " + ".\n");
+            addLog("Configuração do jogador "+j2.getNome()+" com a ficha " + "X" + ".\n");
             iniciaJogo();
             return true;
         }
         return true;
     }
 
-    // FUNCAO CORRETA
-    public void iniciaJogo(){
-        tabuleiro = new Tabuleiro();
-        //addLog(tabuleiro.toString());
-        atual = j1;
-        prox = j2;
+    private void getRandomJogador(){
+        if(Math.random() < 0.5){
+            atual = j1;
+            prox = j2;
+        }
+        else{
+            atual = j2;
+            prox = j1;
+        }
+        addLog("Foi sorteado que o primeiro jogador é a/o " + atual.getNome() + ".\n");
     }
 
-     //FUNCAO DEBUG
+//    // FUNCAO CORRETA
+    public void iniciaJogo(){
+        tabuleiro = new Tabuleiro();
+        getRandomJogador();
+        addLog(tabuleiro.toString());
+        addLog("\nÉ o " + atual.getNome() + " a decidir.");
+    }
+
+  //   FUNCAO DEBUG
 //    public void iniciaJogo(){
 //        tabuleiro = new Tabuleiro();
 //        atual = new JogadorH("s", "x");
 //        prox = new JogadorH("t", "o");
-//    }
+////    }
 
     public boolean efetuaJogada(int col){
         atual.addCol(col-1);
@@ -85,17 +105,28 @@ public class Dados implements Serializable {
             addLog(tabuleiro.toString());
             return true;
         }
+        addLog(atual.toString());
+        addLog(tabuleiro.toString());
+        addLog("\nÉ o " + atual.getNome() + " a decidir.");
         return false;
     }
 
     public boolean efetuaJogadaEspecial(int col){
-        return tabuleiro.jogaEspecial(col - 1);
+        if(tabuleiro.jogaEspecial(col-1)){
+            addLog(tabuleiro.toString());
+            addLog("\nÉ o " + atual.getNome() + " a decidir.");
+            return true;
+        }
+        addLog(tabuleiro.toString());
+        addLog("\nÉ o " + atual.getNome() + " a decidir.");
+        return false;
     }
 
     public boolean efetuaJogadaPC(){
-        int colArt = atual.getCol();
-        if(tabuleiro.joga(colArt, atual.getFicha())) {
+        atual.addCol(atual.randomCol());
+        if(tabuleiro.joga(atual.getCol(), atual.getFicha())) {
             addLog(atual.toString());
+            addLog(tabuleiro.toString());
             return true;
         }
         return false;
@@ -113,6 +144,7 @@ public class Dados implements Serializable {
         Jogador aux = atual;
         atual = prox;
         prox = aux;
+        addLog("\nÉ o " + atual.getNome() + " a decidir.");
     }
 
     public void terminaJogo(){
@@ -151,16 +183,6 @@ public class Dados implements Serializable {
         minijogo.criaJogo();
         System.out.println(minijogo.getResposta());
         return minijogo.getJogo();
-//        if(atual.getMinijogo() == 0){
-//            m.criaJogo();
-//            System.out.println(m.getResposta());
-//            return m.getJogo();
-//        }
-//        else{
-//            d.criaJogo();
-//            System.out.println(d.getResposta());
-//            return d.getJogo();
-//        }
     }
 
     public boolean minijogoResposta(String resposta) {
@@ -168,12 +190,13 @@ public class Dados implements Serializable {
             atual.incrementaRespostas();
             return true;
         }
+        addLog("Jogador " + atual.getNome() + " perdeu um minijogo.\n");
+        addLog(tabuleiro.toString());
         return false;
     }
 
     public boolean continuaMinijogo(){
         if(minijogo.continuaMinijogo(atual.getRespostas())){
-            System.out.println(atual.getRespostas());
             return true;
         }
         atual.stopClock();
@@ -181,10 +204,11 @@ public class Dados implements Serializable {
     }
 
     public boolean minijogoVitoria(){
-        System.out.println(atual.getTempo());
         if(minijogo.vitoriaMinijogo(atual.getTempo(), atual.getRespostas())){
             return true;
         }
+        addLog("Jogador " + atual.getNome() + " perdeu um minijogo.\n");
+        addLog(tabuleiro.toString());
         return false;
     }
 
@@ -194,15 +218,13 @@ public class Dados implements Serializable {
 
     public void atribuiEspecial(){
         addLog("Jogador " + atual.getNome() + " ganhou o minijogo e uma peça especial.\n");
+        addLog(tabuleiro.toString());
+        addLog("\nÉ o " + atual.getNome() + " a decidir.");
         atual.incrementaEspecial();
     }
 
     public int getEspecial(){
         return atual.getEspecial();
-    }
-
-    public int getRespostas(){
-        return atual.getRespostas();
     }
 
     public int getCreditos(){
@@ -226,8 +248,6 @@ public class Dados implements Serializable {
 
     public void removeCreditos(int creditos){
         atual.removeCreditos(creditos);
-        System.out.println("Foi removido um credito ao jogador " + atual.getNome() + ".\n");
-        System.out.println("Tem " + atual.getCreditos() + " creditos.\n");
         addLog("Foi removido um crédito ao jogador " + atual.getNome() + ".\n");
     }
 
@@ -237,18 +257,25 @@ public class Dados implements Serializable {
     }
 
     private void addLog(String a){
-        logCompleto.add(a);
+        logJogada.add(a);
     }
 
-    public List<String> getLog(){
+    public List<String> getLogJogada(){
+        addLogCompleto();
+        List<String> aux = new ArrayList<>();
+        aux = logJogada;
+        logJogada = new ArrayList<>();
+        return aux;
+    }
+
+    public List<String> getLogCompleto(){
         return logCompleto;
     }
 
-    public String getLogJogada() {
-        if (logCompleto.size() > 0) {
-            return logCompleto.get(logCompleto.size() - 1);
+    private void addLogCompleto(){
+        for(String s : logJogada){
+            logCompleto.add(s);
         }
-        return "";
     }
 
     public String getTabuleiro(){
@@ -257,7 +284,7 @@ public class Dados implements Serializable {
 
     public boolean tabuleiroCheio() {
         if(tabuleiro.cheio()){
-            addLog("Jogadores empataram.");
+            addLog("Jogadores empataram.\n");
             return true;
         }
         return false;

@@ -30,6 +30,7 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
             jogo.mantemJogador(a.getJogadorAtual());
             jogo.removeCreditos(a.getCreditos());
             jogo.resetJogadas();
+            jogo.efetuaJogada(0);
         }
     }
 
@@ -80,16 +81,17 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
 
     public String getMiniJogo() { return jogo.getMinijogo(); }
 
-    public List getLog() {
-        return jogo.getLog();
-    }
 
     public void efetuaJogadaEspecial(int col) {
         jogo.efetuaJogadaEspecial(col);
     }
 
-    public String getLogJogada() {
+    public List<String> getLogJogada() {
         return jogo.getLogJogada();
+    }
+
+    public List<String> getLogCompleto() {
+        return jogo.getLogCompleto();
     }
 
     private static class Memento implements IMemento, Serializable { //Memento genérico que dá para tudo quando se recorre a serialização ...

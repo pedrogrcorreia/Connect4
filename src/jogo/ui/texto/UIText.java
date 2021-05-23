@@ -6,6 +6,7 @@ import jogo.logica.Situacao;
 import jogo.logica.Util;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,11 +28,12 @@ public class UIText {
         System.out.println("1. Jogador vs Jogador");
         System.out.println("2. Jogador vs Computador");
         System.out.println("3. Computador vs Computador");
-        System.out.println("Introduza fim para sair");
+        System.out.print("Opção: ");
         String s;
         int opcao = 0;
         if(sc.hasNextInt()){
             opcao = sc.nextInt();
+            sc.nextLine();
             if(opcao <= 0 || opcao > 3){
                 escolherModo();
             }
@@ -54,11 +56,13 @@ public class UIText {
         }
         else {
             jogoGestao.configuraJogador(s);
+
         }
     }
 
     void instrucoes(){
         System.out.println("As colunas são numeradas de 1 a 7.");
+        System.out.println("Introduza 'j' para jogar.");
         System.out.println("Introduza 'u' para desfazer a jogada anterior.");
         System.out.println("Introduza 's' para utilizar a peça especial.");
         System.out.println("Introduza 'g' para gravar o jogo e sair.");
@@ -66,17 +70,19 @@ public class UIText {
     }
 
     void efetuaJogada(){
-        System.out.println("Introduza a coluna onde pretende jogar.");
-        System.out.print("Coluna: ");
+        System.out.println("Introduza a opção que pretende.");
+        System.out.print("Opção/Coluna: ");
         String s;
         int col;
         if(sc.hasNextInt()){
             col = sc.nextInt();
+            sc.nextLine();
             jogoGestao.efetuaJogada(col);
             return;
         }
         s = sc.next();
         if(s.compareToIgnoreCase("u") == 0){
+//            jogoGestao.efetuaJogada('u');
             jogoGestao.undo();
             return;
         }
@@ -109,6 +115,10 @@ public class UIText {
         System.out.println("Prima enter para prosseguir o jogo.");
         String s;
         s = sc.nextLine();
+        //System.out.println(Arrays.toString(s.toCharArray()));
+//        if(s.compareToIgnoreCase("\n") == 0){
+//            efetuaJogadaPC();
+//        }
         if(s.compareToIgnoreCase("fim") == 0){
             jogoGestao.terminaJogoAtual();
             sairJogo = true;
@@ -122,23 +132,24 @@ public class UIText {
         jogoGestao.efetuaJogadaPC();
     }
 
-    void novoJogo(){
+    public void novoJogo(){
         System.out.println("Pretende iniciar um novo jogo? (S/N)");
         System.out.print("Opção: ");
         String s;
         s = sc.next();
         if(s.compareToIgnoreCase("s") == 0){
+            System.out.println(s);
             newGame = true;
             jogoGestao.novoJogo();
+            return;
         }
         if(s.compareToIgnoreCase("n") == 0){
             jogoGestao.terminaJogoAtual();
             sairJogo = true;
+            return;
         }
-        else{
-            System.out.println("Por favor introduza uma opção válida.\n");
-            novoJogo();
-        }
+        System.out.println("Por favor introduza uma opção válida.\n");
+        novoJogo();
     }
 
     void minijogo(){
@@ -200,7 +211,7 @@ public class UIText {
     }
 
     void printLog(){
-        List<String> log = jogoGestao.getLog();
+        List<String> log = jogoGestao.getLogCompleto();
         //System.out.println("\n");
         for(String s : log){
             System.out.println(s);
@@ -208,16 +219,22 @@ public class UIText {
     }
 
     void printLogJogada(){
-        String log = jogoGestao.getLogJogada();
-        System.out.println(log);
+        List<String> log = jogoGestao.getLogJogada();
+        for(String s : log){
+            System.out.println(s+"\n");
+        }
     }
 
     void jogo(){
         while (!sairJogo) {
+            if(newGame){
+                instrucoes();
+            }
+            newGame = false;
             if (jogoGestao != null) {
                 Situacao sit = jogoGestao.getSituacaoAtual();
+                //System.out.println(sit);
                 printLogJogada();
-                System.out.println(sit);
                 switch (sit) {
                     case ESCOLHE_MODO:
                         escolherModo();
@@ -227,21 +244,17 @@ public class UIText {
                         break;
                     case AGUARDA_JOGADOR1:
                     case AGUARDA_JOGADOR2:
-                        if(newGame){
-                            instrucoes();
-                        }
-                        newGame = false;
-                        System.out.println(jogoGestao.getTabuleiro());
+                        //System.out.println(jogoGestao.getTabuleiro());
                         efetuaJogada();
                         break;
                     case AGUARDA_JOGADOR1_ESPECIAL:
                     case AGUARDA_JOGADOR2_ESPECIAL:
                         efetuaJogadaEspecial();
-                        System.out.println(jogoGestao.getTabuleiro());
+                        //System.out.println(jogoGestao.getTabuleiro());
                         break;
                     case AGUARDA_JOGADORPC:
-                        System.out.println(jogoGestao.getTabuleiro());
                         efetuaJogadaPC();
+                        //System.out.println(jogoGestao.getTabuleiro());
                         break;
                     case AGUARDA_MINIJOGO:
                         minijogo();

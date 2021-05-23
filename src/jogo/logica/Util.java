@@ -93,7 +93,7 @@ public class Util {
         File targetDir=new File("replays");
 
         File[] files = targetDir.listFiles();
-        if(files != null){
+        if(files == null){
             return 0;
         }
         else{
