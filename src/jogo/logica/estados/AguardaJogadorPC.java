@@ -10,25 +10,45 @@ public class AguardaJogadorPC extends EstadoAdapter implements Serializable {
 
     @Override
     public IEstado efetuaJogadaPC() {
-        if(getModelo().efetuaJogadaPC()){
-            if(getModelo().getModo() == 2) {
-                if(!getModelo().verificaVitoria()) {
-                    return new AguardaJogador(getModelo());
-                }
-                else{
+        if(getModelo().getModo() == 3){ // modo CvC
+            if(getModelo().efetuaJogadaPC()){ // se a jogada resultar...
+                if(getModelo().verificaVitoria() || getModelo().tabuleiroCheio()) { // em caso de vitoria ou empate
                     return new AguardaRecomeco(getModelo());
                 }
+                getModelo().proxJogador(); // passar ao proximo jogador PC
+                return new AguardaJogadorPC(getModelo());
             }
-            if(getModelo().getModo() == 3){
-                if(!getModelo().verificaVitoria()) {
-                    return new AguardaJogadorPC(getModelo());
-                }
-                else{
+            return this;
+        }
+        if(getModelo().getModo() == 2){ // modo HvC
+            if(getModelo().efetuaJogadaPC()){
+                if(getModelo().verificaVitoria() || getModelo().tabuleiroCheio()){
                     return new AguardaRecomeco(getModelo());
                 }
+                getModelo().proxJogador(); // passa ao proximo jogador H
+                return new AguardaJogador(getModelo());
             }
         }
         return this;
+//        if(getModelo().efetuaJogadaPC()){
+//            if(getModelo().getModo() == 2) {
+//                if(!getModelo().verificaVitoria()) {
+//                    return new AguardaJogador(getModelo());
+//                }
+//                else{
+//                    return new AguardaRecomeco(getModelo());
+//                }
+//            }
+//            if(getModelo().getModo() == 3){
+//                if(!getModelo().verificaVitoria()) {
+//                    return new AguardaJogadorPC(getModelo());
+//                }
+//                else{
+//                    return new AguardaRecomeco(getModelo());
+//                }
+//            }
+//        }
+        //return this;
     }
 
     @Override

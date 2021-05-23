@@ -10,15 +10,15 @@ public class AguardaJogadorEspecial extends EstadoAdapter implements Serializabl
 
     @Override
     public IEstado efetuaJogadaEspecial(int col) {
-        if(getModelo().getEspecial() == 0){
-            return new AguardaJogador(getModelo());
+        if(getModelo().getEspecial() == 0){ // se não tiver peças especiais
+            return new AguardaJogador(getModelo()); // volta para a jogada normal
         }
         else{
-            if(getModelo().efetuaJogadaEspecial(col)){
-                return new AguardaJogador(getModelo());
+            if(getModelo().efetuaJogadaEspecial(col)){ // se inserir uma coluna válida
+                return new AguardaJogador(getModelo()); // joga o mesmo jogador
             }
             else{
-                return new AguardaJogadorEspecial(getModelo());
+                return new AguardaJogadorEspecial(getModelo()); // nao inseriu uma coluna válida volta a tentar
             }
         }
     }

@@ -10,76 +10,43 @@ public class AguardaJogador extends EstadoAdapter implements Serializable {
 
     @Override
     public IEstado efetuaJogada(int col) {
-        if(getModelo().getModo() == 1){
-            if(col == (int) 's'){
-                if(getModelo().getEspecial() > 0){
-                    return new AguardaJogadorEspecial(getModelo());
-                }
-                else{
-                    return this;
-                }
+        if(getModelo().getModo() == 1){ // modo HvH
+            if(getModelo().getJogadas() > 0 && getModelo(). getJogadas() % 4 == 0) { // se o numero de jogadas for maior que 0 e multiplo de 4
+                return new AguardaMinijogo(getModelo()); // avança para um minijogo
             }
-            if(getModelo().efetuaJogada(col)){
-                if(!getModelo().verificaVitoria()){
-                    if(getModelo().getJogadas() > 0 && getModelo().getJogadas() % 4 == 0){
-                        return new AguardaMinijogo(getModelo());
-                    }
-                    getModelo().proxJogador();
-                    return new AguardaJogador(getModelo());
+            if(col == (int) 's'){ // se a coluna for especial
+                if(getModelo().getEspecial() > 0){ // e o jogador tiver peças especiais
+                    return new AguardaJogadorEspecial(getModelo()); // avança para o estado de jogar uma peça especial
                 }
-                else{
-                    return new AguardaRecomeco(getModelo());
+                return this;
+            }
+            if(getModelo().efetuaJogada(col)){ // se a coluna for válida
+                if(getModelo().verificaVitoria() || getModelo().tabuleiroCheio()){ // check vitoria ou empate
+                   return new AguardaRecomeco(getModelo());
                 }
+                getModelo().proxJogador(); // muda de jogador
+                return new AguardaJogador(getModelo());
             }
         }
         if(getModelo().getModo() == 2){
+            if(getModelo().getJogadas() > 0 && getModelo(). getJogadas() % 4 == 0) {
+                return new AguardaMinijogo(getModelo());
+            }
             if(col == (int) 's'){
                 if(getModelo().getEspecial() > 0){
                     return new AguardaJogadorEspecial(getModelo());
                 }
-                else{
-                    return this;
-                }
-            }
-            if(getModelo().getJogadas() > 0 && getModelo().getJogadas() % 4 == 0){
-                return new AguardaMinijogo(getModelo());
+                return this;
             }
             if(getModelo().efetuaJogada(col)){
-                if(!getModelo().verificaVitoria()){
-                    getModelo().proxJogador();
-                    return new AguardaJogadorPC(getModelo());
-                }
-                else{
+                if(getModelo().verificaVitoria() || getModelo().tabuleiroCheio()){
                     return new AguardaRecomeco(getModelo());
                 }
+                getModelo().proxJogador();
+                return new AguardaJogadorPC(getModelo());
             }
         }
         return this;
-
-        //// TESTEEEE
-//        if(getModelo().getModo() == 1) {
-//            if(col == (int) 's'){
-//                if(getModelo().getEspecial() > 0) {
-//                    return new AguardaJogadorEspecial(getModelo());
-//                }
-//                else{
-//                    return this;
-//                }
-//            }
-//            if (!getModelo().efetuaJogada(col)) {
-//                return this;
-//            }
-//            else {
-//                if (!getModelo().verificaVitoria()) {
-//                    getModelo().proxJogador();
-//                    return new AguardaJogador(getModelo());
-//                }
-//                else {
-//                    return new AguardaRecomeco(getModelo());
-//                }
-//            }
-//        }
-//        return this;
     }
 
     @Override

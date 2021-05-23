@@ -20,20 +20,19 @@ public class AguardaMinijogoResposta extends EstadoAdapter implements Serializab
                     getModelo().atribuiEspecial(); // atribuir a peça especial
                     getModelo().incrementaJogadas(); // incrementa o numero de jogadas
                     getModelo().resetRespostas(); // faz o reset das respostas
-                    getModelo().proxJogador(); // passa para o proximo jogador
                     return new AguardaJogador(getModelo()); // novo estado
                 } else { // se perdeu (tempo excedido)
                     getModelo().mudaMinijogo(); // so nao atribui a peça especial
                     getModelo().incrementaJogadas();
                     getModelo().resetRespostas();
-                    getModelo().proxJogador();
+                    getModelo().proxJogador(); // passa ao proximo jogador porque perdeu
                     return new AguardaJogador(getModelo());
                 }
             } // se errou
             getModelo().mudaMinijogo();
             getModelo().incrementaJogadas();
             getModelo().resetRespostas();
-            getModelo().proxJogador();
+            getModelo().proxJogador(); // passa ao proximo jogador porque perdeu
             return new AguardaJogador(getModelo());
         }
         else { // se o modo for HvC
@@ -46,20 +45,19 @@ public class AguardaMinijogoResposta extends EstadoAdapter implements Serializab
                     getModelo().atribuiEspecial(); // atribuir a peça especial
                     getModelo().incrementaJogadas(); // incrementa o numero de jogadas
                     getModelo().resetRespostas(); // faz o reset das respostas
-                    getModelo().proxJogador(); // passa para o proximo jogador
                     return new AguardaJogadorPC(getModelo()); // novo estado
                 } else { // se perdeu (tempo excedido)
-                    getModelo().mudaMinijogo(); // so nao atribui a peça especial
+                    getModelo().mudaMinijogo(); // nao atribui a peça especial
                     getModelo().incrementaJogadas();
                     getModelo().resetRespostas();
-                    getModelo().proxJogador();
+                    getModelo().proxJogador(); // passa ao proximo jogador
                     return new AguardaJogadorPC(getModelo());
                 }
             } // se errou
             getModelo().mudaMinijogo();
             getModelo().incrementaJogadas();
             getModelo().resetRespostas();
-            getModelo().proxJogador();
+            getModelo().proxJogador(); // passa ao proximo jogador
             return new AguardaJogadorPC(getModelo());
         }
     }

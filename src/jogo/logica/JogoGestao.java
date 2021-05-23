@@ -52,7 +52,6 @@ public class JogoGestao implements Serializable {
     }
 
     public void novoJogo() {
-        //careTaker.gravaMemento();
         originator.novoJogo();
     }
 

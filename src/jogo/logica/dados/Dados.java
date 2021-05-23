@@ -63,19 +63,19 @@ public class Dados implements Serializable {
     }
 
     // FUNCAO CORRETA
-//    public void iniciaJogo(){
-//        tabuleiro = new Tabuleiro();
-//        addLog(tabuleiro.toString());
-//        atual = j1;
-//        prox = j2;
-//    }
-
-     //FUNCAO DEBUG
     public void iniciaJogo(){
         tabuleiro = new Tabuleiro();
-        atual = new JogadorH("s", "x");
-        prox = new JogadorH("t", "o");
+        //addLog(tabuleiro.toString());
+        atual = j1;
+        prox = j2;
     }
+
+     //FUNCAO DEBUG
+//    public void iniciaJogo(){
+//        tabuleiro = new Tabuleiro();
+//        atual = new JogadorH("s", "x");
+//        prox = new JogadorH("t", "o");
+//    }
 
     public boolean efetuaJogada(int col){
         atual.addCol(col-1);
@@ -96,7 +96,6 @@ public class Dados implements Serializable {
         int colArt = atual.getCol();
         if(tabuleiro.joga(colArt, atual.getFicha())) {
             addLog(atual.toString());
-            proxJogador();
             return true;
         }
         return false;
@@ -177,7 +176,7 @@ public class Dados implements Serializable {
             System.out.println(atual.getRespostas());
             return true;
         }
-        stopClock();
+        atual.stopClock();
         return false;
     }
 
@@ -237,14 +236,6 @@ public class Dados implements Serializable {
         addLog("As jogadas até ao mini-jogo foram resetadas para o jogador " + atual.getNome() + ".\n");
     }
 
-    public void startClock(){
-        atual.startClock();
-    }
-
-    public void stopClock(){
-        atual.stopClock();
-    }
-
     private void addLog(String a){
         logCompleto.add(a);
     }
@@ -264,6 +255,11 @@ public class Dados implements Serializable {
         return tabuleiro.toString();
     }
 
-    public boolean tabuleiroCheio() { return tabuleiro.cheio(); }
-
+    public boolean tabuleiroCheio() {
+        if(tabuleiro.cheio()){
+            addLog("Jogadores empataram.");
+            return true;
+        }
+        return false;
+    }
 }

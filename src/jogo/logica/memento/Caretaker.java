@@ -17,13 +17,12 @@ public class Caretaker implements Serializable { //CareTaker (usado pelas IU) ->
     }
 
     public void gravaMemento() {
-        stackRedo.clear();  // estava isEmpty
+        stackRedo.clear();
         try{
             stackHist.push(originator.getMemento());
         } catch(IOException ex) {
             System.out.println("gravaMemento: " + ex);
             stackHist.clear();
-            //stackRedo.clear();
         }
     }
 
@@ -63,9 +62,9 @@ public class Caretaker implements Serializable { //CareTaker (usado pelas IU) ->
 
     // metodos que consultam
     // isto é só para debug
-    public String toString(){
-        return "\nstackHist=" + stackHist.size() +
-                "\nstackRedo=" + stackRedo.size();
-    }
+//    public String toString(){
+//        return "\nstackHist=" + stackHist.size() +
+//                "\nstackRedo=" + stackRedo.size();
+//    }
 
 }

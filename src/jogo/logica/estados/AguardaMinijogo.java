@@ -10,11 +10,11 @@ public class AguardaMinijogo extends EstadoAdapter implements Serializable {
 
     @Override
     public IEstado minijogo(String s) {
-        if(getModelo().minijogo(s)){
+        if(getModelo().minijogo(s)){ // se a resposta for sim
             return new AguardaMinijogoResposta(getModelo());
         }
-        getModelo().mudaMinijogo();
-        getModelo().proxJogador();
+        getModelo().incrementaJogadas(); // incrementa jogadas para sair deste estado
+        getModelo().mudaMinijogo(); // muda o minijogo para o jogador mas nao perde a jogada
         return new AguardaJogador(getModelo());
     }
 

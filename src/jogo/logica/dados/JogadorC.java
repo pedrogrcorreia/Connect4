@@ -1,7 +1,6 @@
 package jogo.logica.dados;
 
 import java.io.Serializable;
-import java.util.Random;
 
 public class JogadorC implements Jogador, Serializable {
     private String nome;

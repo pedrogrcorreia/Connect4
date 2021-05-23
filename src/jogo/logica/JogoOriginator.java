@@ -26,9 +26,11 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
         Memento aux = (Memento) m;
         Object obj = aux.getSnapshot();
         jogo = (Jogo) obj;
-        jogo.mantemJogador(a.getJogadorAtual());
-        jogo.removeCreditos(a.getCreditos());
-        jogo.resetJogadas();
+        if(jogo != null) {
+            jogo.mantemJogador(a.getJogadorAtual());
+            jogo.removeCreditos(a.getCreditos());
+            jogo.resetJogadas();
+        }
     }
 
     public void escolherModo(int opcao) {

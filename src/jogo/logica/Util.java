@@ -18,12 +18,6 @@ public class Util {
             jogos[i] = files[i].getName();
         }
 
-//        for(String j : jogos){
-//            System.out.println(j);
-//        }
-
-//        System.out.println(jogos[0]);
-
         if(files.length >= 5){
             File gameToDelete = new File(targetDir, jogos[0]);
             gameToDelete.delete();
@@ -82,12 +76,29 @@ public class Util {
         try{
             in = new ObjectInputStream(new FileInputStream(nomeFicheiro));
             x = (JogoGestao) in.readObject();
-        }finally{
+        }
+        catch(Exception FileNotFoundException){
+            x = null;
+            System.out.println("Ficheiro não encontrado.\n");
+        }
+        finally{
             if(in != null){
                 in.close();
             }
         }
         return x;
+    }
+
+    public static int getReplays(){
+        File targetDir=new File("replays");
+
+        File[] files = targetDir.listFiles();
+        if(files != null){
+            return 0;
+        }
+        else{
+            return files.length;
+        }
     }
 
     public static JogoGestao recuperaReplay(int jogo) throws IOException, ClassNotFoundException{
@@ -105,9 +116,6 @@ public class Util {
         for(int i=0; i< files.length; i++){
             jogos[i] = files[i].getName();
         }
-
-
-
 
         File targetFile=new File(targetDir, jogos[jogo-1]);
 

@@ -12,9 +12,9 @@ public class Jogo implements Serializable {
 
     public Jogo(){
         modelo = new Dados();
-        //estado = new AguardaEscolha(modelo);
-        modelo.iniciaJogo();
-        estado = new AguardaMinijogo(modelo);
+        estado = new AguardaEscolha(modelo);
+        //modelo.iniciaJogo();
+        //estado = new AguardaMinijogo(modelo);
     }
 
     public void setEstado(IEstado estado){ this.estado = estado;   }
