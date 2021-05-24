@@ -11,7 +11,7 @@ public class AguardaJogador extends EstadoAdapter {
     @Override
     public IEstado efetuaJogada(int col) {
         if(getModelo().getModo() == 1){ // modo HvH
-            if(getModelo().getJogadas() > 0 && getModelo(). getJogadas() % 4 == 0) { // se o numero de jogadas for maior que 0 e multiplo de 4
+            if(getModelo().getJogadas() > 0 && getModelo().getJogadas() % 4 == 0) { // se o numero de jogadas for maior que 0 e multiplo de 4
                 return new AguardaMinijogo(getModelo()); // avança para um minijogo
             }
             if(col == (int) 's'){ // se a coluna for especial
@@ -32,21 +32,24 @@ public class AguardaJogador extends EstadoAdapter {
             }
         }
         if(getModelo().getModo() == 2){
-            if(getModelo().getJogadas() > 0 && getModelo(). getJogadas() % 4 == 0) {
-                return new AguardaMinijogo(getModelo());
+            if(getModelo().getJogadas() > 0 && getModelo().getJogadas() % 4 == 0) { // se o numero de jogadas for maior que 0 e multiplo de 4
+                return new AguardaMinijogo(getModelo()); // avança para um minijogo
             }
-            if(col == (int) 's'){
-                if(getModelo().getEspecial() > 0){
-                    return new AguardaJogadorEspecial(getModelo());
+            if(col == (int) 's'){ // se a coluna for especial
+                if(getModelo().getEspecial() > 0){ // e o jogador tiver peças especiais
+                    return new AguardaJogadorEspecial(getModelo()); // avança para o estado de jogar uma peça especial
                 }
                 return this;
             }
-            if(getModelo().efetuaJogada(col)){
-                if(getModelo().verificaVitoria() || getModelo().tabuleiroCheio()){
+            if(getModelo().efetuaJogada(col)){ // se a coluna for válida
+                if(getModelo().verificaVitoria() || getModelo().tabuleiroCheio()){ // check vitoria ou empate
                     return new AguardaRecomeco(getModelo());
                 }
-                getModelo().proxJogador();
+                getModelo().proxJogador(); // muda de jogador
                 return new AguardaJogadorPC(getModelo());
+            }
+            else{
+                return new AguardaJogador(getModelo());
             }
         }
         return this;

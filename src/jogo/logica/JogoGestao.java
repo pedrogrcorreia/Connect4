@@ -19,7 +19,7 @@ public class JogoGestao implements Serializable {
     }
 
     public void undo(){
-        if(originator.getCreditos() > 1) {
+        if(originator.getCreditos() >= 1) {
             careTaker.undo();
         }
     }
@@ -43,10 +43,7 @@ public class JogoGestao implements Serializable {
         originator.efetuaJogadaEspecial(col);
     }
 
-    public void efetuaJogadaPC(){
-        careTaker.gravaMemento();
-        originator.efetuaJogadaPC();
-    }
+    public void efetuaJogadaPC(){ originator.efetuaJogadaPC(); }
 
     public void novoJogo() {
         originator.novoJogo();

@@ -1,5 +1,6 @@
 package jogo.logica;
 
+import jogo.logica.estados.AguardaJogador;
 import jogo.logica.memento.IMemento;
 import jogo.logica.memento.IMementoOriginator;
 
