@@ -77,9 +77,13 @@ public class Util {
             in = new ObjectInputStream(new FileInputStream(nomeFicheiro));
             x = (JogoGestao) in.readObject();
         }
-        catch(Exception FileNotFoundException){
+        catch(FileNotFoundException f){
             x = null;
             System.out.println("Ficheiro não encontrado.\n");
+        }
+        catch(ClassNotFoundException c){
+            x = null;
+            System.out.println("Ocorreu um erro ao obter o jogo.\n");
         }
         finally{
             if(in != null){

@@ -177,7 +177,8 @@ public class Tabuleiro implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("_______________\n");
+        //sb.append("_______________\n");
+        sb.append("\n 1 2 3 4 5 6 7 \n");
         for(int i=0; i<6; i++){
             for(int j=0; j<7; j++){
                 if(j==0){
@@ -187,7 +188,7 @@ public class Tabuleiro implements Serializable {
             }
             sb.append("\n");
         }
-        sb.append("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
+        //sb.append("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
         return sb.toString();
     }
 }

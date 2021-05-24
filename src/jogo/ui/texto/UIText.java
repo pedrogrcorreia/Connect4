@@ -112,10 +112,6 @@ public class UIText {
         System.out.println("Prima enter para prosseguir o jogo.");
         String s;
         s = sc.nextLine();
-        //System.out.println(Arrays.toString(s.toCharArray()));
-//        if(s.compareToIgnoreCase("\n") == 0){
-//            efetuaJogadaPC();
-//        }
         if(s.compareToIgnoreCase("fim") == 0){
             sairJogo = true;
         }
@@ -176,13 +172,6 @@ public class UIText {
         String s;
         s = sc.next();
         jogoGestao = Util.recuperaJogo(s);
-//        if(jogoGestao != null){
-//            return jogoGestao;
-//        }
-//        else{
-//            System.out.println("Introduza um nome de ficheiro válido.");
-//            carregaJogo();
-//        }
         return jogoGestao;
     }
 

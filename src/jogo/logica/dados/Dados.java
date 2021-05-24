@@ -107,18 +107,19 @@ public class Dados implements Serializable {
         }
         addLog(atual.toString());
         addLog(tabuleiro.toString());
-        addLog("\nÉ o " + atual.getNome() + " a decidir.");
+        addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
         return false;
     }
 
     public boolean efetuaJogadaEspecial(int col){
         if(tabuleiro.jogaEspecial(col-1)){
+            addLog("Jogador " + atual.getNome() + " eliminou as peças da coluna " + col + ".\n");
             addLog(tabuleiro.toString());
-            addLog("\nÉ o " + atual.getNome() + " a decidir.");
+            addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
             return true;
         }
         addLog(tabuleiro.toString());
-        addLog("\nÉ o " + atual.getNome() + " a decidir.");
+        addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
         return false;
     }
 
@@ -144,12 +145,12 @@ public class Dados implements Serializable {
         Jogador aux = atual;
         atual = prox;
         prox = aux;
-        addLog("\nÉ o " + atual.getNome() + " a decidir.");
+        addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
     }
 
     public void terminaJogo(){
-        j1 = null;
-        j2 = null;
+            j1 = null;
+            j2 = null;
     }
 
     public int getJogadas(){
@@ -219,7 +220,7 @@ public class Dados implements Serializable {
     public void atribuiEspecial(){
         addLog("Jogador " + atual.getNome() + " ganhou o minijogo e uma peça especial.\n");
         addLog(tabuleiro.toString());
-        addLog("\nÉ o " + atual.getNome() + " a decidir.");
+        addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
         atual.incrementaEspecial();
     }
 
@@ -262,7 +263,7 @@ public class Dados implements Serializable {
 
     public List<String> getLogJogada(){
         addLogCompleto();
-        List<String> aux = new ArrayList<>();
+        List<String> aux;
         aux = logJogada;
         logJogada = new ArrayList<>();
         return aux;

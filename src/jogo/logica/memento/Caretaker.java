@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Caretaker implements Serializable { //CareTaker (usado pelas IU) -> no TP, seria a Máquina de estados/modelo
+public class Caretaker implements Serializable {
 
     private IMementoOriginator originator;
 

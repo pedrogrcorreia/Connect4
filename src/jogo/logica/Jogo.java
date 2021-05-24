@@ -18,7 +18,7 @@ public class Jogo implements Serializable {
 //        estado = new AguardaMinijogo(modelo);
     }
 
-    public void setEstado(IEstado estado){ this.estado = estado;   }
+    private void setEstado(IEstado estado){ this.estado = estado;   }
 
     public void escolherModo(int opc){
         setEstado(estado.escolherModo(opc));
