@@ -5,7 +5,7 @@ import jogo.logica.dados.Dados;
 
 import java.io.Serializable;
 
-public class AguardaRecomeco extends EstadoAdapter implements Serializable {
+public class AguardaRecomeco extends EstadoAdapter {
     public AguardaRecomeco(Dados modelo){super(modelo);}
 
     @Override

@@ -5,12 +5,12 @@ import jogo.logica.dados.Dados;
 
 import java.io.Serializable;
 
-public class AguardaJogadorEspecial extends EstadoAdapter implements Serializable {
+public class AguardaJogadorEspecial extends EstadoAdapter {
     public AguardaJogadorEspecial(Dados modelo){ super(modelo); }
 
     @Override
     public IEstado efetuaJogadaEspecial(int col) {
-        if(getModelo().getEspecial() == 0){ // se não tiver peças especiais
+        if(getModelo().getEspecial() == 0){ // se não tiver peças especiais -> condicao de tras falhou?
             return new AguardaJogador(getModelo()); // volta para a jogada normal
         }
         else{

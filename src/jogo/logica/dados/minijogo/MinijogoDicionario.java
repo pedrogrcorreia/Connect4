@@ -2,12 +2,11 @@ package jogo.logica.dados.minijogo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MinijogoDicionario implements Minijogo, Serializable {
+public class MinijogoDicionario implements IMinijogo{
 
     List<String> dicionario;
     StringBuilder palavras;
@@ -33,6 +32,10 @@ public class MinijogoDicionario implements Minijogo, Serializable {
         }
     }
 
+    public int calculaTempo(){
+        return palavras.length() / 2;
+    }
+
     @Override
     public void criaJogo(){
         int max = dicionario.size()-1;
@@ -46,10 +49,6 @@ public class MinijogoDicionario implements Minijogo, Serializable {
             }
             palavras.append(" ");
         }
-    }
-
-    public int calculaTempo(){
-        return palavras.length() / 2;
     }
 
     @Override
@@ -83,12 +82,4 @@ public class MinijogoDicionario implements Minijogo, Serializable {
         return false;
     }
 
-    // Funcao debug
-    public String getDicionario(){
-        StringBuilder sb = new StringBuilder();
-        for(String s : dicionario){
-            sb.append(s);
-        }
-        return sb.toString();
-    }
 }

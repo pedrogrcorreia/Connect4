@@ -5,7 +5,7 @@ import jogo.logica.dados.Dados;
 
 import java.io.Serializable;
 
-public class AguardaJogador extends EstadoAdapter implements Serializable {
+public class AguardaJogador extends EstadoAdapter {
     public AguardaJogador(Dados modelo){super(modelo);}
 
     @Override

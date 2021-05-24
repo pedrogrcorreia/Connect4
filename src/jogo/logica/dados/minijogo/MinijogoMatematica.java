@@ -1,8 +1,6 @@
 package jogo.logica.dados.minijogo;
 
-import java.io.Serializable;
-
-public class MinijogoMatematica implements Minijogo, Serializable {
+public class MinijogoMatematica implements IMinijogo {
 
     private int n1, n2, res;
     private String operator;

@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class JogoGestao implements Serializable {
-
     @Serial
-    private static final long serialVersionUID = 4L;
+    private static final long serialVersionUID = 8L;
+
     private JogoOriginator originator;
     private Caretaker careTaker;
 
@@ -24,8 +24,6 @@ public class JogoGestao implements Serializable {
         }
     }
 
-    // delegacao para jogo originator
-
     public void escolherModo(int opcao) {
         originator.escolherModo(opcao);
     }
@@ -39,6 +37,10 @@ public class JogoGestao implements Serializable {
             careTaker.gravaMemento();
         }
         originator.efetuaJogada(col);
+    }
+
+    public void efetuaJogadaEspecial(int col) {
+        originator.efetuaJogadaEspecial(col);
     }
 
     public void efetuaJogadaPC(){
@@ -60,26 +62,14 @@ public class JogoGestao implements Serializable {
         originator.minijogoResposta(resposta);
     }
 
-
-    public Situacao getSituacaoAtual() {
-        return originator.getSituacaoAtual();
-    }
-
-    public String getTabuleiro(){ return originator.getTabuleiro(); }
-
-    @Override
-    public String toString() {
-        return originator.toString();
-    }
-
-    public void efetuaJogadaEspecial(int col) {
-        originator.efetuaJogadaEspecial(col);
-    }
-
     public List<String> getLogJogada() {
         return originator.getLogJogada();
     }
 
     public List<String> getLogCompleto(){ return originator.getLogCompleto(); }
+
+    public Situacao getSituacaoAtual() {
+        return originator.getSituacaoAtual();
+    }
 
 }

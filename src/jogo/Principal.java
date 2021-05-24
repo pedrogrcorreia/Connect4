@@ -1,6 +1,7 @@
 package jogo;
 
 import jogo.logica.JogoGestao;
+import jogo.logica.Util;
 import jogo.ui.texto.UIText;
 
 import java.io.IOException;

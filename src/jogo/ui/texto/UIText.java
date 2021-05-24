@@ -1,12 +1,9 @@
 package jogo.ui.texto;
 
-import jogo.logica.Jogo;
 import jogo.logica.JogoGestao;
 import jogo.logica.Situacao;
 import jogo.logica.Util;
-
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -80,7 +77,6 @@ public class UIText {
         }
         s = sc.next();
         if(s.compareToIgnoreCase("u") == 0){
-//            jogoGestao.efetuaJogada('u');
             jogoGestao.undo();
             return;
         }
@@ -196,7 +192,6 @@ public class UIText {
 
     void printLog(){
         List<String> log = jogoGestao.getLogCompleto();
-        //System.out.println("\n");
         for(String s : log){
             System.out.println(s);
         }
@@ -217,7 +212,6 @@ public class UIText {
             newGame = false;
             if (jogoGestao != null) {
                 Situacao sit = jogoGestao.getSituacaoAtual();
-                //System.out.println(sit);
                 printLogJogada();
                 switch (sit) {
                     case ESCOLHE_MODO:
@@ -228,17 +222,14 @@ public class UIText {
                         break;
                     case AGUARDA_JOGADOR1:
                     case AGUARDA_JOGADOR2:
-                        //System.out.println(jogoGestao.getTabuleiro());
                         efetuaJogada();
                         break;
                     case AGUARDA_JOGADOR1_ESPECIAL:
                     case AGUARDA_JOGADOR2_ESPECIAL:
                         efetuaJogadaEspecial();
-                        //System.out.println(jogoGestao.getTabuleiro());
                         break;
                     case AGUARDA_JOGADORPC:
                         efetuaJogadaPC();
-                        //System.out.println(jogoGestao.getTabuleiro());
                         break;
                     case AGUARDA_MINIJOGO:
                         minijogo();
@@ -252,7 +243,6 @@ public class UIText {
                         novoJogo();
                         break;
                 }
-//                printLogJogada();
             }
         }
     }

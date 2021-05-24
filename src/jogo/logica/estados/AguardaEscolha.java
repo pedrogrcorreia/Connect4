@@ -5,7 +5,7 @@ import jogo.logica.dados.Dados;
 
 import java.io.Serializable;
 
-public class AguardaEscolha extends EstadoAdapter implements Serializable {
+public class AguardaEscolha extends EstadoAdapter {
     public AguardaEscolha(Dados modelo){
         super(modelo);
     }
@@ -21,16 +21,6 @@ public class AguardaEscolha extends EstadoAdapter implements Serializable {
             return new AguardaJogadorPC(getModelo());
         }
         return this;
-//        if(opc == 1 || opc == 2){
-//            getModelo().escolheModo(opc);
-//            return new AguardaConfig(getModelo());
-//        }
-//        if(opc == 3){
-//            getModelo().escolheModo(opc);
-//            getModelo().configuraJogador("");
-//            return new AguardaJogadorPC(getModelo());
-//        }
-//        return new AguardaEscolha(getModelo());
     }
 
     @Override

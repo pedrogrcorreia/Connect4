@@ -5,7 +5,7 @@ import jogo.logica.dados.Dados;
 
 import java.io.Serializable;
 
-public class AguardaJogadorPC extends EstadoAdapter implements Serializable {
+public class AguardaJogadorPC extends EstadoAdapter {
     public AguardaJogadorPC(Dados modelo){super(modelo);}
 
     @Override
@@ -30,25 +30,6 @@ public class AguardaJogadorPC extends EstadoAdapter implements Serializable {
             }
         }
         return this;
-//        if(getModelo().efetuaJogadaPC()){
-//            if(getModelo().getModo() == 2) {
-//                if(!getModelo().verificaVitoria()) {
-//                    return new AguardaJogador(getModelo());
-//                }
-//                else{
-//                    return new AguardaRecomeco(getModelo());
-//                }
-//            }
-//            if(getModelo().getModo() == 3){
-//                if(!getModelo().verificaVitoria()) {
-//                    return new AguardaJogadorPC(getModelo());
-//                }
-//                else{
-//                    return new AguardaRecomeco(getModelo());
-//                }
-//            }
-//        }
-        //return this;
     }
 
     @Override

@@ -7,6 +7,9 @@ import java.io.*;
 import java.util.List;
 
 public class JogoOriginator implements IMementoOriginator, Serializable {
+    @Serial
+    private static final long serialVersionUID = 9L;
+
     Jogo jogo;
 
     public JogoOriginator(){
@@ -22,15 +25,15 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
 
     @Override
     public void setMemento(IMemento m) throws IOException, ClassNotFoundException {
-        Jogo a = jogo;
+        Jogo a = jogo; // momento antes da gravação
         Memento aux = (Memento) m;
         Object obj = aux.getSnapshot();
         jogo = (Jogo) obj;
         if(jogo != null) {
-            jogo.mantemJogador(a.getJogadorAtual());
-            jogo.removeCreditos(a.getCreditos());
-            jogo.resetJogadas();
-            jogo.efetuaJogada(0);
+            jogo.mantemJogador(a.getJogadorAtual()); // para ser o mesmo jogador a jogar
+            jogo.removeCreditos(a.getCreditos()); // retira um credito
+            jogo.resetJogadas(); // reset as jogadas
+            jogo.efetuaJogada(0); // para imprimir o log
         }
     }
 
@@ -46,6 +49,10 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
         jogo.efetuaJogada(col);
     }
 
+    public void efetuaJogadaEspecial(int col) {
+        jogo.efetuaJogadaEspecial(col);
+    }
+
     public void efetuaJogadaPC() {
         jogo.efetuaJogadaPC();
     }
@@ -58,28 +65,12 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
         jogo.minijogo(s);
     }
 
+    public String getMiniJogo() { return jogo.getMinijogo(); }
+
     public void minijogoResposta(String resposta){ jogo.minijogoResposta(resposta); }
-
-    public Situacao getSituacaoAtual() {
-        return jogo.getSituacaoAtual();
-    }
-
-    public String getTabuleiro() { return jogo.getTabuleiro();}
-
-    @Override
-    public String toString() {
-        return jogo.toString();
-    }
 
     public int getCreditos() {
         return jogo.getCreditos();
-    }
-
-    public String getMiniJogo() { return jogo.getMinijogo(); }
-
-
-    public void efetuaJogadaEspecial(int col) {
-        jogo.efetuaJogadaEspecial(col);
     }
 
     public List<String> getLogJogada() {
@@ -90,7 +81,14 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
         return jogo.getLogCompleto();
     }
 
+    public Situacao getSituacaoAtual() {
+        return jogo.getSituacaoAtual();
+    }
+
     private static class Memento implements IMemento, Serializable { //Memento genérico que dá para tudo quando se recorre a serialização ...
+        @Serial
+        private static final long serialVersionUID = 10L;
+
         private byte[] snapshot = null;  // null para marcar a posição do programador
 
         // as seguintes NÃO SÃO @Overrides

@@ -112,7 +112,7 @@ public class Util {
         File targetDir=new File("replays");
 
         File[] files = targetDir.listFiles();
-        if(files != null && files.length < jogo){
+        if(files == null || files.length < jogo){
             return null;
         }
         Arrays.sort(files, Comparator.comparingLong(File::lastModified));

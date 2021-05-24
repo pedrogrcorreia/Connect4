@@ -1,23 +1,27 @@
 package jogo.logica.dados;
 
-import jogo.logica.dados.jogador.Jogador;
+import jogo.logica.dados.jogador.IJogador;
 import jogo.logica.dados.jogador.JogadorC;
 import jogo.logica.dados.jogador.JogadorH;
-import jogo.logica.dados.minijogo.Minijogo;
+import jogo.logica.dados.minijogo.IMinijogo;
 import jogo.logica.dados.minijogo.MinijogoDicionario;
 import jogo.logica.dados.minijogo.MinijogoMatematica;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Dados implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 3L;
+
     private Tabuleiro tabuleiro;
     private int modo;
-    private Jogador j1, j2, atual, prox;
+    private IJogador j1, j2, atual, prox;
     private List<String> logCompleto;
     private List<String> logJogada;
-    private transient Minijogo minijogo;
+    private transient IMinijogo minijogo;
 
     public Dados(){
         logCompleto = new ArrayList<String>();
@@ -82,20 +86,12 @@ public class Dados implements Serializable {
         addLog("Foi sorteado que o primeiro jogador é a/o " + atual.getNome() + ".\n");
     }
 
-//    // FUNCAO CORRETA
     public void iniciaJogo(){
         tabuleiro = new Tabuleiro();
         getRandomJogador();
         addLog(tabuleiro.toString());
-        addLog("\nÉ o " + atual.getNome() + " a decidir.");
+        addLog("\nÉ o " + atual.getNome() + " com a ficha " + atual.getFicha() + " a decidir.");
     }
-
-  //   FUNCAO DEBUG
-//    public void iniciaJogo(){
-//        tabuleiro = new Tabuleiro();
-//        atual = new JogadorH("s", "x");
-//        prox = new JogadorH("t", "o");
-////    }
 
     public boolean efetuaJogada(int col){
         atual.addCol(col-1);
@@ -107,7 +103,7 @@ public class Dados implements Serializable {
         }
         addLog(atual.toString());
         addLog(tabuleiro.toString());
-        addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
+        addLog("\nÉ o " + atual.getNome() + " com a ficha " + atual.getFicha() + " a decidir.");
         return false;
     }
 
@@ -115,11 +111,11 @@ public class Dados implements Serializable {
         if(tabuleiro.jogaEspecial(col-1)){
             addLog("Jogador " + atual.getNome() + " eliminou as peças da coluna " + col + ".\n");
             addLog(tabuleiro.toString());
-            addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
+            addLog("\nÉ o " + atual.getNome() + " com a ficha " + atual.getFicha() + " a decidir.");
             return true;
         }
         addLog(tabuleiro.toString());
-        addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
+        addLog("\nÉ o " + atual.getNome() + " com a ficha " + atual.getFicha() + " a decidir.");
         return false;
     }
 
@@ -141,29 +137,19 @@ public class Dados implements Serializable {
         return true;
     }
 
+    public boolean tabuleiroCheio() {
+        if(tabuleiro.cheio()){
+            addLog("Jogadores empataram.\n");
+            return true;
+        }
+        return false;
+    }
+
     public void proxJogador(){
-        Jogador aux = atual;
+        IJogador aux = atual;
         atual = prox;
         prox = aux;
-        addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
-    }
-
-    public void terminaJogo(){
-            j1 = null;
-            j2 = null;
-    }
-
-    public int getJogadas(){
-        return atual.getJogadas();
-    }
-
-    public int getJogadorAtual(){
-        if(atual == j1){
-            return 1;
-        }
-        else{
-            return 2;
-        }
+        addLog("\nÉ o " + atual.getNome() + " com a ficha " + atual.getFicha() + " a decidir.");
     }
 
     public boolean minijogo(String s){
@@ -220,16 +206,8 @@ public class Dados implements Serializable {
     public void atribuiEspecial(){
         addLog("Jogador " + atual.getNome() + " ganhou o minijogo e uma peça especial.\n");
         addLog(tabuleiro.toString());
-        addLog("\nÉ a/o " + atual.getNome() + " a decidir.");
+        addLog("\nÉ o " + atual.getNome() + " com a ficha " + atual.getFicha() + " a decidir.");
         atual.incrementaEspecial();
-    }
-
-    public int getEspecial(){
-        return atual.getEspecial();
-    }
-
-    public int getCreditos(){
-        return atual.getCreditos();
     }
 
     public void incrementaJogadas(){ atual.incrementaJogadas(); }
@@ -257,8 +235,40 @@ public class Dados implements Serializable {
         addLog("As jogadas até ao mini-jogo foram resetadas para o jogador " + atual.getNome() + ".\n");
     }
 
+    public int getJogadas(){
+        return atual.getJogadas();
+    }
+
+    public int getJogadorAtual(){
+        if(atual == j1){
+            return 1;
+        }
+        else{
+            return 2;
+        }
+    }
+
+    public int getEspecial(){
+        return atual.getEspecial();
+    }
+
+    public int getCreditos(){
+        return atual.getCreditos();
+    }
+
+    public void terminaJogo(){
+        j1 = null;
+        j2 = null;
+    }
+
     private void addLog(String a){
         logJogada.add(a);
+    }
+
+    private void addLogCompleto(){
+        for(String s : logJogada){
+            logCompleto.add(s);
+        }
     }
 
     public List<String> getLogJogada(){
@@ -273,21 +283,7 @@ public class Dados implements Serializable {
         return logCompleto;
     }
 
-    private void addLogCompleto(){
-        for(String s : logJogada){
-            logCompleto.add(s);
-        }
-    }
 
-    public String getTabuleiro(){
-        return tabuleiro.toString();
-    }
 
-    public boolean tabuleiroCheio() {
-        if(tabuleiro.cheio()){
-            addLog("Jogadores empataram.\n");
-            return true;
-        }
-        return false;
-    }
+
 }

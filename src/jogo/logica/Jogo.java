@@ -1,21 +1,24 @@
 package jogo.logica;
 
 import jogo.logica.dados.Dados;
-import jogo.logica.estados.*;
+import jogo.logica.estados.IEstado;
+import jogo.logica.estados.AguardaEscolha;
 
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 public class Jogo implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 7L;
+
     private Dados modelo;
     private IEstado estado;
 
     public Jogo(){
         modelo = new Dados();
         estado = new AguardaEscolha(modelo);
-//        modelo.iniciaJogo();
-//        modelo.escolheModo(1);
-//        estado = new AguardaMinijogo(modelo);
     }
 
     private void setEstado(IEstado estado){ this.estado = estado;   }
@@ -36,13 +39,9 @@ public class Jogo implements Serializable {
 
     public void minijogo(String s){ setEstado(estado.minijogo(s)); }
 
+    public String getMinijogo() { return modelo.getMinijogo(); }
+
     public void minijogoResposta(String resposta){ setEstado(estado.minijogoResposta(resposta)); }
-
-    public Situacao getSituacaoAtual(){
-        return estado.getSituacaoAtual();
-    }
-
-    public int getCreditos() { return modelo.getCreditos(); }
 
     public void removeCreditos(int creditos){ modelo.removeCreditos(creditos); }
 
@@ -52,21 +51,15 @@ public class Jogo implements Serializable {
         modelo.mantemJogador(jogador);
     }
 
+    public int getCreditos() { return modelo.getCreditos(); }
+
     public int getJogadorAtual() {
         return modelo.getJogadorAtual();
     }
-
-    public String getMinijogo() { return modelo.getMinijogo(); }
 
     public List<String> getLogJogada(){ return modelo.getLogJogada(); }
 
     public List<String> getLogCompleto(){ return modelo.getLogCompleto(); }
 
-    public String getTabuleiro() { return modelo.getTabuleiro(); }
-
-    @Override
-    public String toString() {
-        return modelo.getTabuleiro();
-    }
-
+    public Situacao getSituacaoAtual(){ return estado.getSituacaoAtual(); }
 }

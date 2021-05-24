@@ -1,8 +1,6 @@
 package jogo.logica.dados.jogador;
 
-import java.io.Serializable;
-
-public class JogadorH implements Jogador, Serializable {
+public class JogadorH extends JogadorAdapter{
     String nome;
     String ficha;
     private int colJogada;
@@ -14,7 +12,6 @@ public class JogadorH implements Jogador, Serializable {
 
     long start;
     long stop;
-    long time;
 
     public JogadorH(String username, String ficha){
         nome = username;
@@ -23,7 +20,17 @@ public class JogadorH implements Jogador, Serializable {
         creditos = 5;
         respostas = 0;
         minijogo = 0;
-        special = 1;
+        special = 0;
+    }
+
+    @Override
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public String getFicha(){
+        return ficha;
     }
 
     @Override
@@ -34,21 +41,6 @@ public class JogadorH implements Jogador, Serializable {
     @Override
     public void addCol(int col){
         colJogada = col;
-    }
-
-    @Override
-    public int randomCol() {
-        return 0;
-    }
-
-    @Override
-    public String getFicha(){
-        return ficha;
-    }
-
-    @Override
-    public String getNome() {
-        return nome;
     }
 
     @Override

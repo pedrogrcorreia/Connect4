@@ -1,11 +1,14 @@
 package jogo.logica.memento;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Caretaker implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 6L;
 
     private IMementoOriginator originator;
 
@@ -41,9 +44,9 @@ public class Caretaker implements Serializable {
             stackHist.clear();
             stackRedo.clear();
         }
-
     }
 
+    // nao é necessário
     public void redo() {
         if (stackRedo.isEmpty()) {
             return;
@@ -59,12 +62,4 @@ public class Caretaker implements Serializable {
             stackRedo.clear();
         }
     }
-
-    // metodos que consultam
-    // isto é só para debug
-//    public String toString(){
-//        return "\nstackHist=" + stackHist.size() +
-//                "\nstackRedo=" + stackRedo.size();
-//    }
-
 }

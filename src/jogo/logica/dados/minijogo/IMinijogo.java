@@ -1,6 +1,12 @@
 package jogo.logica.dados.minijogo;
 
-public interface Minijogo {
+import java.io.Serial;
+import java.io.Serializable;
+
+public interface IMinijogo extends Serializable {
+    @Serial
+    long serialVersionUID = 2L;
+
     void criaJogo();
     String getJogo();
     String getResposta();

@@ -1,8 +1,12 @@
 package jogo.logica.dados;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Tabuleiro implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 4L;
+
     private String[][] tab;
 
     public Tabuleiro(){
@@ -177,7 +181,6 @@ public class Tabuleiro implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        //sb.append("_______________\n");
         sb.append("\n 1 2 3 4 5 6 7 \n");
         for(int i=0; i<6; i++){
             for(int j=0; j<7; j++){
@@ -188,7 +191,6 @@ public class Tabuleiro implements Serializable {
             }
             sb.append("\n");
         }
-        //sb.append("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
         return sb.toString();
     }
 }

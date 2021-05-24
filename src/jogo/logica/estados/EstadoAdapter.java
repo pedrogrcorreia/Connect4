@@ -2,9 +2,7 @@ package jogo.logica.estados;
 
 import jogo.logica.dados.Dados;
 
-import java.io.Serializable;
-
-public abstract class EstadoAdapter implements IEstado, Serializable {
+public abstract class EstadoAdapter implements IEstado {
     private final Dados modelo;
 
     public EstadoAdapter(Dados modelo){

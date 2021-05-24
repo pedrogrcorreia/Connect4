@@ -1,6 +1,12 @@
 package jogo.logica.dados.jogador;
 
-public interface Jogador {
+import java.io.Serial;
+import java.io.Serializable;
+
+public interface IJogador extends Serializable {
+    @Serial
+    long serialVersionUID = 1L;
+
     String getNome();
     String getFicha();
     int getCol();
