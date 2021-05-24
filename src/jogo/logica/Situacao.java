@@ -1,7 +1,5 @@
 package jogo.logica;
 
-import jogo.logica.dados.Dados;
-
 import java.io.Serializable;
 
 public enum Situacao implements Serializable {

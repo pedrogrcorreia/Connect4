@@ -1,6 +1,5 @@
 package jogo.logica.estados;
 
-
 import jogo.logica.Situacao;
 
 import java.io.Serial;
