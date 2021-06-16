@@ -69,4 +69,13 @@ public class JogoGestao implements Serializable {
         return originator.getSituacaoAtual();
     }
 
+    public boolean getMinijogoVitoria() { return originator.getMinijogoVitoria(); }
+
+    public int getCreditos() { return originator.getCreditos(); }
+
+    public int getJogadas() { return originator.getJogadas(); }
+
+    public int getEspeciais() { return originator.getEspeciais(); }
+
+    public String[][] getTabuleiro(){ return originator.getTabuleiro(); }
 }

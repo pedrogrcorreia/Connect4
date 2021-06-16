@@ -86,17 +86,26 @@ public class Dados implements Serializable {
         addLog("Foi sorteado que o primeiro jogador é a/o " + atual.getNome() + ".\n");
     }
 
+//    public void iniciaJogo(){
+//        tabuleiro = new Tabuleiro();
+//        if(modo == 1 || modo == 3) {
+//            getRandomJogador();
+//        }
+//        else {
+//            atual = j1;
+//            prox = j2;
+//        }
+//        addLog(tabuleiro.toString());
+//        addJogadorLog();
+//    }
+
+     //  FUNCAO DEBUG
     public void iniciaJogo(){
+        modo = 1;
         tabuleiro = new Tabuleiro();
-        if(modo == 1 || modo == 3) {
-            getRandomJogador();
-        }
-        else {
-            atual = j1;
-            prox = j2;
-        }
-        addLog(tabuleiro.toString());
-        addJogadorLog();
+        System.out.println(tabuleiro);
+        atual = new JogadorH("s", "x");
+        prox = new JogadorH("t", "o");
     }
 
     public boolean efetuaJogada(int col){
@@ -179,6 +188,7 @@ public class Dados implements Serializable {
     }
 
     public boolean minijogoResposta(String resposta) {
+        System.out.println(resposta);
         if(minijogo.respostaCorreta(resposta)){
             atual.incrementaRespostas();
             return true;
@@ -265,6 +275,8 @@ public class Dados implements Serializable {
         j1 = null;
         j2 = null;
     }
+
+    public String[][] getTabuleiro() { return tabuleiro.getTabuleiro(); }
 
     private void addLog(String a){
         logJogada.add(a);

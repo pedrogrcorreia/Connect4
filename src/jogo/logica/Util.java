@@ -49,11 +49,11 @@ public class Util {
         }
     }
 
-    public static boolean gravaJogo(JogoGestao x, String nomeFicheiro){
+    public static boolean gravaJogo(JogoGestao x, File file){
         ObjectOutputStream out = null;
 
         try{
-            out = new ObjectOutputStream(new FileOutputStream(nomeFicheiro));
+            out = new ObjectOutputStream(new FileOutputStream(file));
             out.writeObject(x);
             return true;
         }catch(IOException e){
@@ -69,12 +69,12 @@ public class Util {
         }
     }
 
-    public static JogoGestao recuperaJogo(String nomeFicheiro) throws IOException, ClassNotFoundException{
+    public static JogoGestao recuperaJogo(File filename) throws IOException, ClassNotFoundException{
         JogoGestao x;
         ObjectInputStream in = null;
 
         try{
-            in = new ObjectInputStream(new FileInputStream(nomeFicheiro));
+            in = new ObjectInputStream(new FileInputStream(filename));
             x = (JogoGestao) in.readObject();
         }
         catch(FileNotFoundException f){

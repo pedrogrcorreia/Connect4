@@ -178,6 +178,8 @@ public class Tabuleiro implements Serializable {
         return true;
     }
 
+    public String[][] getTabuleiro(){ return tab; }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
