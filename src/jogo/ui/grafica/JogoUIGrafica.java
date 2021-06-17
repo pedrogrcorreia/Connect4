@@ -1,27 +1,29 @@
 package jogo.ui.grafica;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import jogo.logica.JogoObservavel;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import static jogo.logica.Properties.*;
-import static jogo.logica.Situacao.AGUARDA_JOGADOR1;
+import static jogo.logica.Situacao.*;
 
 public class JogoUIGrafica extends BorderPane {
     private JogoObservavel jogoObservavel;
     private MenuItem menu;
     private Principal principal;
 
-    public JogoUIGrafica(JogoObservavel jogoObservavel){
+    public JogoUIGrafica(JogoObservavel jogoObservavel) throws InterruptedException {
         this.jogoObservavel = jogoObservavel;
         criarVista();
         menus();
@@ -35,7 +37,7 @@ public class JogoUIGrafica extends BorderPane {
         });
     }
 
-    private void criarVista(){
+    private void criarVista() throws InterruptedException {
         principal = new Principal(jogoObservavel);
         setCenter(principal);
     }
@@ -54,9 +56,53 @@ public class JogoUIGrafica extends BorderPane {
 
         jogo.getItems().addAll(menu, carregarJogo, gravarJogo, replayJogo, sair);
 
+        menu.setOnAction(e->{
+            jogoObservavel.terminaJogoAtual();
+        });
+
         sair.setOnAction((ActionEvent e)-> {
             Stage janela2 = (Stage) this.getScene().getWindow();
             fireEvent( new WindowEvent(janela2, WindowEvent.WINDOW_CLOSE_REQUEST));
+        });
+
+        carregarJogo.setOnAction(e->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("./"));
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if(selectedFile != null){
+                try {
+                    jogoObservavel.recuperaJogo(selectedFile);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (ClassNotFoundException classNotFoundException) {
+                    classNotFoundException.printStackTrace();
+                }
+            }
+        });
+
+        gravarJogo.setOnAction(e->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("./"));
+            File selectedFile = fileChooser.showSaveDialog(null);
+            if(selectedFile != null){
+               jogoObservavel.gravarJogo(selectedFile);
+            }
+                }
+        );
+
+        replayJogo.setOnAction(e->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("./replays"));
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if(selectedFile != null){
+                try {
+                    jogoObservavel.recuperaJogo(selectedFile);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (ClassNotFoundException classNotFoundException) {
+                    classNotFoundException.printStackTrace();
+                }
+            }
         });
 
         Menu sobre = new Menu("_Sobre");
@@ -66,7 +112,7 @@ public class JogoUIGrafica extends BorderPane {
         regras.setOnAction((ActionEvent e)->{
             Alert msgBox = new Alert(Alert.AlertType.INFORMATION);
             msgBox.setHeaderText("Regras");
-            msgBox.setContentText("Tente fazer linhas de 4 fichas seguidas da mesma cor.\nDe 4 em 4 jogadas tem direito a um minijogo.\nSe ganhar o minijogo pode jogar peças especiais que eliminam todas as fichas de uma coluna.\nPode voltar atrás durante o jogo.\n");
+            msgBox.setContentText("Jogador 1 tem as fichas azuis.\nJogador 2 tem as fichas vermelhas.\nTente fazer linhas de 4 fichas seguidas da mesma cor.\nDe 4 em 4 jogadas tem direito a um minijogo.\nSe ganhar o minijogo pode jogar peças especiais que eliminam todas as fichas de uma coluna.\nPode voltar atrás durante o jogo.\n");
             msgBox.showAndWait();
         });
 
@@ -82,5 +128,5 @@ public class JogoUIGrafica extends BorderPane {
         menuBar.getMenus().addAll(jogo, sobre);
     }
 
-    private void atualiza(){menu.setDisable(!(jogoObservavel.getSituacaoAtual() ==  AGUARDA_JOGADOR1));};
+    private void atualiza(){menu.setDisable( !(jogoObservavel.getSituacaoAtual() ==  AGUARDA_JOGADOR1) && !(jogoObservavel.getSituacaoAtual() == AGUARDA_JOGADOR2) && !(jogoObservavel.getSituacaoAtual() == AGUARDA_JOGADORPC));};
 }

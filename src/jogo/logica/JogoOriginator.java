@@ -94,6 +94,10 @@ public class JogoOriginator implements IMementoOriginator, Serializable {
 
     public String[][] getTabuleiro(){ return jogo.getTabuleiro(); }
 
+    public int getJogadorAtual(){ return jogo.getJogadorAtual(); }
+
+    public void terminaJogoAtual(){ jogo.terminaJogoAtual(); }
+
     private static class Memento implements IMemento, Serializable { //Memento genérico que dá para tudo quando se recorre a serialização ...
         @Serial
         private static final long serialVersionUID = 10L;

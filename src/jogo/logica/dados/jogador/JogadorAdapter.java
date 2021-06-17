@@ -56,7 +56,7 @@ public abstract class JogadorAdapter implements IJogador {
     public void mudaMinijogo() {}
 
     @Override
-    public void incrementaEspecial() {}
+    public void incrementaEspecial(int i) {}
 
     @Override
     public int getEspecial() { return 0; }
@@ -72,4 +72,7 @@ public abstract class JogadorAdapter implements IJogador {
 
     @Override
     public int getTempo() { return 0; }
+
+    @Override
+    public void resetCreditos(){}
 }

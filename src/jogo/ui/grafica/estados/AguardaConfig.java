@@ -45,15 +45,19 @@ public class AguardaConfig extends HBox {
     }
 
     private void registarListener(){
-        enter.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                jogoObservavel.configuraJogador(nome.getText());
+        enter.setOnAction(e->jogoObservavel.configuraJogador(nome.getText()));
+
+        setOnKeyPressed(e->{
+            switch(e.getCode()) {
+                case ENTER:
+                    jogoObservavel.configuraJogador(nome.getText());
+                    break;
             }
         });
     }
 
     private void atualiza(){
+        nome.requestFocus();
         nome.clear();
         this.setVisible(jogoObservavel.getSituacaoAtual() == AGUARDA_CONFIG);
     };

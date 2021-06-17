@@ -20,8 +20,8 @@ public class Jogo implements Serializable {
 
     public Jogo(){
         modelo = new Dados();
-        modelo.iniciaJogo();
-        estado = new AguardaJogador(modelo);
+        //modelo.iniciaJogo();
+        estado = new AguardaEscolha(modelo);
     }
 
     private void setEstado(IEstado estado){ this.estado = estado; }
@@ -34,13 +34,17 @@ public class Jogo implements Serializable {
 
     public void efetuaJogada(int col){ setEstado(estado.efetuaJogada(col)); }
 
-    public void efetuaJogadaEspecial(int col) { setEstado(estado.efetuaJogadaEspecial(col)); }
+    public void efetuaJogadaEspecial(int col) {
+        setEstado(estado.efetuaJogadaEspecial(col));
+    }
 
     public void efetuaJogadaPC(){ setEstado(estado.efetuaJogadaPC()); }
 
     public void novoJogo(){ setEstado(estado.novoJogo()); }
 
     public void minijogo(String s){ setEstado(estado.minijogo(s)); }
+
+    public void terminaJogoAtual(){ setEstado(estado.terminaJogo()); }
 
     public String getMinijogo() { return modelo.getMinijogo(); }
 

@@ -21,10 +21,11 @@ public interface IJogador extends Serializable {
     int getRespostas();
     int getMinijogo();
     void mudaMinijogo();
-    void incrementaEspecial();
+    void incrementaEspecial(int i);
     int getEspecial();
     void resetRespostas();
     void startClock();
     void stopClock();
     int getTempo();
+    void resetCreditos();
 }

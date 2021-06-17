@@ -27,7 +27,7 @@ public class AguardaJogadorPC extends EstadoAdapter {
                 return new AguardaJogador(getModelo());
             }
         }
-        return new AguardaJogador(getModelo());
+        return this;
     }
 
     @Override

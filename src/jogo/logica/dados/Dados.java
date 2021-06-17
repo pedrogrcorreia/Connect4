@@ -26,6 +26,8 @@ public class Dados implements Serializable {
     public Dados(){
         logCompleto = new ArrayList<String>();
         logJogada = new ArrayList<String>();
+        tabuleiro = new Tabuleiro();
+
     };
 
     public boolean escolheModo(int opc){
@@ -86,26 +88,24 @@ public class Dados implements Serializable {
         addLog("Foi sorteado que o primeiro jogador é a/o " + atual.getNome() + ".\n");
     }
 
-//    public void iniciaJogo(){
-//        tabuleiro = new Tabuleiro();
-//        if(modo == 1 || modo == 3) {
-//            getRandomJogador();
-//        }
-//        else {
-//            atual = j1;
-//            prox = j2;
-//        }
-//        addLog(tabuleiro.toString());
-//        addJogadorLog();
-//    }
-
-     //  FUNCAO DEBUG
     public void iniciaJogo(){
-        modo = 1;
         tabuleiro = new Tabuleiro();
-        System.out.println(tabuleiro);
-        atual = new JogadorH("s", "x");
-        prox = new JogadorH("t", "o");
+
+        if(modo == 1 || modo == 3) {
+            getRandomJogador();
+        }
+        else {
+            atual = j1;
+            prox = j2;
+        }
+        atual.resetJogadas();
+        atual.resetRespostas();
+        atual.resetCreditos();
+        prox.resetJogadas();
+        prox.resetRespostas();
+        prox.resetCreditos();
+        addLog(tabuleiro.toString());
+        addJogadorLog();
     }
 
     public boolean efetuaJogada(int col){
@@ -124,6 +124,7 @@ public class Dados implements Serializable {
 
     public boolean efetuaJogadaEspecial(int col){
         if(tabuleiro.jogaEspecial(col-1)){
+            atual.incrementaEspecial(-1);
             addLog("Jogador " + atual.getNome() + " eliminou as peças da coluna " + col + ".\n");
             addLog(tabuleiro.toString());
             addJogadorLog();
@@ -183,12 +184,12 @@ public class Dados implements Serializable {
             minijogo = new MinijogoDicionario();
         }
         minijogo.criaJogo();
-        System.out.println(minijogo.getResposta());
+        System.out.println("DEBUG");
+        System.out.println("Resposta: " + minijogo.getResposta());
         return minijogo.getJogo();
     }
 
     public boolean minijogoResposta(String resposta) {
-        System.out.println(resposta);
         if(minijogo.respostaCorreta(resposta)){
             atual.incrementaRespostas();
             return true;
@@ -223,7 +224,7 @@ public class Dados implements Serializable {
         addLog("Jogador " + atual.getNome() + " ganhou o minijogo e uma peça especial.\n");
         addLog(tabuleiro.toString());
         addJogadorLog();
-        atual.incrementaEspecial();
+        atual.incrementaEspecial(1);
     }
 
     public void incrementaJogadas(){ atual.incrementaJogadas(); }
@@ -274,6 +275,10 @@ public class Dados implements Serializable {
     public void terminaJogo(){
         j1 = null;
         j2 = null;
+    }
+
+    public void terminaJogoAtual(){
+        iniciaJogo();
     }
 
     public String[][] getTabuleiro() { return tabuleiro.getTabuleiro(); }

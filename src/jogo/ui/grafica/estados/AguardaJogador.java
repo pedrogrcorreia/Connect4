@@ -11,12 +11,11 @@ import static jogo.logica.Properties.*;
 import static jogo.logica.Situacao.AGUARDA_JOGADOR1;
 import static jogo.logica.Situacao.AGUARDA_JOGADOR2;
 
-public class AguardaJogada extends HBox {
+public class AguardaJogador extends HBox {
     private JogoObservavel jogoObservavel;
     private Label text;
-    private Label jogador;
 
-    public AguardaJogada(JogoObservavel jogoObservavel){
+    public AguardaJogador(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
         criarJanela();
         registarObserver();
@@ -24,7 +23,7 @@ public class AguardaJogada extends HBox {
     }
 
     private void criarJanela(){
-        text = new Label("Jogador a jogar: ");
+        text = new Label();
         setAlignment(Pos.CENTER);
         getChildren().addAll(text);
     }
@@ -39,7 +38,7 @@ public class AguardaJogada extends HBox {
         if(jogoObservavel.getSituacaoAtual() == AGUARDA_JOGADOR1){
             text.setText("Jogador 1 a jogar.");
         }
-        else{
+        else if(jogoObservavel.getSituacaoAtual() == AGUARDA_JOGADOR2){
             text.setText("Jogador 2 a jogar");
         }
         setVisible(jogoObservavel.getSituacaoAtual() == AGUARDA_JOGADOR1 || jogoObservavel.getSituacaoAtual() == AGUARDA_JOGADOR2);

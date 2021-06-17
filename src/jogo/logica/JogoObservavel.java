@@ -83,6 +83,21 @@ public class JogoObservavel {
 
     public String[][] getTabuleiro(){ return jogoGestao.getTabuleiro(); }
 
+    public int getJogadorAtual(){ return jogoGestao.getJogadorAtual(); }
+
+    public void terminaJogoAtual(){
+        jogoGestao.terminaJogoAtual();
+        propertyChangeSupport.firePropertyChange(JOGO.toString(), null, null);
+    }
+
+    public boolean undo(){
+        boolean aux;
+        aux = jogoGestao.undo();
+        propertyChangeSupport.firePropertyChange(JOGO.toString(), null, null);
+        return aux;
+    }
+
+
     // metodos para gravação e recuperação de jogos
 
     public boolean gravarJogo(File filename){
@@ -94,14 +109,15 @@ public class JogoObservavel {
         JogoGestao aux = Util.recuperaJogo(filename);
         if(aux != null){
             jogoGestao = aux;
+            propertyChangeSupport.firePropertyChange(JOGO.toString(), null, null);
             return true;
         }
         return false;
     }
 
-    public void setJogoGestao(JogoGestao jogoGestao){
-        this.jogoGestao = jogoGestao;
-        propertyChangeSupport.firePropertyChange(CARREGAR_JOGO.toString(), null, null);
+    public void gravarReplay(){
+        if(jogoGestao.getSituacaoAtual() == Situacao.AGUARDA_RECOMECO){
+            Util.gravaReplay(jogoGestao);
+        }
     }
-
 }

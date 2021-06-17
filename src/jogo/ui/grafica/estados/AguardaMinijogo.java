@@ -1,14 +1,9 @@
 package jogo.ui.grafica.estados;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import jogo.logica.JogoObservavel;
-import jogo.logica.Situacao;
-
 import static jogo.logica.Properties.JOGO;
 import static jogo.logica.Situacao.AGUARDA_MINIJOGO;
 
@@ -18,6 +13,7 @@ public class AguardaMinijogo extends HBox {
     private RadioButton sim, nao;
     private ToggleGroup radioGroup;
     private Button opcao;
+    private Label text;
 
     public AguardaMinijogo(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
@@ -27,6 +23,7 @@ public class AguardaMinijogo extends HBox {
     }
 
     private void criaVista(){
+        text = new Label("Deseja jogar o minijogo?");
         sim = new RadioButton("Sim");
         nao = new RadioButton("Não");
         opcao = new Button("Escolher");
@@ -35,7 +32,7 @@ public class AguardaMinijogo extends HBox {
         radioGroup.getToggles().addAll(sim, nao);
         setAlignment(Pos.CENTER);
         setSpacing(20);
-        getChildren().addAll(sim, nao, opcao);
+        getChildren().addAll(text, sim, nao, opcao);
 
         opcao.setOnAction((e)->{
             if(sim.isSelected()){

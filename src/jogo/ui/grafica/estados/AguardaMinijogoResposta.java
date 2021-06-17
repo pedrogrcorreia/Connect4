@@ -43,19 +43,22 @@ public class AguardaMinijogoResposta extends HBox {
     }
 
     private void registarListener(){
-        enter.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                jogoObservavel.minijogoResposta(resposta.getText());
+        enter.setOnAction(e->jogoObservavel.minijogoResposta(resposta.getText()));
+
+        setOnKeyPressed(e->{
+            switch(e.getCode()){
+                case ENTER:
+                    jogoObservavel.minijogoResposta(resposta.getText());
             }
         });
     }
 
     private void atualiza(){
-        resposta.clear();
-
-        text.setText(jogoObservavel.getMinijogo());
-        res = resposta.getText();
+        if(jogoObservavel.getSituacaoAtual() == AGUARDA_MINIJOGO_RESPOSTA) {
+            resposta.clear();
+            text.setText(jogoObservavel.getMinijogo());
+            res = resposta.getText();
+        }
         setVisible(jogoObservavel.getSituacaoAtual() == AGUARDA_MINIJOGO_RESPOSTA);
     }
 }

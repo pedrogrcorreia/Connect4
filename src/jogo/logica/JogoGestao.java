@@ -18,10 +18,12 @@ public class JogoGestao implements Serializable {
         careTaker = new Caretaker(originator);
     }
 
-    public void undo(){
+    public boolean undo(){
         if(originator.getCreditos() >= 1) {
             careTaker.undo();
+            return true;
         }
+        return false;
     }
 
     public void escolherModo(int opcao) {
@@ -78,4 +80,8 @@ public class JogoGestao implements Serializable {
     public int getEspeciais() { return originator.getEspeciais(); }
 
     public String[][] getTabuleiro(){ return originator.getTabuleiro(); }
+
+    public int getJogadorAtual(){ return originator.getJogadorAtual(); }
+
+    public void terminaJogoAtual(){ originator.terminaJogoAtual(); }
 }

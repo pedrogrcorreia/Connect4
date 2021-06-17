@@ -51,4 +51,9 @@ public abstract class EstadoAdapter implements IEstado {
         return this;
     }
 
+    @Override
+    public IEstado terminaJogo(){
+        getModelo().terminaJogo();
+        return new AguardaEscolha(getModelo());
+    }
 }

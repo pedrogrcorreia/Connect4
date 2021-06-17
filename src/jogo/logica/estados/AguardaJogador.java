@@ -23,11 +23,8 @@ public class AguardaJogador extends EstadoAdapter {
                    return new AguardaRecomeco(getModelo());
                 }
                 getModelo().proxJogador(); // muda de jogador
-                return new AguardaJogador(getModelo());
             }
-            else{
-                return new AguardaJogador(getModelo());
-            }
+            return new AguardaJogador(getModelo());
         }
         if(getModelo().getModo() == 2){
             if(getModelo().getJogadas() > 0 && getModelo().getJogadas() % 4 == 0) { // se o numero de jogadas for maior que 0 e multiplo de 4

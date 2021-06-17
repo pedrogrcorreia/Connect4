@@ -35,31 +35,16 @@ public class AguardaEscolha extends HBox {
         cvc = new Button("Computador vs Computador");
         setSpacing(10);
         setAlignment(Pos.CENTER);
-        //setPadding(new Insets(30, 30, 30, 30));
         getChildren().addAll(hvh, hvc, cvc);
     }
 
     private void registarListener(){
-        hvh.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                jogoObservavel.escolherModo(1);
-            }
-        });
+        hvh.setOnAction(e->jogoObservavel.escolherModo(1));
 
-        hvc.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                jogoObservavel.escolherModo(2);
-            }
-        });
 
-        cvc.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                jogoObservavel.escolherModo(3);
-            }
-        });
+        hvc.setOnAction(e->jogoObservavel.escolherModo(2));
+
+        cvc.setOnAction(e->jogoObservavel.escolherModo(3));
     }
 
 

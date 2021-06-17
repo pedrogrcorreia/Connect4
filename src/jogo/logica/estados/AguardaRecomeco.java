@@ -8,8 +8,13 @@ public class AguardaRecomeco extends EstadoAdapter {
 
     @Override
     public IEstado novoJogo() {
-        getModelo().terminaJogo();
-        return new AguardaEscolha(getModelo());
+        getModelo().terminaJogoAtual();
+        if(getModelo().getModo() == 1 || getModelo().getModo() == 2) {
+            return new AguardaJogador(getModelo());
+        }
+        else{
+            return new AguardaJogadorPC(getModelo());
+        }
     }
 
     @Override

@@ -100,8 +100,8 @@ public class JogadorH extends JogadorAdapter{
     }
 
     @Override
-    public void incrementaEspecial() {
-        special++;
+    public void incrementaEspecial(int i) {
+        special += i;
     }
 
     @Override
@@ -128,6 +128,9 @@ public class JogadorH extends JogadorAdapter{
     public int getTempo() {
         return (int) (stop - start) / 1000;
     }
+
+    @Override
+    public void resetCreditos(){ creditos = 5; }
 
     @Override
     public String toString() {

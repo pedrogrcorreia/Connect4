@@ -17,6 +17,7 @@ public interface IEstado extends Serializable {
     IEstado novoJogo();
     IEstado minijogo(String s);
     IEstado minijogoResposta(String resposta);
+    IEstado terminaJogo();
 
     Situacao getSituacaoAtual();
 }

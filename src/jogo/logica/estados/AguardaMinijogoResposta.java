@@ -43,7 +43,7 @@ public class AguardaMinijogoResposta extends EstadoAdapter {
                     getModelo().atribuiEspecial(); // atribuir a peça especial
                     getModelo().incrementaJogadas(); // incrementa o numero de jogadas
                     getModelo().resetRespostas(); // faz o reset das respostas
-                    return new AguardaJogadorPC(getModelo()); // novo estado
+                    return new AguardaJogador(getModelo()); // novo estado
                 } else { // se perdeu (tempo excedido)
                     getModelo().mudaMinijogo(); // nao atribui a peça especial
                     getModelo().incrementaJogadas();
