@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import jogo.logica.JogoObservavel;
-
 import static jogo.logica.Properties.JOGO;
 import static jogo.logica.Situacao.*;
 

@@ -1,7 +1,4 @@
 package jogo.ui.grafica.estados;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,13 +10,13 @@ import jogo.logica.JogoObservavel;
 import static jogo.logica.Properties.*;
 import static jogo.logica.Situacao.AGUARDA_CONFIG;
 
-public class AguardaConfig extends HBox {
+public class AguardaConfigP extends HBox {
     private JogoObservavel jogoObservavel;
     private Label text;
     private TextField nome;
     private Button enter;
 
-    public AguardaConfig(JogoObservavel jogoObservavel){
+    public AguardaConfigP(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
         criarJanela();
         registarObserver();

@@ -10,18 +10,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import jogo.logica.JogoObservavel;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
 import static jogo.logica.Properties.*;
 import static jogo.logica.Situacao.*;
 
 public class JogoUIGrafica extends BorderPane {
     private JogoObservavel jogoObservavel;
     private MenuItem menu;
-    private Principal principal;
+    private PrincipalP principalP;
 
     public JogoUIGrafica(JogoObservavel jogoObservavel) throws InterruptedException {
         this.jogoObservavel = jogoObservavel;
@@ -38,8 +35,8 @@ public class JogoUIGrafica extends BorderPane {
     }
 
     private void criarVista() throws InterruptedException {
-        principal = new Principal(jogoObservavel);
-        setCenter(principal);
+        principalP = new PrincipalP(jogoObservavel);
+        setCenter(principalP);
     }
 
     private void menus(){
@@ -112,7 +109,7 @@ public class JogoUIGrafica extends BorderPane {
         regras.setOnAction((ActionEvent e)->{
             Alert msgBox = new Alert(Alert.AlertType.INFORMATION);
             msgBox.setHeaderText("Regras");
-            msgBox.setContentText("Jogador 1 tem as fichas azuis.\nJogador 2 tem as fichas vermelhas.\nTente fazer linhas de 4 fichas seguidas da mesma cor.\nDe 4 em 4 jogadas tem direito a um minijogo.\nSe ganhar o minijogo pode jogar peças especiais que eliminam todas as fichas de uma coluna.\nPode voltar atrás durante o jogo.\n");
+            msgBox.setContentText("Jogador 1 tem as fichas amarelas.\nJogador 2 tem as fichas vermelhas.\nTente fazer linhas de 4 fichas seguidas da mesma cor.\nDe 4 em 4 jogadas tem direito a um minijogo.\nSe ganhar o minijogo pode jogar peças especiais que eliminam todas as fichas de uma coluna.\nPode voltar atrás durante o jogo.\n");
             msgBox.showAndWait();
         });
 

@@ -7,7 +7,7 @@ import jogo.logica.JogoObservavel;
 import static jogo.logica.Properties.JOGO;
 import static jogo.logica.Situacao.AGUARDA_MINIJOGO;
 
-public class AguardaMinijogo extends HBox {
+public class AguardaMinijogoP extends HBox {
     private JogoObservavel jogoObservavel;
 
     private RadioButton sim, nao;
@@ -15,7 +15,7 @@ public class AguardaMinijogo extends HBox {
     private Button opcao;
     private Label text;
 
-    public AguardaMinijogo(JogoObservavel jogoObservavel){
+    public AguardaMinijogoP(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
         criaVista();
         registarObserver();

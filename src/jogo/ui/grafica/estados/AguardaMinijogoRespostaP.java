@@ -1,7 +1,5 @@
 package jogo.ui.grafica.estados;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,14 +10,14 @@ import jogo.logica.JogoObservavel;
 import static jogo.logica.Properties.JOGO;
 import static jogo.logica.Situacao.AGUARDA_MINIJOGO_RESPOSTA;
 
-public class AguardaMinijogoResposta extends HBox {
+public class AguardaMinijogoRespostaP extends HBox {
     private JogoObservavel jogoObservavel;
     private Label text;
     private TextField resposta;
     private Button enter;
     private String res;
 
-    public AguardaMinijogoResposta(JogoObservavel jogoObservavel){
+    public AguardaMinijogoRespostaP(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
         criarJanela();
         registarObserver();

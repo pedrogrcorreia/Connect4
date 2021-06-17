@@ -2,20 +2,18 @@ package jogo.ui.grafica.estados;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import jogo.logica.JogoObservavel;
-import jogo.logica.Situacao;
 
 import static jogo.logica.Properties.*;
 import static jogo.logica.Situacao.AGUARDA_JOGADOR1;
 import static jogo.logica.Situacao.AGUARDA_JOGADOR2;
 
-public class AguardaJogador extends HBox {
+public class AguardaJogadorP extends HBox {
     private JogoObservavel jogoObservavel;
     private Label text;
 
-    public AguardaJogador(JogoObservavel jogoObservavel){
+    public AguardaJogadorP(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
         criarJanela();
         registarObserver();

@@ -3,7 +3,6 @@ package jogo.logica;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import static jogo.logica.Properties.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -59,7 +58,6 @@ public class JogoObservavel {
     }
 
     public String getMinijogo(){
-        //propertyChangeSupport.firePropertyChange(JOGO.toString(), null, null);
         return jogoGestao.getMinijogo();}
 
     public void minijogoResposta(String resposta){
@@ -96,7 +94,6 @@ public class JogoObservavel {
         propertyChangeSupport.firePropertyChange(JOGO.toString(), null, null);
         return aux;
     }
-
 
     // metodos para gravação e recuperação de jogos
 

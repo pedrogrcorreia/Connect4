@@ -1,27 +1,20 @@
 package jogo.ui.grafica.estados;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import jogo.logica.JogoObservavel;
-import jogo.logica.Situacao;
-
 import static jogo.logica.Properties.*;
 import static jogo.logica.Situacao.ESCOLHE_MODO;
 
-public class AguardaEscolha extends HBox {
+public class AguardaEscolhaP extends HBox {
     private JogoObservavel jogoObservavel;
 
     private Button hvh;
     private Button hvc;
     private Button cvc;
 
-    public AguardaEscolha(JogoObservavel jogoObservavel) {
+    public AguardaEscolhaP(JogoObservavel jogoObservavel) {
         this.jogoObservavel = jogoObservavel;
         criarJanela();
         registarObserver();

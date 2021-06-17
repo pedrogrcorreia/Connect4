@@ -9,14 +9,14 @@ import jogo.logica.Situacao;
 
 import static jogo.logica.Properties.JOGO;
 
-public class AguardaRecomeco extends HBox {
+public class AguardaRecomecoP extends HBox {
     private JogoObservavel jogoObservavel;
 
     private Label text;
     private Button novoJogo;
     private Button sair;
 
-    public AguardaRecomeco(JogoObservavel jogoObservavel){
+    public AguardaRecomecoP(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
         criarJanela();
         registarObserver();

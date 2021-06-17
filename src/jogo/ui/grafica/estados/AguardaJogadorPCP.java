@@ -10,13 +10,13 @@ import jogo.logica.JogoObservavel;
 import static jogo.logica.Properties.JOGO;
 import static jogo.logica.Situacao.*;
 
-public class AguardaJogadorPC extends HBox {
+public class AguardaJogadorPCP extends HBox {
     private JogoObservavel jogoObservavel;
     private Label text;
     private Slider slider;
     private double speed;
 
-    public AguardaJogadorPC(JogoObservavel jogoObservavel){
+    public AguardaJogadorPCP(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
         criarJanela();
         registarObserver();

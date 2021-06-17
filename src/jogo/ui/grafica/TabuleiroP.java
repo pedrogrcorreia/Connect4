@@ -1,27 +1,18 @@
 package jogo.ui.grafica;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
 import jogo.logica.JogoObservavel;
 import jogo.logica.Situacao;
-
-import javafx.geometry.Insets;
-
-
 import static javafx.scene.paint.Color.*;
 import static jogo.logica.Properties.JOGO;
 
-public class TabuleiroG extends GridPane {
+public class TabuleiroP extends GridPane {
     private JogoObservavel jogoObservavel;
 
 
-    public TabuleiroG(JogoObservavel jogoObservavel) {
+    public TabuleiroP(JogoObservavel jogoObservavel) {
         this.jogoObservavel = jogoObservavel;
         criarVista();
         registarObserver();
@@ -36,8 +27,7 @@ public class TabuleiroG extends GridPane {
 
     private void criarVista(){
         getChildren().clear();
-        setPrefSize(6, 7);
-        setAlignment(Pos.CENTER_LEFT);
+        setAlignment(Pos.CENTER);
         for(int i=0; i<7; i++){
             ColumnConstraints columnConstraints = new ColumnConstraints(40);
             getColumnConstraints().add(columnConstraints);
@@ -47,15 +37,8 @@ public class TabuleiroG extends GridPane {
             RowConstraints rowConstraints = new RowConstraints(40);
             getRowConstraints().add(rowConstraints);
         }
-
-        for(int i=0; i<7; i++){
-            for(int j=0; j<6; j++){
-                Circle c = new Circle(20);
-                c.setFill(BLACK);
-                add(c, i, j);
-            }
-        }
-        setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,null, new BorderWidths(2))));
+        setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID,null, new BorderWidths(3))));
+        setBackground(new Background(new BackgroundFill(BLUE, null, null)));
     }
 
     private void atualiza(){
@@ -65,14 +48,16 @@ public class TabuleiroG extends GridPane {
         for(int i=0; i<7; i++){
             for(int j=0; j<6; j++){
                 Circle c = new Circle(20);
+                c.setStroke(BLACK);
+                c.setStrokeWidth(3);
                 if(tab[j][i].compareToIgnoreCase(" ") == 0){
-                    c.setFill(BLACK);
+                    c.setFill(DARKGRAY.darker());
                 }
                 if(tab[j][i].compareToIgnoreCase("X") == 0){
                     c.setFill(RED);
                 }
                 if(tab[j][i].compareToIgnoreCase("O") == 0){
-                    c.setFill(BLUE);
+                    c.setFill(YELLOW);
                 }
                 int finalI = i;
                 c.setOnMousePressed(e ->{

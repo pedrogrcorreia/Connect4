@@ -1,7 +1,6 @@
 package jogo.logica;
 
 import jogo.logica.memento.Caretaker;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;

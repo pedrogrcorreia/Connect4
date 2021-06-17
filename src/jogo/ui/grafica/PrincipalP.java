@@ -10,17 +10,16 @@ import javafx.scene.paint.Color;
 import jogo.logica.JogoObservavel;
 import jogo.logica.Situacao;
 import jogo.ui.grafica.estados.*;
-
 import static jogo.logica.Properties.JOGO;
 
-public class Principal extends BorderPane {
+public class PrincipalP extends BorderPane {
     private JogoObservavel jogoObservavel;
     private VBox direita;
     private VBox esquerda;
     private HBox central;
     private Label jinfo;
 
-    public Principal(JogoObservavel jogoObservavel){
+    public PrincipalP(JogoObservavel jogoObservavel){
         this.jogoObservavel = jogoObservavel;
         criarVista();
         registarObservador();
@@ -35,7 +34,7 @@ public class Principal extends BorderPane {
 
     private void criarVista(){
         // esquerda é o tabuleiro
-        TabuleiroG tabg = new TabuleiroG(jogoObservavel);
+        TabuleiroP tabg = new TabuleiroP(jogoObservavel);
         esquerda = new VBox(10);
 
         esquerda.getChildren().addAll(tabg);
@@ -71,15 +70,15 @@ public class Principal extends BorderPane {
         setCenter(central);
 
         // Painel que altera
-        AguardaConfig aguardaConfig = new AguardaConfig(jogoObservavel);
-        AguardaEscolha aguardaEscolha = new AguardaEscolha(jogoObservavel);
-        AguardaJogador aguardaJogador = new AguardaJogador(jogoObservavel);
-        AguardaMinijogo aguardaMinijogo = new AguardaMinijogo(jogoObservavel);
-        AguardaMinijogoResposta aguardaMinijogoResposta = new AguardaMinijogoResposta(jogoObservavel);
-        AguardaRecomeco aguardaRecomeco = new AguardaRecomeco(jogoObservavel);
-        AguardaJogadorPC aguardaJogadorPC = new AguardaJogadorPC(jogoObservavel);
+        AguardaConfigP aguardaConfigP = new AguardaConfigP(jogoObservavel);
+        AguardaEscolhaP aguardaEscolhaP = new AguardaEscolhaP(jogoObservavel);
+        AguardaJogadorP aguardaJogadorP = new AguardaJogadorP(jogoObservavel);
+        AguardaMinijogoP aguardaMinijogoP = new AguardaMinijogoP(jogoObservavel);
+        AguardaMinijogoRespostaP aguardaMinijogoRespostaP = new AguardaMinijogoRespostaP(jogoObservavel);
+        AguardaRecomecoP aguardaRecomecoP = new AguardaRecomecoP(jogoObservavel);
+        AguardaJogadorPCP aguardaJogadorPCP = new AguardaJogadorPCP(jogoObservavel);
         AguardaJogadorEspecial aguardaJogadorEspecial = new AguardaJogadorEspecial(jogoObservavel);
-        StackPane bot = new StackPane(aguardaConfig, aguardaEscolha, aguardaJogador, aguardaMinijogo, aguardaMinijogoResposta, aguardaRecomeco, aguardaJogadorPC, aguardaJogadorEspecial);
+        StackPane bot = new StackPane(aguardaConfigP, aguardaEscolhaP, aguardaJogadorP, aguardaMinijogoP, aguardaMinijogoRespostaP, aguardaRecomecoP, aguardaJogadorPCP, aguardaJogadorEspecial);
         setBottom(bot);
         bot.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
         bot.setPadding(new Insets(10, 10, 10, 10));
