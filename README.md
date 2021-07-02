@@ -1,3 +1,9 @@
 # TPPA2021
-Trabalho Prático PA 2020/2021 ISEC
-![Alt text](image.png?raw=true "Capa")
+
+## Trabalho Prático Programação Avançada 2020/2021 ISEC
+
+### Connect4 - Java/JavaFX
+
+- State Pattern
+- Memento to undo plays
+- MVC
