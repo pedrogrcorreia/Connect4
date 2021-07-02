@@ -1,4 +1,4 @@
-# TPPA2021
+# Connect 4
 
 ## Trabalho Prático Programação Avançada 2020/2021 ISEC
 
